@@ -32,7 +32,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <Link to="/" className="font-heading text-xl font-bold text-primary">
-              DesignEdu
+              Plots
             </Link>
             <span className="text-sm text-muted-foreground bg-primary/10 px-2 py-1 rounded">
               Admin

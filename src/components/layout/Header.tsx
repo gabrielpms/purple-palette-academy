@@ -32,10 +32,10 @@ export function Header() {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-primary">
-            <span className="font-display text-xl font-bold text-primary-foreground">D</span>
+            <span className="font-display text-xl font-bold text-primary-foreground">P</span>
           </div>
           <span className="hidden font-display text-xl font-bold text-foreground sm:block">
-            Design<span className="text-primary">School</span>
+            Plots
           </span>
         </Link>
 

@@ -10,10 +10,10 @@ export function Footer() {
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-2">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-primary">
-                <span className="font-display text-xl font-bold text-primary-foreground">D</span>
+                <span className="font-display text-xl font-bold text-primary-foreground">P</span>
               </div>
               <span className="font-display text-xl font-bold text-foreground">
-                Design<span className="text-primary">School</span>
+                Plots
               </span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
@@ -110,9 +110,9 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="mailto:contato@designschool.com.br" className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary">
+                <a href="mailto:contato@plots.com.br" className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary">
                   <Mail className="h-4 w-4" />
-                  contato@designschool.com.br
+                  contato@plots.com.br
                 </a>
               </li>
             </ul>
@@ -121,7 +121,7 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:flex-row">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} DesignSchool. Todos os direitos reservados.
+            © {new Date().getFullYear()} Plots. Todos os direitos reservados.
           </p>
           <div className="flex gap-6">
             <a href="#" className="text-sm text-muted-foreground transition-colors hover:text-primary">
