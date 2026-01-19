@@ -9,22 +9,32 @@ import { toast } from "sonner";
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const { signIn } = useAuthContext();
+  const { signIn, signUp } = useAuthContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    const { error } = await signIn(email, password);
-
-    if (error) {
-      toast.error("Erro ao fazer login: " + error.message);
+    if (isSignUp) {
+      const { error } = await signUp(email, password);
+      if (error) {
+        toast.error("Erro ao criar conta: " + error.message);
+      } else {
+        toast.success("Conta criada com sucesso! Faça login.");
+        setIsSignUp(false);
+      }
     } else {
-      toast.success("Login realizado com sucesso!");
-      navigate("/admin");
+      const { error } = await signIn(email, password);
+      if (error) {
+        toast.error("Erro ao fazer login: " + error.message);
+      } else {
+        toast.success("Login realizado com sucesso!");
+        navigate("/admin");
+      }
     }
 
     setLoading(false);
@@ -34,9 +44,13 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-muted/30 p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">Acesso Admin</CardTitle>
+          <CardTitle className="text-2xl font-bold">
+            {isSignUp ? "Criar Conta" : "Acesso Admin"}
+          </CardTitle>
           <CardDescription>
-            Entre com suas credenciais para acessar o painel administrativo
+            {isSignUp 
+              ? "Crie sua conta para acessar o sistema" 
+              : "Entre com suas credenciais para acessar o painel administrativo"}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -64,9 +78,22 @@ export default function LoginPage() {
               />
             </div>
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Entrando..." : "Entrar"}
+              {loading 
+                ? (isSignUp ? "Criando..." : "Entrando...") 
+                : (isSignUp ? "Criar Conta" : "Entrar")}
             </Button>
           </form>
+          <div className="mt-4 text-center">
+            <button
+              type="button"
+              onClick={() => setIsSignUp(!isSignUp)}
+              className="text-sm text-primary hover:underline"
+            >
+              {isSignUp 
+                ? "Já tem conta? Faça login" 
+                : "Não tem conta? Cadastre-se"}
+            </button>
+          </div>
         </CardContent>
       </Card>
     </div>
