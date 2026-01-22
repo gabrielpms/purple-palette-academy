@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import { Clock, Star, Users, ArrowRight, Tag } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { Clock, Star, Users, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface CourseCardProps {
@@ -42,7 +41,7 @@ export function CourseCard({ course, variant = "default" }: CourseCardProps) {
     return (
       <Link
         to={`/curso/${course.slug}`}
-        className="group flex gap-4 rounded-xl border border-border p-3 transition-all hover:border-primary/30 hover:shadow-card-hover"
+        className="group flex gap-4 rounded-xl border border-border p-3 transition-all hover:border-primary/30 hover:bg-secondary/30"
       >
         <div className="relative h-20 w-28 flex-shrink-0 overflow-hidden rounded-lg">
           <img
@@ -70,7 +69,7 @@ export function CourseCard({ course, variant = "default" }: CourseCardProps) {
     <Link
       to={`/curso/${course.slug}`}
       className={cn(
-        "group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card transition-all hover-lift",
+        "group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all hover:border-primary/20 hover:shadow-lg",
         variant === "featured" && "md:flex-row"
       )}
     >
@@ -89,62 +88,26 @@ export function CourseCard({ course, variant = "default" }: CourseCardProps) {
             variant === "featured" && "aspect-video md:aspect-auto md:h-full"
           )}
         />
+        
         {/* Badges */}
-        <div className="absolute left-3 top-3 flex flex-wrap gap-2">
+        <div className="absolute left-4 top-4 flex flex-wrap gap-2">
           {course.is_new && (
-            <Badge className="bg-success text-primary-foreground border-0">
+            <span className="rounded-full bg-primary px-3 py-1 text-xs font-medium text-primary-foreground">
               Novo
-            </Badge>
+            </span>
           )}
           {hasDiscount && (
-            <Badge className="bg-destructive text-destructive-foreground border-0">
+            <span className="rounded-full bg-destructive px-3 py-1 text-xs font-medium text-destructive-foreground">
               -{discountPercent}%
-            </Badge>
+            </span>
           )}
         </div>
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
       </div>
 
       {/* Content */}
-      <div className={cn("flex flex-1 flex-col p-5", variant === "featured" && "md:p-8")}>
-        {/* Tags */}
-        {course.tags && course.tags.length > 0 && (
-          <div className="mb-3 flex flex-wrap gap-1.5">
-            {course.tags.slice(0, 3).map((tag) => (
-              <span
-                key={tag}
-                className="inline-flex items-center gap-1 rounded-full bg-accent px-2 py-0.5 text-xs font-medium text-accent-foreground"
-              >
-                <Tag className="h-3 w-3" />
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
-
-        {/* Title & Description */}
-        <h3
-          className={cn(
-            "font-display font-bold leading-tight transition-colors group-hover:text-primary",
-            variant === "featured" ? "text-xl md:text-2xl" : "text-lg"
-          )}
-        >
-          {course.title}
-        </h3>
-        {course.short_description && (
-          <p
-            className={cn(
-              "mt-2 text-muted-foreground",
-              variant === "featured" ? "line-clamp-3 text-sm md:text-base" : "line-clamp-2 text-sm"
-            )}
-          >
-            {course.short_description}
-          </p>
-        )}
-
+      <div className={cn("flex flex-1 flex-col p-6", variant === "featured" && "md:p-8")}>
         {/* Instructor */}
-        <div className="mt-4 flex items-center gap-2">
+        <div className="flex items-center gap-3">
           {course.instructor_avatar && (
             <img
               src={course.instructor_avatar}
@@ -152,8 +115,24 @@ export function CourseCard({ course, variant = "default" }: CourseCardProps) {
               className="h-8 w-8 rounded-full object-cover"
             />
           )}
-          <span className="text-sm font-medium">{course.instructor_name}</span>
+          <span className="text-sm text-muted-foreground">{course.instructor_name}</span>
         </div>
+
+        {/* Title */}
+        <h3
+          className={cn(
+            "mt-4 font-display font-bold leading-tight transition-colors group-hover:text-primary",
+            variant === "featured" ? "text-xl md:text-2xl" : "text-lg"
+          )}
+        >
+          {course.title}
+        </h3>
+        
+        {course.short_description && (
+          <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
+            {course.short_description}
+          </p>
+        )}
 
         {/* Stats */}
         <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
@@ -161,44 +140,41 @@ export function CourseCard({ course, variant = "default" }: CourseCardProps) {
             <div className="flex items-center gap-1">
               <Star className="h-4 w-4 fill-gold text-gold" />
               <span className="font-medium text-foreground">{course.rating}</span>
-              {course.reviews_count && (
-                <span>({course.reviews_count})</span>
-              )}
-            </div>
-          )}
-          {course.students_count && course.students_count > 0 && (
-            <div className="flex items-center gap-1">
-              <Users className="h-4 w-4" />
-              <span>{course.students_count.toLocaleString("pt-BR")} alunos</span>
             </div>
           )}
           {course.duration_hours && (
             <div className="flex items-center gap-1">
               <Clock className="h-4 w-4" />
-              <span>{course.duration_hours}h de conteúdo</span>
+              <span>{course.duration_hours}h</span>
+            </div>
+          )}
+          {course.students_count && course.students_count > 0 && (
+            <div className="flex items-center gap-1">
+              <Users className="h-4 w-4" />
+              <span>{course.students_count.toLocaleString("pt-BR")}</span>
             </div>
           )}
           {course.level && (
-            <Badge variant="secondary" className="text-xs">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-secondary">
               {levelLabels[course.level] || course.level}
-            </Badge>
+            </span>
           )}
         </div>
 
         {/* Price & CTA */}
-        <div className="mt-auto flex items-end justify-between pt-5">
+        <div className="mt-auto flex items-end justify-between pt-6">
           <div>
             {hasDiscount && (
               <span className="text-sm text-muted-foreground line-through">
                 R$ {course.original_price?.toFixed(0)}
               </span>
             )}
-            <p className="font-display text-2xl font-bold text-primary">
+            <p className="font-display text-2xl font-bold">
               R$ {course.price.toFixed(0)}
             </p>
           </div>
           <div className="flex items-center gap-1 text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
-            Ver curso
+            Ver detalhes
             <ArrowRight className="h-4 w-4" />
           </div>
         </div>
