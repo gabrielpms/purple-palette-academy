@@ -63,8 +63,8 @@ export function HeroMasterclass({ instructors = defaultInstructors }: HeroMaster
           </h1>
 
           <p className="mt-6 max-w-xl text-lg text-muted-foreground md:text-xl">
-            Acesso ilimitado a masterclasses, nano aulas e sessões de mentoria 
-            com os melhores designers do Brasil.
+            Masterclasses individuais ou assinatura com nano aulas e sessões de mentoria. 
+            Aprenda design estratégico com os melhores profissionais do Brasil.
           </p>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -74,7 +74,7 @@ export function HeroMasterclass({ instructors = defaultInstructors }: HeroMaster
               asChild
             >
               <Link to="/cursos">
-                Começar Agora
+                Ver Masterclasses
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </Button>
@@ -86,7 +86,7 @@ export function HeroMasterclass({ instructors = defaultInstructors }: HeroMaster
             >
               <Link to="/sobre">
                 <Play className="h-5 w-5" />
-                Ver Como Funciona
+                Conhecer a Plataforma
               </Link>
             </Button>
           </div>

@@ -1,13 +1,8 @@
 import { Link } from "react-router-dom";
-import { Check, Play, Users, BookOpen, Zap } from "lucide-react";
+import { Check, Play, Users, Zap, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const features = [
-  {
-    icon: BookOpen,
-    title: "Acesso a todas as Masterclasses",
-    description: "Cursos completos com os melhores profissionais",
-  },
   {
     icon: Zap,
     title: "Nano Aulas",
@@ -26,10 +21,10 @@ const features = [
 ];
 
 const benefits = [
-  "Acesso ilimitado a todo conteúdo",
-  "Certificados de conclusão",
+  "Acesso ilimitado a nano aulas",
+  "Sessões de mentoria ao vivo",
   "Comunidade exclusiva de designers",
-  "Downloads para assistir offline",
+  "Certificados de participação",
   "Cancele quando quiser",
 ];
 
@@ -37,47 +32,53 @@ export function SubscriptionSection() {
   return (
     <section className="py-24 md:py-32 bg-gradient-to-b from-background via-secondary/30 to-background">
       <div className="container">
-        <div className="text-center max-w-3xl mx-auto">
-          <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20 mb-6">
-            Plano de Assinatura
-          </span>
-          <h2 className="font-display text-4xl font-bold md:text-5xl lg:text-6xl">
-            Tudo que você precisa.
-            <br />
-            <span className="text-muted-foreground">Um único plano.</span>
-          </h2>
-          <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Acesse todas as masterclasses, nano aulas e sessões de mentoria por uma assinatura mensal acessível.
-          </p>
-        </div>
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Content */}
+          <div>
+            <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20 mb-6">
+              Assinatura
+            </span>
+            <h2 className="font-display text-4xl font-bold md:text-5xl leading-tight">
+              Aprenda continuamente.
+              <br />
+              <span className="text-muted-foreground">Evolua constantemente.</span>
+            </h2>
+            <p className="mt-6 text-lg text-muted-foreground">
+              Nossa assinatura te dá acesso a nano aulas exclusivas e sessões de mentoria ao vivo com profissionais de mercado. 
+              Ideal para quem quer manter-se atualizado e evoluir constantemente.
+            </p>
+            <p className="mt-4 text-sm text-muted-foreground border-l-2 border-primary/30 pl-4">
+              <strong className="text-foreground">Nota:</strong> As masterclasses são vendidas separadamente e não estão incluídas na assinatura.
+            </p>
 
-        {/* Features Grid */}
-        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {features.map((feature) => (
-            <div
-              key={feature.title}
-              className="group p-6 rounded-2xl bg-card border border-border hover:border-primary/30 transition-all"
-            >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                <feature.icon className="h-6 w-6" />
-              </div>
-              <h3 className="mt-4 font-display text-lg font-semibold">
-                {feature.title}
-              </h3>
-              <p className="mt-2 text-sm text-muted-foreground">
-                {feature.description}
-              </p>
+            {/* Features */}
+            <div className="mt-10 space-y-4">
+              {features.map((feature) => (
+                <div
+                  key={feature.title}
+                  className="flex items-start gap-4"
+                >
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <feature.icon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-display font-semibold">
+                      {feature.title}
+                    </h3>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {feature.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
 
-        {/* Pricing Card */}
-        <div className="mt-16 max-w-lg mx-auto">
-          <div className="relative rounded-3xl bg-card border border-border p-8 md:p-10">
-            {/* Glow effect */}
-            <div className="absolute -inset-px rounded-3xl bg-gradient-to-r from-primary/20 via-transparent to-primary/20 blur-xl opacity-50" />
+          {/* Pricing Card */}
+          <div className="relative">
+            <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-primary/10 via-transparent to-primary/10 blur-2xl" />
             
-            <div className="relative">
+            <div className="relative rounded-3xl bg-card border border-border p-8 md:p-10">
               <div className="text-center">
                 <h3 className="font-display text-2xl font-bold">Assinatura Premium</h3>
                 <div className="mt-6">
@@ -101,16 +102,30 @@ export function SubscriptionSection() {
 
               <Button 
                 size="lg" 
-                className="w-full mt-8 h-14 text-base font-semibold bg-primary hover:bg-primary/90"
+                className="w-full mt-8 h-14 text-base font-semibold bg-primary hover:bg-primary/90 gap-2"
                 asChild
               >
                 <Link to="/cursos">
                   Começar 7 dias grátis
+                  <ArrowRight className="h-5 w-5" />
                 </Link>
               </Button>
               <p className="mt-4 text-center text-xs text-muted-foreground">
                 Sem compromisso. Cancele a qualquer momento.
               </p>
+            </div>
+
+            {/* Masterclass CTA */}
+            <div className="mt-6 p-6 rounded-2xl bg-secondary/50 border border-border text-center">
+              <p className="text-sm text-muted-foreground">
+                Prefere comprar uma masterclass individual?
+              </p>
+              <Button variant="link" className="mt-2 text-primary gap-1" asChild>
+                <Link to="/cursos">
+                  Ver todas as masterclasses
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
