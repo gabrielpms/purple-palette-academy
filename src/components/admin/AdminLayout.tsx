@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
-import { BookOpen, FolderOpen, Users, LogOut, Home } from "lucide-react";
+import { BookOpen, FolderOpen, Users, LogOut, Home, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface AdminLayoutProps {
@@ -13,6 +13,7 @@ const navItems = [
   { href: "/admin", label: "Cursos", icon: BookOpen },
   { href: "/admin/categorias", label: "Categorias", icon: FolderOpen },
   { href: "/admin/parceiros", label: "Parceiros", icon: Users },
+  { href: "/admin/temporadas", label: "Temporadas", icon: Sparkles },
 ];
 
 export function AdminLayout({ children }: AdminLayoutProps) {

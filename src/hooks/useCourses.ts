@@ -112,7 +112,7 @@ export function useCourse(slug: string) {
         .select(`
           *,
           categories(id, name, slug),
-          partners(id, name, logo_url)
+          partners(id, name, logo_url, is_active)
         `)
         .eq("slug", slug)
         .single();
