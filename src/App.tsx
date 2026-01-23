@@ -12,10 +12,13 @@ import AboutPage from "./pages/AboutPage";
 import PartnersPage from "./pages/PartnersPage";
 import BecomePartnerPage from "./pages/BecomePartnerPage";
 import StrategyReturnPage from "./pages/StrategyReturnPage";
+import SeasonPage from "./pages/SeasonPage";
 import LoginPage from "./pages/LoginPage";
 import AdminCoursesPage from "./pages/admin/AdminCoursesPage";
 import AdminCategoriesPage from "./pages/admin/AdminCategoriesPage";
 import AdminPartnersPage from "./pages/admin/AdminPartnersPage";
+import AdminSeasonsPage from "./pages/admin/AdminSeasonsPage";
+import AdminSeasonPillarsPage from "./pages/admin/AdminSeasonPillarsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +39,7 @@ const App = () => (
             <Route path="/parceiros" element={<PartnersPage />} />
             <Route path="/seja-parceiro" element={<BecomePartnerPage />} />
             <Route path="/retorno-estrategia" element={<StrategyReturnPage />} />
+            <Route path="/temporada/:slug" element={<SeasonPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route
               path="/admin"
@@ -58,6 +62,22 @@ const App = () => (
               element={
                 <ProtectedRoute requireAdmin>
                   <AdminPartnersPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/temporadas"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <AdminSeasonsPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/temporadas/:seasonId/pilares"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <AdminSeasonPillarsPage />
                 </ProtectedRoute>
               }
             />

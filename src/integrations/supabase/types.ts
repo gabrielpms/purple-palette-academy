@@ -64,6 +64,7 @@ export type Database = {
           price: number
           rating: number | null
           reviews_count: number | null
+          season_id: string | null
           short_description: string | null
           slug: string
           students_count: number | null
@@ -91,6 +92,7 @@ export type Database = {
           price?: number
           rating?: number | null
           reviews_count?: number | null
+          season_id?: string | null
           short_description?: string | null
           slug: string
           students_count?: number | null
@@ -118,6 +120,7 @@ export type Database = {
           price?: number
           rating?: number | null
           reviews_count?: number | null
+          season_id?: string | null
           short_description?: string | null
           slug?: string
           students_count?: number | null
@@ -139,6 +142,13 @@ export type Database = {
             columns: ["partner_id"]
             isOneToOne: false
             referencedRelation: "partners"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "courses_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
             referencedColumns: ["id"]
           },
         ]
@@ -206,6 +216,80 @@ export type Database = {
           name?: string
           updated_at?: string
           website_url?: string | null
+        }
+        Relationships: []
+      }
+      season_pillars: {
+        Row: {
+          created_at: string
+          description: string
+          icon: string | null
+          id: string
+          order_index: number | null
+          season_id: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          icon?: string | null
+          id?: string
+          order_index?: number | null
+          season_id: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          icon?: string | null
+          id?: string
+          order_index?: number | null
+          season_id?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "season_pillars_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      seasons: {
+        Row: {
+          concept: string
+          created_at: string
+          hero_image_url: string | null
+          id: string
+          is_active: boolean | null
+          slug: string
+          subtitle: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          concept: string
+          created_at?: string
+          hero_image_url?: string | null
+          id?: string
+          is_active?: boolean | null
+          slug: string
+          subtitle?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          concept?: string
+          created_at?: string
+          hero_image_url?: string | null
+          id?: string
+          is_active?: boolean | null
+          slug?: string
+          subtitle?: string | null
+          title?: string
+          updated_at?: string
         }
         Relationships: []
       }
