@@ -60,8 +60,8 @@ export function SeasonHighlight() {
               className="h-14 px-8 text-base font-semibold bg-primary hover:bg-primary/90 gap-2"
               asChild
             >
-              <Link to="/cursos?tema=estrategia">
-                Explorar cursos de estratégia
+              <Link to="/temporada/retorno-estrategia">
+                Conhecer a temporada completa
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </Button>
