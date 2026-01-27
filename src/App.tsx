@@ -19,6 +19,7 @@ import AdminCategoriesPage from "./pages/admin/AdminCategoriesPage";
 import AdminPartnersPage from "./pages/admin/AdminPartnersPage";
 import AdminSeasonsPage from "./pages/admin/AdminSeasonsPage";
 import AdminSeasonPillarsPage from "./pages/admin/AdminSeasonPillarsPage";
+import AdminFoundersPage from "./pages/admin/AdminFoundersPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -78,6 +79,14 @@ const App = () => (
               element={
                 <ProtectedRoute requireAdmin>
                   <AdminSeasonPillarsPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/fundadores"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <AdminFoundersPage />
                 </ProtectedRoute>
               }
             />
