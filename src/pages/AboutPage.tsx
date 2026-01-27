@@ -1,6 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CTASection } from "@/components/home/CTASection";
+import { FoundersSection } from "@/components/about/FoundersSection";
 import { Target, Heart, Lightbulb, Users } from "lucide-react";
 
 const values = [
@@ -147,6 +148,8 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+
+        <FoundersSection />
 
         <CTASection />
       </main>

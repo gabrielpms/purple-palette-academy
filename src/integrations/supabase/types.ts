@@ -153,6 +153,45 @@ export type Database = {
           },
         ]
       }
+      founders: {
+        Row: {
+          bio: string
+          created_at: string
+          id: string
+          is_active: boolean | null
+          linkedin_url: string | null
+          name: string
+          order_index: number | null
+          photo_url: string | null
+          role: string
+          updated_at: string
+        }
+        Insert: {
+          bio: string
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          linkedin_url?: string | null
+          name: string
+          order_index?: number | null
+          photo_url?: string | null
+          role: string
+          updated_at?: string
+        }
+        Update: {
+          bio?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          linkedin_url?: string | null
+          name?: string
+          order_index?: number | null
+          photo_url?: string | null
+          role?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       partner_requests: {
         Row: {
           company: string | null
