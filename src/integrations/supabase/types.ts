@@ -227,32 +227,47 @@ export type Database = {
       }
       partners: {
         Row: {
+          bio: string | null
           created_at: string
           description: string | null
           id: string
+          instagram_url: string | null
           is_active: boolean
+          linkedin_url: string | null
           logo_url: string | null
           name: string
+          slug: string | null
+          twitter_url: string | null
           updated_at: string
           website_url: string | null
         }
         Insert: {
+          bio?: string | null
           created_at?: string
           description?: string | null
           id?: string
+          instagram_url?: string | null
           is_active?: boolean
+          linkedin_url?: string | null
           logo_url?: string | null
           name: string
+          slug?: string | null
+          twitter_url?: string | null
           updated_at?: string
           website_url?: string | null
         }
         Update: {
+          bio?: string | null
           created_at?: string
           description?: string | null
           id?: string
+          instagram_url?: string | null
           is_active?: boolean
+          linkedin_url?: string | null
           logo_url?: string | null
           name?: string
+          slug?: string | null
+          twitter_url?: string | null
           updated_at?: string
           website_url?: string | null
         }
