@@ -40,9 +40,14 @@ export interface Category {
 export interface Partner {
   id: string;
   name: string;
-  logo_url?: string;
-  website_url?: string;
-  description?: string;
+  slug: string;
+  logo_url: string | null;
+  website_url: string | null;
+  description: string | null;
+  bio: string | null;
+  linkedin_url: string | null;
+  twitter_url: string | null;
+  instagram_url: string | null;
   is_active: boolean;
 }
 
@@ -112,7 +117,7 @@ export function useCourse(slug: string) {
         .select(`
           *,
           categories(id, name, slug),
-          partners(id, name, logo_url, is_active)
+          partners(id, name, slug, logo_url, website_url, description, bio, linkedin_url, twitter_url, instagram_url, is_active)
         `)
         .eq("slug", slug)
         .single();

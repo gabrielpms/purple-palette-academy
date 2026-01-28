@@ -9,7 +9,8 @@ import Index from "./pages/Index";
 import CoursesPage from "./pages/CoursesPage";
 import CourseDetailPage from "./pages/CourseDetailPage";
 import AboutPage from "./pages/AboutPage";
-import PartnersPage from "./pages/PartnersPage";
+import InstructorsPage from "./pages/InstructorsPage";
+import InstructorDetailPage from "./pages/InstructorDetailPage";
 import BecomePartnerPage from "./pages/BecomePartnerPage";
 import StrategyReturnPage from "./pages/StrategyReturnPage";
 import SeasonPage from "./pages/SeasonPage";
@@ -37,7 +38,8 @@ const App = () => (
             <Route path="/cursos/:categorySlug" element={<CoursesPage />} />
             <Route path="/curso/:slug" element={<CourseDetailPage />} />
             <Route path="/sobre" element={<AboutPage />} />
-            <Route path="/parceiros" element={<PartnersPage />} />
+            <Route path="/instrutores" element={<InstructorsPage />} />
+            <Route path="/instrutor/:slug" element={<InstructorDetailPage />} />
             <Route path="/seja-parceiro" element={<BecomePartnerPage />} />
             <Route path="/retorno-estrategia" element={<StrategyReturnPage />} />
             <Route path="/temporada/:slug" element={<SeasonPage />} />

@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Table,
   TableBody,
@@ -32,7 +33,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Pencil, Trash2 } from "lucide-react";
+import { Plus, Pencil, Trash2, Linkedin, Twitter, Instagram } from "lucide-react";
 import { toast } from "sonner";
 import { Partner } from "@/hooks/useCourses";
 
@@ -43,9 +44,14 @@ export default function AdminPartnersPage() {
   const [deletingPartner, setDeletingPartner] = useState<Partner | null>(null);
   const [formData, setFormData] = useState({
     name: "",
+    slug: "",
     logo_url: "",
     website_url: "",
     description: "",
+    bio: "",
+    linkedin_url: "",
+    twitter_url: "",
+    instagram_url: "",
     is_active: true,
   });
   const [loading, setLoading] = useState(false);
@@ -68,14 +74,30 @@ export default function AdminPartnersPage() {
       setEditingPartner(partner);
       setFormData({
         name: partner.name,
+        slug: partner.slug || "",
         logo_url: partner.logo_url || "",
         website_url: partner.website_url || "",
         description: partner.description || "",
+        bio: partner.bio || "",
+        linkedin_url: partner.linkedin_url || "",
+        twitter_url: partner.twitter_url || "",
+        instagram_url: partner.instagram_url || "",
         is_active: partner.is_active,
       });
     } else {
       setEditingPartner(null);
-      setFormData({ name: "", logo_url: "", website_url: "", description: "", is_active: true });
+      setFormData({ 
+        name: "", 
+        slug: "",
+        logo_url: "", 
+        website_url: "", 
+        description: "", 
+        bio: "",
+        linkedin_url: "",
+        twitter_url: "",
+        instagram_url: "",
+        is_active: true 
+      });
     }
     setIsFormOpen(true);
   };
@@ -84,11 +106,18 @@ export default function AdminPartnersPage() {
     e.preventDefault();
     setLoading(true);
 
+    const generatedSlug = formData.slug || formData.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+
     const partnerData = {
       name: formData.name,
+      slug: generatedSlug,
       logo_url: formData.logo_url || null,
       website_url: formData.website_url || null,
       description: formData.description || null,
+      bio: formData.bio || null,
+      linkedin_url: formData.linkedin_url || null,
+      twitter_url: formData.twitter_url || null,
+      instagram_url: formData.instagram_url || null,
       is_active: formData.is_active,
     };
 
@@ -106,13 +135,14 @@ export default function AdminPartnersPage() {
     }
 
     if (error) {
-      toast.error("Erro ao salvar parceiro: " + error.message);
+      toast.error("Erro ao salvar instrutor: " + error.message);
     } else {
-      toast.success(editingPartner ? "Parceiro atualizado!" : "Parceiro criado!");
+      toast.success(editingPartner ? "Instrutor atualizado!" : "Instrutor criado!");
       setIsFormOpen(false);
       setEditingPartner(null);
       queryClient.invalidateQueries({ queryKey: ["admin-partners"] });
       queryClient.invalidateQueries({ queryKey: ["partners"] });
+      queryClient.invalidateQueries({ queryKey: ["instructors"] });
     }
 
     setLoading(false);
@@ -127,11 +157,12 @@ export default function AdminPartnersPage() {
       .eq("id", deletingPartner.id);
 
     if (error) {
-      toast.error("Erro ao excluir parceiro: " + error.message);
+      toast.error("Erro ao excluir instrutor: " + error.message);
     } else {
-      toast.success("Parceiro excluído!");
+      toast.success("Instrutor excluído!");
       queryClient.invalidateQueries({ queryKey: ["admin-partners"] });
       queryClient.invalidateQueries({ queryKey: ["partners"] });
+      queryClient.invalidateQueries({ queryKey: ["instructors"] });
     }
 
     setDeletingPartner(null);
@@ -142,14 +173,14 @@ export default function AdminPartnersPage() {
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row gap-4 justify-between">
           <div>
-            <h1 className="text-2xl font-bold">Parceiros</h1>
+            <h1 className="text-2xl font-bold">Instrutores</h1>
             <p className="text-muted-foreground">
-              Gerencie os parceiros da plataforma
+              Gerencie os instrutores da plataforma
             </p>
           </div>
           <Button onClick={() => openForm()}>
             <Plus className="h-4 w-4 mr-2" />
-            Novo Parceiro
+            Novo Instrutor
           </Button>
         </div>
 
@@ -157,8 +188,8 @@ export default function AdminPartnersPage() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Parceiro</TableHead>
-                <TableHead className="hidden md:table-cell">Website</TableHead>
+                <TableHead>Instrutor</TableHead>
+                <TableHead className="hidden md:table-cell">Redes Sociais</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="w-24">Ações</TableHead>
               </TableRow>
@@ -173,7 +204,7 @@ export default function AdminPartnersPage() {
               ) : partners?.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={4} className="text-center py-8">
-                    Nenhum parceiro encontrado
+                    Nenhum instrutor encontrado
                   </TableCell>
                 </TableRow>
               ) : (
@@ -185,7 +216,7 @@ export default function AdminPartnersPage() {
                           <img
                             src={partner.logo_url}
                             alt={partner.name}
-                            className="w-10 h-10 rounded object-contain bg-muted p-1"
+                            className="w-10 h-10 rounded-full object-cover bg-muted"
                           />
                         )}
                         <div>
@@ -199,18 +230,20 @@ export default function AdminPartnersPage() {
                       </div>
                     </TableCell>
                     <TableCell className="hidden md:table-cell">
-                      {partner.website_url ? (
-                        <a
-                          href={partner.website_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-primary hover:underline"
-                        >
-                          {new URL(partner.website_url).hostname}
-                        </a>
-                      ) : (
-                        "-"
-                      )}
+                      <div className="flex gap-2">
+                        {partner.linkedin_url && (
+                          <Linkedin className="h-4 w-4 text-muted-foreground" />
+                        )}
+                        {partner.twitter_url && (
+                          <Twitter className="h-4 w-4 text-muted-foreground" />
+                        )}
+                        {partner.instagram_url && (
+                          <Instagram className="h-4 w-4 text-muted-foreground" />
+                        )}
+                        {!partner.linkedin_url && !partner.twitter_url && !partner.instagram_url && (
+                          <span className="text-muted-foreground">-</span>
+                        )}
+                      </div>
                     </TableCell>
                     <TableCell>
                       <Badge variant={partner.is_active ? "default" : "secondary"}>
@@ -249,69 +282,131 @@ export default function AdminPartnersPage() {
         setIsFormOpen(open);
         if (!open) setEditingPartner(null);
       }}>
-        <DialogContent>
+        <DialogContent className="max-w-2xl max-h-[90vh]">
           <DialogHeader>
             <DialogTitle>
-              {editingPartner ? "Editar Parceiro" : "Novo Parceiro"}
+              {editingPartner ? "Editar Instrutor" : "Novo Instrutor"}
             </DialogTitle>
           </DialogHeader>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="name">Nome *</Label>
-              <Input
-                id="name"
-                value={formData.name}
-                onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="logo_url">URL do Logo</Label>
-              <Input
-                id="logo_url"
-                value={formData.logo_url}
-                onChange={(e) => setFormData(prev => ({ ...prev, logo_url: e.target.value }))}
-                placeholder="https://..."
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="website_url">Website</Label>
-              <Input
-                id="website_url"
-                value={formData.website_url}
-                onChange={(e) => setFormData(prev => ({ ...prev, website_url: e.target.value }))}
-                placeholder="https://..."
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="description">Descrição</Label>
-              <Textarea
-                id="description"
-                value={formData.description}
-                onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-              />
-            </div>
-            <div className="flex items-center justify-between rounded-lg border p-4">
-              <div className="space-y-0.5">
-                <Label>Ativo</Label>
-                <p className="text-sm text-muted-foreground">
-                  Parceiros inativos não aparecem no site
-                </p>
+          <ScrollArea className="max-h-[70vh] pr-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="space-y-2">
+                  <Label htmlFor="name">Nome *</Label>
+                  <Input
+                    id="name"
+                    value={formData.name}
+                    onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="slug">Slug (URL)</Label>
+                  <Input
+                    id="slug"
+                    value={formData.slug}
+                    onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
+                    placeholder="gerado-automaticamente"
+                  />
+                </div>
               </div>
-              <Switch
-                checked={formData.is_active}
-                onCheckedChange={(checked) => setFormData(prev => ({ ...prev, is_active: checked }))}
-              />
-            </div>
-            <div className="flex gap-4 justify-end">
-              <Button type="button" variant="outline" onClick={() => setIsFormOpen(false)}>
-                Cancelar
-              </Button>
-              <Button type="submit" disabled={loading}>
-                {loading ? "Salvando..." : editingPartner ? "Atualizar" : "Criar"}
-              </Button>
-            </div>
-          </form>
+
+              <div className="space-y-2">
+                <Label htmlFor="logo_url">URL da Foto</Label>
+                <Input
+                  id="logo_url"
+                  value={formData.logo_url}
+                  onChange={(e) => setFormData(prev => ({ ...prev, logo_url: e.target.value }))}
+                  placeholder="https://..."
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="description">Título / Cargo</Label>
+                <Input
+                  id="description"
+                  value={formData.description}
+                  onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                  placeholder="Ex: Head of Design na Nubank"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="bio">Biografia</Label>
+                <Textarea
+                  id="bio"
+                  value={formData.bio}
+                  onChange={(e) => setFormData(prev => ({ ...prev, bio: e.target.value }))}
+                  placeholder="Escreva uma biografia detalhada do instrutor..."
+                  rows={5}
+                />
+              </div>
+
+              <div className="space-y-4 rounded-lg border p-4">
+                <h4 className="font-medium">Redes Sociais</h4>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <Label htmlFor="linkedin_url">LinkedIn</Label>
+                    <Input
+                      id="linkedin_url"
+                      value={formData.linkedin_url}
+                      onChange={(e) => setFormData(prev => ({ ...prev, linkedin_url: e.target.value }))}
+                      placeholder="https://linkedin.com/in/..."
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="twitter_url">Twitter/X</Label>
+                    <Input
+                      id="twitter_url"
+                      value={formData.twitter_url}
+                      onChange={(e) => setFormData(prev => ({ ...prev, twitter_url: e.target.value }))}
+                      placeholder="https://twitter.com/..."
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="instagram_url">Instagram</Label>
+                    <Input
+                      id="instagram_url"
+                      value={formData.instagram_url}
+                      onChange={(e) => setFormData(prev => ({ ...prev, instagram_url: e.target.value }))}
+                      placeholder="https://instagram.com/..."
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="website_url">Website</Label>
+                    <Input
+                      id="website_url"
+                      value={formData.website_url}
+                      onChange={(e) => setFormData(prev => ({ ...prev, website_url: e.target.value }))}
+                      placeholder="https://..."
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between rounded-lg border p-4">
+                <div className="space-y-0.5">
+                  <Label>Ativo</Label>
+                  <p className="text-sm text-muted-foreground">
+                    Instrutores inativos não aparecem no site
+                  </p>
+                </div>
+                <Switch
+                  checked={formData.is_active}
+                  onCheckedChange={(checked) => setFormData(prev => ({ ...prev, is_active: checked }))}
+                />
+              </div>
+
+              <div className="flex gap-4 justify-end pt-4">
+                <Button type="button" variant="outline" onClick={() => setIsFormOpen(false)}>
+                  Cancelar
+                </Button>
+                <Button type="submit" disabled={loading}>
+                  {loading ? "Salvando..." : editingPartner ? "Atualizar" : "Criar"}
+                </Button>
+              </div>
+            </form>
+          </ScrollArea>
         </DialogContent>
       </Dialog>
 
@@ -319,9 +414,9 @@ export default function AdminPartnersPage() {
       <AlertDialog open={!!deletingPartner} onOpenChange={() => setDeletingPartner(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Excluir parceiro?</AlertDialogTitle>
+            <AlertDialogTitle>Excluir instrutor?</AlertDialogTitle>
             <AlertDialogDescription>
-              Tem certeza que deseja excluir o parceiro "{deletingPartner?.name}"? Esta ação não pode ser desfeita.
+              Tem certeza que deseja excluir o instrutor "{deletingPartner?.name}"? Esta ação não pode ser desfeita.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

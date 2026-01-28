@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 const navLinks = [
   { name: "Masterclasses", path: "/cursos" },
   { name: "Sobre", path: "/sobre" },
-  { name: "Parceiros", path: "/parceiros" },
+  { name: "Instrutores", path: "/instrutores" },
 ];
 
 export function Header() {

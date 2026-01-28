@@ -12,7 +12,7 @@ interface AdminLayoutProps {
 const navItems = [
   { href: "/admin", label: "Cursos", icon: BookOpen },
   { href: "/admin/categorias", label: "Categorias", icon: FolderOpen },
-  { href: "/admin/parceiros", label: "Parceiros", icon: Users },
+  { href: "/admin/parceiros", label: "Instrutores", icon: Users },
   { href: "/admin/temporadas", label: "Temporadas", icon: Sparkles },
   { href: "/admin/fundadores", label: "Fundadores", icon: UserCircle },
 ];
