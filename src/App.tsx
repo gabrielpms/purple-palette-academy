@@ -21,6 +21,9 @@ import AdminPartnersPage from "./pages/admin/AdminPartnersPage";
 import AdminSeasonsPage from "./pages/admin/AdminSeasonsPage";
 import AdminSeasonPillarsPage from "./pages/admin/AdminSeasonPillarsPage";
 import AdminFoundersPage from "./pages/admin/AdminFoundersPage";
+import AdminSettingsPage from "./pages/admin/AdminSettingsPage";
+import AdminTestimonialsPage from "./pages/admin/AdminTestimonialsPage";
+import AdminLeadsPage from "./pages/admin/AdminLeadsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -89,6 +92,30 @@ const App = () => (
               element={
                 <ProtectedRoute requireAdmin>
                   <AdminFoundersPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/configuracoes"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <AdminSettingsPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/depoimentos"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <AdminTestimonialsPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/leads"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <AdminLeadsPage />
                 </ProtectedRoute>
               }
             />

@@ -51,16 +51,6 @@ export interface Partner {
   is_active: boolean;
 }
 
-export interface Testimonial {
-  id: string;
-  name: string;
-  role?: string;
-  company?: string;
-  avatar_url?: string;
-  content: string;
-  rating?: number;
-  is_featured?: boolean;
-}
 
 export function useCourses(filters?: {
   categorySlug?: string;
@@ -160,20 +150,3 @@ export function usePartners() {
   });
 }
 
-export function useTestimonials(featured = true) {
-  return useQuery({
-    queryKey: ["testimonials", featured],
-    queryFn: async () => {
-      let query = supabase.from("testimonials").select("*");
-      
-      if (featured) {
-        query = query.eq("is_featured", true);
-      }
-
-      const { data, error } = await query.order("created_at", { ascending: false });
-
-      if (error) throw error;
-      return data as Testimonial[];
-    },
-  });
-}

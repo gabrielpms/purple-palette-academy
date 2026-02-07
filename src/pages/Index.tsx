@@ -7,13 +7,17 @@ import { FeaturedInstructors } from "@/components/home/FeaturedInstructors";
 import { NewCourses } from "@/components/home/NewCourses";
 import { SubscriptionSection } from "@/components/home/SubscriptionSection";
 import { Testimonials } from "@/components/home/Testimonials";
-import { useCourses, useTestimonials } from "@/hooks/useCourses";
+import { LeadCapture } from "@/components/home/LeadCapture";
+import { useCourses } from "@/hooks/useCourses";
+import { useFeaturedTestimonials } from "@/hooks/useTestimonials";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Index() {
   const { data: featuredCourses, isLoading: loadingFeatured } = useCourses({ featured: true });
   const { data: allCourses, isLoading: loadingAll } = useCourses();
-  const { data: testimonials, isLoading: loadingTestimonials } = useTestimonials();
+  const { data: testimonials, isLoading: loadingTestimonials } = useFeaturedTestimonials();
+  const { data: settings } = useSiteSettings();
 
   // Get the 3 most recent courses
   const recentCourses = allCourses?.slice(0, 3) || [];
@@ -68,20 +72,25 @@ export default function Index() {
         {/* Subscription CTA */}
         <SubscriptionSection />
         
-        {/* Testimonials */}
-        {loadingTestimonials ? (
-          <section className="py-24">
-            <div className="container">
-              <Skeleton className="h-12 w-64 mx-auto mb-16" />
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-                {[1, 2, 3, 4].map((i) => (
-                  <Skeleton key={i} className="h-[250px] rounded-2xl" />
-                ))}
+        {/* Lead Capture */}
+        <LeadCapture />
+        
+        {/* Testimonials - only show if enabled in settings */}
+        {settings?.show_testimonials !== false && (
+          loadingTestimonials ? (
+            <section className="py-24">
+              <div className="container">
+                <Skeleton className="h-12 w-64 mx-auto mb-16" />
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                  {[1, 2, 3, 4].map((i) => (
+                    <Skeleton key={i} className="h-[250px] rounded-2xl" />
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
-        ) : (
-          <Testimonials testimonials={testimonials || []} />
+            </section>
+          ) : (
+            <Testimonials testimonials={testimonials || []} />
+          )
         )}
       </main>
       
