@@ -105,14 +105,70 @@ export default function SeasonPage() {
         {/* Concept */}
         <section className="py-20 md:py-28">
           <div className="container">
-            <div className="mx-auto max-w-3xl">
-              <div className="prose prose-lg dark:prose-invert max-w-none">
-                {season.concept.split("\n\n").map((paragraph, index) => (
-                  <p key={index} className="text-muted-foreground leading-relaxed">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
+            <div className="mx-auto max-w-4xl space-y-12">
+              {(() => {
+                const paragraphs = season.concept.split("\n\n").filter(p => p.trim());
+                const lastIndex = paragraphs.length - 1;
+
+                const renderBlocks: React.ReactNode[] = [];
+                let i = 0;
+
+                while (i < paragraphs.length) {
+                  const p = paragraphs[i];
+                  const isFirst = i === 0;
+                  const isLast = i === lastIndex;
+                  const isShort = p.length < 200;
+
+                  if (isFirst) {
+                    // Lead editorial
+                    renderBlocks.push(
+                      <p key={i} className="text-xl md:text-2xl font-display font-medium text-foreground leading-relaxed">
+                        {p}
+                      </p>
+                    );
+                    renderBlocks.push(<div key={`sep-${i}`} className="w-16 h-1 bg-primary/20 mx-auto" />);
+                  } else if (isLast) {
+                    // Fechamento com destaque
+                    renderBlocks.push(<div key={`sep-${i}`} className="w-16 h-1 bg-primary/20 mx-auto" />);
+                    renderBlocks.push(
+                      <div key={i} className="bg-primary/5 rounded-2xl p-8 md:p-10">
+                        <p className="text-lg md:text-xl font-display font-medium text-foreground leading-relaxed">
+                          {p}
+                        </p>
+                      </div>
+                    );
+                  } else if (isShort) {
+                    // Blockquote / pull quote
+                    renderBlocks.push(
+                      <blockquote key={i} className="border-l-4 border-primary pl-6 md:pl-8 py-2">
+                        <p className="text-lg md:text-xl italic text-foreground/90 leading-relaxed">
+                          {p}
+                        </p>
+                      </blockquote>
+                    );
+                  } else if (i + 1 < lastIndex && !paragraphs[i + 1].length || (i + 1 < lastIndex && paragraphs[i + 1].length >= 200)) {
+                    // Grid de 2 colunas com o próximo parágrafo
+                    renderBlocks.push(
+                      <div key={i} className="grid md:grid-cols-2 gap-8">
+                        <p className="text-muted-foreground leading-relaxed">{p}</p>
+                        <p className="text-muted-foreground leading-relaxed">{paragraphs[i + 1]}</p>
+                      </div>
+                    );
+                    i++; // pula o próximo pois já foi usado
+                  } else {
+                    // Parágrafo normal com largura total
+                    renderBlocks.push(
+                      <p key={i} className="text-muted-foreground leading-relaxed">
+                        {p}
+                      </p>
+                    );
+                  }
+
+                  i++;
+                }
+
+                return renderBlocks;
+              })()}
             </div>
           </div>
         </section>
