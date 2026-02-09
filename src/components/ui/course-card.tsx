@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Clock, Star, Users, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { AbstractCourseThumbnail } from "@/components/ui/abstract-course-thumbnail";
 
 interface CourseCardProps {
   course: {
@@ -44,11 +45,15 @@ export function CourseCard({ course, variant = "default" }: CourseCardProps) {
         className="group flex gap-4 rounded-xl border border-border p-3 transition-all hover:border-primary/30 hover:bg-secondary/30"
       >
         <div className="relative h-20 w-28 flex-shrink-0 overflow-hidden rounded-lg">
-          <img
-            src={course.thumbnail_url || "/placeholder.svg"}
-            alt={course.title}
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-          />
+          {course.thumbnail_url ? (
+            <img
+              src={course.thumbnail_url}
+              alt={course.title}
+              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          ) : (
+            <AbstractCourseThumbnail title={course.title} className="h-full w-full" />
+          )}
         </div>
         <div className="flex flex-1 flex-col justify-between">
           <h4 className="line-clamp-2 font-display text-sm font-semibold leading-tight group-hover:text-primary">
@@ -80,14 +85,24 @@ export function CourseCard({ course, variant = "default" }: CourseCardProps) {
           variant === "featured" ? "md:w-1/2" : "aspect-video"
         )}
       >
-        <img
-          src={course.thumbnail_url || "/placeholder.svg"}
-          alt={course.title}
-          className={cn(
-            "h-full w-full object-cover transition-transform duration-500 group-hover:scale-105",
-            variant === "featured" && "aspect-video md:aspect-auto md:h-full"
-          )}
-        />
+        {course.thumbnail_url ? (
+          <img
+            src={course.thumbnail_url}
+            alt={course.title}
+            className={cn(
+              "h-full w-full object-cover transition-transform duration-500 group-hover:scale-105",
+              variant === "featured" && "aspect-video md:aspect-auto md:h-full"
+            )}
+          />
+        ) : (
+          <AbstractCourseThumbnail
+            title={course.title}
+            className={cn(
+              "h-full w-full transition-transform duration-500 group-hover:scale-105",
+              variant === "featured" ? "aspect-video md:aspect-auto md:h-full" : "aspect-video"
+            )}
+          />
+        )}
         
         {/* Badges */}
         <div className="absolute left-4 top-4 flex flex-wrap gap-2">
