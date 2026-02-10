@@ -82,19 +82,8 @@ export default function InstructorDetailPage() {
                   )}
                 </div>
 
-                {/* Social Links */}
+                {/* Social Links (excluding LinkedIn) */}
                 <div className="mt-6 flex flex-wrap gap-3">
-                  {instructor.linkedin_url && (
-                    <a
-                      href={instructor.linkedin_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 rounded-full bg-card border border-border px-4 py-2 text-sm hover:border-primary/30 transition-colors"
-                    >
-                      <Linkedin className="h-4 w-4" />
-                      LinkedIn
-                    </a>
-                  )}
                   {instructor.twitter_url && (
                     <a
                       href={instructor.twitter_url}
@@ -129,21 +118,6 @@ export default function InstructorDetailPage() {
                     </a>
                   )}
                 </div>
-
-                {/* Presentation Video */}
-                {instructor.video_url && (
-                  <div className="mt-8">
-                    <div className="aspect-video overflow-hidden rounded-2xl border border-border">
-                      <iframe
-                        src={instructor.video_url}
-                        title={`Vídeo de apresentação - ${instructor.name}`}
-                        className="h-full w-full"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
-                    </div>
-                  </div>
-                )}
               </div>
 
               {/* Info */}
@@ -153,9 +127,33 @@ export default function InstructorDetailPage() {
                 </h1>
                 
                 {instructor.description && (
-                  <p className="mt-4 text-lg text-primary font-medium">
-                    {instructor.description}
-                  </p>
+                  <div className="mt-4 flex items-center gap-3">
+                    {instructor.linkedin_url && (
+                      <a
+                        href={instructor.linkedin_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        <Linkedin className="h-5 w-5" />
+                      </a>
+                    )}
+                    <p className="text-lg text-primary font-medium">
+                      {instructor.description}
+                    </p>
+                  </div>
+                )}
+
+                {!instructor.description && instructor.linkedin_url && (
+                  <a
+                    href={instructor.linkedin_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    <Linkedin className="h-5 w-5" />
+                    LinkedIn
+                  </a>
                 )}
 
                 {instructor.bio && (
@@ -167,6 +165,21 @@ export default function InstructorDetailPage() {
                 )}
               </div>
             </div>
+
+            {/* Presentation Video - full width, centered */}
+            {instructor.video_url && (
+              <div className="mt-12 mx-auto max-w-4xl">
+                <div className="aspect-video overflow-hidden rounded-2xl border border-border">
+                  <iframe
+                    src={instructor.video_url}
+                    title={`Vídeo de apresentação - ${instructor.name}`}
+                    className="h-full w-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </section>
 
