@@ -48,6 +48,7 @@ export interface Partner {
   linkedin_url: string | null;
   twitter_url: string | null;
   instagram_url: string | null;
+  video_url: string | null;
   is_active: boolean;
 }
 
@@ -107,7 +108,7 @@ export function useCourse(slug: string) {
         .select(`
           *,
           categories(id, name, slug),
-          partners(id, name, slug, logo_url, website_url, description, bio, linkedin_url, twitter_url, instagram_url, is_active)
+          partners(id, name, slug, logo_url, website_url, description, bio, linkedin_url, twitter_url, instagram_url, video_url, is_active)
         `)
         .eq("slug", slug)
         .single();

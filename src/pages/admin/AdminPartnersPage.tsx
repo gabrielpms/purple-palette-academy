@@ -52,6 +52,7 @@ export default function AdminPartnersPage() {
     linkedin_url: "",
     twitter_url: "",
     instagram_url: "",
+    video_url: "",
     is_active: true,
   });
   const [loading, setLoading] = useState(false);
@@ -82,6 +83,7 @@ export default function AdminPartnersPage() {
         linkedin_url: partner.linkedin_url || "",
         twitter_url: partner.twitter_url || "",
         instagram_url: partner.instagram_url || "",
+        video_url: (partner as any).video_url || "",
         is_active: partner.is_active,
       });
     } else {
@@ -96,6 +98,7 @@ export default function AdminPartnersPage() {
         linkedin_url: "",
         twitter_url: "",
         instagram_url: "",
+        video_url: "",
         is_active: true 
       });
     }
@@ -118,6 +121,7 @@ export default function AdminPartnersPage() {
       linkedin_url: formData.linkedin_url || null,
       twitter_url: formData.twitter_url || null,
       instagram_url: formData.instagram_url || null,
+      video_url: formData.video_url || null,
       is_active: formData.is_active,
     };
 
@@ -340,6 +344,19 @@ export default function AdminPartnersPage() {
                   placeholder="Escreva uma biografia detalhada do instrutor..."
                   rows={5}
                 />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="video_url">URL do Vídeo de Apresentação</Label>
+                <Input
+                  id="video_url"
+                  value={formData.video_url}
+                  onChange={(e) => setFormData(prev => ({ ...prev, video_url: e.target.value }))}
+                  placeholder="https://youtube.com/embed/... ou https://vimeo.com/..."
+                />
+                <p className="text-xs text-muted-foreground">
+                  Use a URL de embed do YouTube ou Vimeo
+                </p>
               </div>
 
               <div className="space-y-4 rounded-lg border p-4">

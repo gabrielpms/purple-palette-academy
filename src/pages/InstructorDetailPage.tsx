@@ -129,6 +129,21 @@ export default function InstructorDetailPage() {
                     </a>
                   )}
                 </div>
+
+                {/* Presentation Video */}
+                {instructor.video_url && (
+                  <div className="mt-8">
+                    <div className="aspect-video overflow-hidden rounded-2xl border border-border">
+                      <iframe
+                        src={instructor.video_url}
+                        title={`Vídeo de apresentação - ${instructor.name}`}
+                        className="h-full w-full"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Info */}
