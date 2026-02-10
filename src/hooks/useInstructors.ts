@@ -12,6 +12,7 @@ export interface Instructor {
   linkedin_url: string | null;
   twitter_url: string | null;
   instagram_url: string | null;
+  video_url: string | null;
   is_active: boolean;
   created_at: string;
   updated_at: string;

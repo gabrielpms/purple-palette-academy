@@ -260,6 +260,7 @@ export type Database = {
           slug: string | null
           twitter_url: string | null
           updated_at: string
+          video_url: string | null
           website_url: string | null
         }
         Insert: {
@@ -275,6 +276,7 @@ export type Database = {
           slug?: string | null
           twitter_url?: string | null
           updated_at?: string
+          video_url?: string | null
           website_url?: string | null
         }
         Update: {
@@ -290,6 +292,7 @@ export type Database = {
           slug?: string | null
           twitter_url?: string | null
           updated_at?: string
+          video_url?: string | null
           website_url?: string | null
         }
         Relationships: []

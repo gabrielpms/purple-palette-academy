@@ -277,7 +277,7 @@ export default function CourseDetailPage() {
           </div>
         </section>
 
-        {/* Partner */}
+        {/* Partner / Instructor Video */}
         {course.partners && (
           <section className="border-t border-border py-12">
             <div className="container">
@@ -290,12 +290,32 @@ export default function CourseDetailPage() {
                   />
                 )}
                 <div>
-                  <p className="text-sm text-muted-foreground">Parceiro</p>
-                  <p className="font-display text-lg font-semibold">
+                  <p className="text-sm text-muted-foreground">Instrutor</p>
+                  <Link
+                    to={`/instrutor/${course.partners.slug}`}
+                    className="font-display text-lg font-semibold hover:text-primary transition-colors"
+                  >
                     {course.partners.name}
-                  </p>
+                  </Link>
                 </div>
               </div>
+
+              {course.partners.video_url && (
+                <div className="mt-8 max-w-3xl">
+                  <h3 className="font-display text-lg font-semibold mb-4">
+                    Conheça o instrutor
+                  </h3>
+                  <div className="aspect-video overflow-hidden rounded-2xl border border-border">
+                    <iframe
+                      src={course.partners.video_url}
+                      title={`Vídeo de apresentação - ${course.partners.name}`}
+                      className="h-full w-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           </section>
         )}
