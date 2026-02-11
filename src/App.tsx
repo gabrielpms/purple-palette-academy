@@ -25,6 +25,7 @@ import AdminFoundersPage from "./pages/admin/AdminFoundersPage";
 import AdminSettingsPage from "./pages/admin/AdminSettingsPage";
 import AdminTestimonialsPage from "./pages/admin/AdminTestimonialsPage";
 import AdminLeadsPage from "./pages/admin/AdminLeadsPage";
+import SubscriptionPage from "./pages/SubscriptionPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -48,6 +49,7 @@ const App = () => (
             <Route path="/seja-parceiro" element={<BecomePartnerPage />} />
             <Route path="/retorno-estrategia" element={<StrategyReturnPage />} />
             <Route path="/temporada/:slug" element={<SeasonPage />} />
+            <Route path="/assinatura" element={<SubscriptionPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route
               path="/admin"
