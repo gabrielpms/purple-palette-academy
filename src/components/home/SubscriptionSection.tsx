@@ -105,7 +105,7 @@ export function SubscriptionSection() {
                 className="w-full mt-8 h-14 text-base font-semibold bg-primary hover:bg-primary/90 gap-2"
                 asChild
               >
-                <Link to="/cursos">
+                <Link to="/assinatura">
                   Começar 7 dias grátis
                   <ArrowRight className="h-5 w-5" />
                 </Link>
