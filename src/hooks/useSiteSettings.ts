@@ -8,6 +8,14 @@ export interface SiteSettings {
   primary_color: string;
   secondary_color: string;
   show_testimonials: boolean;
+  subscription_title: string | null;
+  subscription_description: string | null;
+  subscription_price: number | null;
+  subscription_original_price: number | null;
+  subscription_annual_price: number | null;
+  subscription_discount_text: string | null;
+  subscription_cta_text: string | null;
+  subscription_note: string | null;
   created_at: string;
   updated_at: string;
 }
