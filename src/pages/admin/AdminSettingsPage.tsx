@@ -5,8 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, Save, Palette, Image, MessageSquare } from "lucide-react";
+import { Loader2, Save, Palette, Image, MessageSquare, CreditCard } from "lucide-react";
 
 export default function AdminSettingsPage() {
   const { data: settings, isLoading } = useSiteSettings();
@@ -17,12 +18,30 @@ export default function AdminSettingsPage() {
   const [secondaryColor, setSecondaryColor] = useState("#262626");
   const [showTestimonials, setShowTestimonials] = useState(true);
 
+  // Subscription fields
+  const [subTitle, setSubTitle] = useState("");
+  const [subDescription, setSubDescription] = useState("");
+  const [subPrice, setSubPrice] = useState("");
+  const [subOriginalPrice, setSubOriginalPrice] = useState("");
+  const [subAnnualPrice, setSubAnnualPrice] = useState("");
+  const [subDiscountText, setSubDiscountText] = useState("");
+  const [subCtaText, setSubCtaText] = useState("");
+  const [subNote, setSubNote] = useState("");
+
   useEffect(() => {
     if (settings) {
       setLogoUrl(settings.logo_url || "");
       setPrimaryColor(settings.primary_color);
       setSecondaryColor(settings.secondary_color);
       setShowTestimonials(settings.show_testimonials);
+      setSubTitle(settings.subscription_title || "");
+      setSubDescription(settings.subscription_description || "");
+      setSubPrice(String(settings.subscription_price ?? ""));
+      setSubOriginalPrice(String(settings.subscription_original_price ?? ""));
+      setSubAnnualPrice(String(settings.subscription_annual_price ?? ""));
+      setSubDiscountText(settings.subscription_discount_text || "");
+      setSubCtaText(settings.subscription_cta_text || "");
+      setSubNote(settings.subscription_note || "");
     }
   }, [settings]);
 
@@ -32,6 +51,14 @@ export default function AdminSettingsPage() {
       primary_color: primaryColor,
       secondary_color: secondaryColor,
       show_testimonials: showTestimonials,
+      subscription_title: subTitle || null,
+      subscription_description: subDescription || null,
+      subscription_price: subPrice ? Number(subPrice) : null,
+      subscription_original_price: subOriginalPrice ? Number(subOriginalPrice) : null,
+      subscription_annual_price: subAnnualPrice ? Number(subAnnualPrice) : null,
+      subscription_discount_text: subDiscountText || null,
+      subscription_cta_text: subCtaText || null,
+      subscription_note: subNote || null,
     });
   };
 
@@ -183,8 +210,102 @@ export default function AdminSettingsPage() {
               </div>
             </CardContent>
           </Card>
-        </div>
 
+
+          {/* Subscription Settings */}
+          <Card className="md:col-span-2">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <CreditCard className="h-5 w-5" />
+                Assinatura na Home
+              </CardTitle>
+              <CardDescription>
+                Edite os textos e valores exibidos na seção de assinatura da página inicial.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="subTitle">Título</Label>
+                <Input
+                  id="subTitle"
+                  value={subTitle}
+                  onChange={(e) => setSubTitle(e.target.value)}
+                  placeholder="Aprenda continuamente. Evolua constantemente."
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="subDescription">Descrição</Label>
+                <Textarea
+                  id="subDescription"
+                  value={subDescription}
+                  onChange={(e) => setSubDescription(e.target.value)}
+                  placeholder="Nossa assinatura te dá acesso..."
+                  rows={3}
+                />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="subPrice">Preço mensal (R$)</Label>
+                  <Input
+                    id="subPrice"
+                    type="number"
+                    value={subPrice}
+                    onChange={(e) => setSubPrice(e.target.value)}
+                    placeholder="79"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="subOriginalPrice">Preço original (R$)</Label>
+                  <Input
+                    id="subOriginalPrice"
+                    type="number"
+                    value={subOriginalPrice}
+                    onChange={(e) => setSubOriginalPrice(e.target.value)}
+                    placeholder="149"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="subAnnualPrice">Preço anual (R$)</Label>
+                  <Input
+                    id="subAnnualPrice"
+                    type="number"
+                    value={subAnnualPrice}
+                    onChange={(e) => setSubAnnualPrice(e.target.value)}
+                    placeholder="569"
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="subDiscountText">Texto de desconto</Label>
+                <Input
+                  id="subDiscountText"
+                  value={subDiscountText}
+                  onChange={(e) => setSubDiscountText(e.target.value)}
+                  placeholder="Economize 47% - Oferta de lançamento"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="subCtaText">Texto do botão (CTA)</Label>
+                <Input
+                  id="subCtaText"
+                  value={subCtaText}
+                  onChange={(e) => setSubCtaText(e.target.value)}
+                  placeholder="Começar 7 dias grátis"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="subNote">Nota sobre masterclasses</Label>
+                <Textarea
+                  id="subNote"
+                  value={subNote}
+                  onChange={(e) => setSubNote(e.target.value)}
+                  placeholder="As masterclasses são vendidas separadamente..."
+                  rows={2}
+                />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
         <div className="flex justify-end">
           <Button onClick={handleSave} disabled={updateSettings.isPending}>
             {updateSettings.isPending ? (

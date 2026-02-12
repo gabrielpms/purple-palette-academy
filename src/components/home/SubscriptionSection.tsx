@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Check, Play, Users, Zap, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 const features = [
   {
@@ -29,6 +30,21 @@ const benefits = [
 ];
 
 export function SubscriptionSection() {
+  const { data: settings } = useSiteSettings();
+
+  const title = settings?.subscription_title || "Aprenda continuamente. Evolua constantemente.";
+  const description = settings?.subscription_description || "Nossa assinatura te dá acesso a nano aulas exclusivas e sessões de mentoria ao vivo com profissionais de mercado. Ideal para quem quer manter-se atualizado e evoluir constantemente.";
+  const price = settings?.subscription_price ?? 79;
+  const originalPrice = settings?.subscription_original_price ?? 149;
+  const discountText = settings?.subscription_discount_text || "Economize 47% - Oferta de lançamento";
+  const ctaText = settings?.subscription_cta_text || "Começar 7 dias grátis";
+  const note = settings?.subscription_note || "As masterclasses são vendidas separadamente e não estão incluídas na assinatura.";
+
+  // Split title by "." to create two lines
+  const titleParts = title.split(".");
+  const titleLine1 = titleParts[0]?.trim();
+  const titleLine2 = titleParts.slice(1).join(".").trim();
+
   return (
     <section className="py-24 md:py-32 bg-gradient-to-b from-background via-secondary/30 to-background">
       <div className="container">
@@ -39,16 +55,19 @@ export function SubscriptionSection() {
               Assinatura
             </span>
             <h2 className="font-display text-4xl font-bold md:text-5xl leading-tight">
-              Aprenda continuamente.
-              <br />
-              <span className="text-muted-foreground">Evolua constantemente.</span>
+              {titleLine1}{titleLine1 && "."}
+              {titleLine2 && (
+                <>
+                  <br />
+                  <span className="text-muted-foreground">{titleLine2}</span>
+                </>
+              )}
             </h2>
             <p className="mt-6 text-lg text-muted-foreground">
-              Nossa assinatura te dá acesso a nano aulas exclusivas e sessões de mentoria ao vivo com profissionais de mercado. 
-              Ideal para quem quer manter-se atualizado e evoluir constantemente.
+              {description}
             </p>
             <p className="mt-4 text-sm text-muted-foreground border-l-2 border-primary/30 pl-4">
-              <strong className="text-foreground">Nota:</strong> As masterclasses são vendidas separadamente e não estão incluídas na assinatura.
+              <strong className="text-foreground">Nota:</strong> {note}
             </p>
 
             {/* Features */}
@@ -82,12 +101,12 @@ export function SubscriptionSection() {
               <div className="text-center">
                 <h3 className="font-display text-2xl font-bold">Assinatura Premium</h3>
                 <div className="mt-6">
-                  <span className="text-sm text-muted-foreground line-through">R$ 149/mês</span>
+                  <span className="text-sm text-muted-foreground line-through">R$ {originalPrice}/mês</span>
                   <div className="flex items-baseline justify-center gap-2">
-                    <span className="font-display text-5xl font-bold">R$ 79</span>
+                    <span className="font-display text-5xl font-bold">R$ {price}</span>
                     <span className="text-muted-foreground">/mês</span>
                   </div>
-                  <p className="mt-2 text-sm text-primary">Economize 47% - Oferta de lançamento</p>
+                  <p className="mt-2 text-sm text-primary">{discountText}</p>
                 </div>
               </div>
 
@@ -106,7 +125,7 @@ export function SubscriptionSection() {
                 asChild
               >
                 <Link to="/assinatura">
-                  Começar 7 dias grátis
+                  {ctaText}
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </Button>

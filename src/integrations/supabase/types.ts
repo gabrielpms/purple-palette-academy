@@ -379,6 +379,14 @@ export type Database = {
           primary_color: string | null
           secondary_color: string | null
           show_testimonials: boolean | null
+          subscription_annual_price: number | null
+          subscription_cta_text: string | null
+          subscription_description: string | null
+          subscription_discount_text: string | null
+          subscription_note: string | null
+          subscription_original_price: number | null
+          subscription_price: number | null
+          subscription_title: string | null
           updated_at: string
         }
         Insert: {
@@ -388,6 +396,14 @@ export type Database = {
           primary_color?: string | null
           secondary_color?: string | null
           show_testimonials?: boolean | null
+          subscription_annual_price?: number | null
+          subscription_cta_text?: string | null
+          subscription_description?: string | null
+          subscription_discount_text?: string | null
+          subscription_note?: string | null
+          subscription_original_price?: number | null
+          subscription_price?: number | null
+          subscription_title?: string | null
           updated_at?: string
         }
         Update: {
@@ -397,6 +413,14 @@ export type Database = {
           primary_color?: string | null
           secondary_color?: string | null
           show_testimonials?: boolean | null
+          subscription_annual_price?: number | null
+          subscription_cta_text?: string | null
+          subscription_description?: string | null
+          subscription_discount_text?: string | null
+          subscription_note?: string | null
+          subscription_original_price?: number | null
+          subscription_price?: number | null
+          subscription_title?: string | null
           updated_at?: string
         }
         Relationships: []
