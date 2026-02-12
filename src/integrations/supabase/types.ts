@@ -381,8 +381,10 @@ export type Database = {
           show_testimonials: boolean | null
           subscription_annual_price: number | null
           subscription_cta_text: string | null
+          subscription_cta_url: string | null
           subscription_description: string | null
           subscription_discount_text: string | null
+          subscription_features: Json | null
           subscription_note: string | null
           subscription_original_price: number | null
           subscription_price: number | null
@@ -398,8 +400,10 @@ export type Database = {
           show_testimonials?: boolean | null
           subscription_annual_price?: number | null
           subscription_cta_text?: string | null
+          subscription_cta_url?: string | null
           subscription_description?: string | null
           subscription_discount_text?: string | null
+          subscription_features?: Json | null
           subscription_note?: string | null
           subscription_original_price?: number | null
           subscription_price?: number | null
@@ -415,8 +419,10 @@ export type Database = {
           show_testimonials?: boolean | null
           subscription_annual_price?: number | null
           subscription_cta_text?: string | null
+          subscription_cta_url?: string | null
           subscription_description?: string | null
           subscription_discount_text?: string | null
+          subscription_features?: Json | null
           subscription_note?: string | null
           subscription_original_price?: number | null
           subscription_price?: number | null
