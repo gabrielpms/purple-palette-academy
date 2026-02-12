@@ -1,25 +1,24 @@
 import { Link } from "react-router-dom";
-import { Check, Play, Users, Zap, ArrowRight } from "lucide-react";
+import { Check, Play, Users, Zap, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 
-const features = [
+const defaultFeatures = [
   {
-    icon: Zap,
     title: "Nano Aulas",
     description: "Conteúdos rápidos de 5-15 min para aprender no seu ritmo",
   },
   {
-    icon: Users,
     title: "Sessões de Mentoria",
     description: "Encontros ao vivo mensais com instrutores",
   },
   {
-    icon: Play,
     title: "Novos conteúdos toda semana",
     description: "Atualizações constantes com tendências do mercado",
   },
 ];
+
+const featureIcons = [Zap, Users, Play, Sparkles];
 
 const benefits = [
   "Acesso ilimitado a nano aulas",
@@ -38,7 +37,11 @@ export function SubscriptionSection() {
   const originalPrice = settings?.subscription_original_price ?? 149;
   const discountText = settings?.subscription_discount_text || "Economize 47% - Oferta de lançamento";
   const ctaText = settings?.subscription_cta_text || "Começar 7 dias grátis";
+  const ctaUrl = settings?.subscription_cta_url || "/assinatura";
   const note = settings?.subscription_note || "As masterclasses são vendidas separadamente e não estão incluídas na assinatura.";
+  const features = settings?.subscription_features?.length ? settings.subscription_features : defaultFeatures;
+
+  const isExternal = ctaUrl.startsWith("http");
 
   // Split title by "." to create two lines
   const titleParts = title.split(".");
@@ -72,24 +75,27 @@ export function SubscriptionSection() {
 
             {/* Features */}
             <div className="mt-10 space-y-4">
-              {features.map((feature) => (
-                <div
-                  key={feature.title}
-                  className="flex items-start gap-4"
-                >
-                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <feature.icon className="h-5 w-5" />
+              {features.map((feature, idx) => {
+                const Icon = featureIcons[idx % featureIcons.length];
+                return (
+                  <div
+                    key={feature.title}
+                    className="flex items-start gap-4"
+                  >
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-display font-semibold">
+                        {feature.title}
+                      </h3>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        {feature.description}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-display font-semibold">
-                      {feature.title}
-                    </h3>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      {feature.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
@@ -124,10 +130,17 @@ export function SubscriptionSection() {
                 className="w-full mt-8 h-14 text-base font-semibold bg-primary hover:bg-primary/90 gap-2"
                 asChild
               >
-                <Link to="/assinatura">
-                  {ctaText}
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
+                {isExternal ? (
+                  <a href={ctaUrl} target="_blank" rel="noopener noreferrer">
+                    {ctaText}
+                    <ArrowRight className="h-5 w-5" />
+                  </a>
+                ) : (
+                  <Link to={ctaUrl}>
+                    {ctaText}
+                    <ArrowRight className="h-5 w-5" />
+                  </Link>
+                )}
               </Button>
               <p className="mt-4 text-center text-xs text-muted-foreground">
                 Sem compromisso. Cancele a qualquer momento.

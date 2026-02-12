@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, Save, Palette, Image, MessageSquare, CreditCard } from "lucide-react";
+import { Loader2, Save, Palette, Image, MessageSquare, CreditCard, Plus, Trash2 } from "lucide-react";
 
 export default function AdminSettingsPage() {
   const { data: settings, isLoading } = useSiteSettings();
@@ -26,7 +26,9 @@ export default function AdminSettingsPage() {
   const [subAnnualPrice, setSubAnnualPrice] = useState("");
   const [subDiscountText, setSubDiscountText] = useState("");
   const [subCtaText, setSubCtaText] = useState("");
+  const [subCtaUrl, setSubCtaUrl] = useState("");
   const [subNote, setSubNote] = useState("");
+  const [subFeatures, setSubFeatures] = useState<{ title: string; description: string }[]>([]);
 
   useEffect(() => {
     if (settings) {
@@ -41,7 +43,9 @@ export default function AdminSettingsPage() {
       setSubAnnualPrice(String(settings.subscription_annual_price ?? ""));
       setSubDiscountText(settings.subscription_discount_text || "");
       setSubCtaText(settings.subscription_cta_text || "");
+      setSubCtaUrl(settings.subscription_cta_url || "");
       setSubNote(settings.subscription_note || "");
+      setSubFeatures(settings.subscription_features || []);
     }
   }, [settings]);
 
@@ -58,7 +62,9 @@ export default function AdminSettingsPage() {
       subscription_annual_price: subAnnualPrice ? Number(subAnnualPrice) : null,
       subscription_discount_text: subDiscountText || null,
       subscription_cta_text: subCtaText || null,
+      subscription_cta_url: subCtaUrl || null,
       subscription_note: subNote || null,
+      subscription_features: subFeatures.length ? subFeatures : null,
     });
   };
 
@@ -294,6 +300,15 @@ export default function AdminSettingsPage() {
                 />
               </div>
               <div className="space-y-2">
+                <Label htmlFor="subCtaUrl">Link do botão (CTA)</Label>
+                <Input
+                  id="subCtaUrl"
+                  value={subCtaUrl}
+                  onChange={(e) => setSubCtaUrl(e.target.value)}
+                  placeholder="/assinatura ou https://..."
+                />
+              </div>
+              <div className="space-y-2">
                 <Label htmlFor="subNote">Nota sobre masterclasses</Label>
                 <Textarea
                   id="subNote"
@@ -302,6 +317,55 @@ export default function AdminSettingsPage() {
                   placeholder="As masterclasses são vendidas separadamente..."
                   rows={2}
                 />
+              </div>
+
+              {/* Features / Diferenciais */}
+              <div className="space-y-3 pt-4 border-t">
+                <div className="flex items-center justify-between">
+                  <Label>Diferenciais</Label>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setSubFeatures([...subFeatures, { title: "", description: "" }])}
+                  >
+                    <Plus className="h-4 w-4 mr-1" />
+                    Adicionar
+                  </Button>
+                </div>
+                {subFeatures.map((feat, idx) => (
+                  <div key={idx} className="flex gap-3 items-start">
+                    <div className="flex-1 space-y-2">
+                      <Input
+                        value={feat.title}
+                        onChange={(e) => {
+                          const updated = [...subFeatures];
+                          updated[idx] = { ...updated[idx], title: e.target.value };
+                          setSubFeatures(updated);
+                        }}
+                        placeholder="Título do diferencial"
+                      />
+                      <Input
+                        value={feat.description}
+                        onChange={(e) => {
+                          const updated = [...subFeatures];
+                          updated[idx] = { ...updated[idx], description: e.target.value };
+                          setSubFeatures(updated);
+                        }}
+                        placeholder="Descrição do diferencial"
+                      />
+                    </div>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      className="text-destructive mt-1"
+                      onClick={() => setSubFeatures(subFeatures.filter((_, i) => i !== idx))}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                ))}
               </div>
             </CardContent>
           </Card>

@@ -15,7 +15,9 @@ export interface SiteSettings {
   subscription_annual_price: number | null;
   subscription_discount_text: string | null;
   subscription_cta_text: string | null;
+  subscription_cta_url: string | null;
   subscription_note: string | null;
+  subscription_features: { title: string; description: string }[] | null;
   created_at: string;
   updated_at: string;
 }
@@ -30,7 +32,7 @@ export function useSiteSettings() {
         .single();
 
       if (error) throw error;
-      return data as SiteSettings;
+      return data as unknown as SiteSettings;
     },
   });
 }
