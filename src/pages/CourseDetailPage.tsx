@@ -16,6 +16,8 @@ import {
   ArrowRight,
   ChevronLeft,
   Tag,
+  Lightbulb,
+  Layers,
 } from "lucide-react";
 
 const levelLabels: Record<string, string> = {
@@ -35,6 +37,11 @@ export default function CourseDetailPage() {
     : 0;
 
   const filteredRelated = relatedCourses?.filter((c) => c.slug !== slug).slice(0, 3);
+
+  const learningTopics = (course?.learning_topics as string[]) || [];
+  const seasonConnectionText = course?.season_connection_text;
+  const instructorContext = course?.partners?.description;
+  const instructorVideo = course?.partners?.video_url;
 
   if (isLoading) {
     return (
@@ -153,7 +160,7 @@ export default function CourseDetailPage() {
                   {course.level && (
                     <div className="flex items-center gap-1.5 text-muted-foreground">
                       <BookOpen className="h-5 w-5" />
-                      {levelLabels[course.level]}
+                      {levelLabels[course.level] || course.level}
                     </div>
                   )}
                 </div>
@@ -263,8 +270,37 @@ export default function CourseDetailPage() {
           </div>
         </section>
 
+        {/* Learning Topics */}
+        {learningTopics.length > 0 && (
+          <section className="py-12 md:py-16 border-t border-border">
+            <div className="container">
+              <div className="max-w-3xl">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                  </div>
+                  <h2 className="font-display text-2xl font-bold md:text-3xl">
+                    O que você vai aprender
+                  </h2>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {learningTopics.map((topic, index) => (
+                    <div
+                      key={index}
+                      className="flex items-start gap-3 rounded-lg border border-border bg-card p-4"
+                    >
+                      <CheckCircle className="h-5 w-5 text-success mt-0.5 shrink-0" />
+                      <span className="text-sm leading-relaxed">{topic}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Description */}
-        <section className="py-12 md:py-16">
+        <section className="py-12 md:py-16 border-t border-border">
           <div className="container">
             <div className="max-w-3xl">
               <h2 className="font-display text-2xl font-bold md:text-3xl">
@@ -277,45 +313,94 @@ export default function CourseDetailPage() {
           </div>
         </section>
 
-        {/* Partner / Instructor Video */}
-        {course.partners && (
-          <section className="border-t border-border py-12">
+        {/* Season Connection */}
+        {seasonConnectionText && course.seasons && (
+          <section className="py-12 md:py-16 border-t border-border bg-muted/30">
             <div className="container">
-              <div className="flex items-center gap-4">
-                {course.partners.logo_url && (
-                  <img
-                    src={course.partners.logo_url}
-                    alt={course.partners.name}
-                    className="h-16 w-16 rounded-xl object-cover"
-                  />
-                )}
-                <div>
-                  <p className="text-sm text-muted-foreground">Instrutor</p>
-                  <Link
-                    to={`/instrutor/${course.partners.slug}`}
-                    className="font-display text-lg font-semibold hover:text-primary transition-colors"
-                  >
-                    {course.partners.name}
-                  </Link>
-                </div>
-              </div>
-
-              {course.partners.video_url && (
-                <div className="mt-8 max-w-3xl">
-                  <h3 className="font-display text-lg font-semibold mb-4">
-                    Conheça o instrutor
-                  </h3>
-                  <div className="aspect-video overflow-hidden rounded-2xl border border-border">
-                    <iframe
-                      src={course.partners.video_url}
-                      title={`Vídeo de apresentação - ${course.partners.name}`}
-                      className="h-full w-full"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
+              <div className="max-w-3xl">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
+                    <Layers className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <h2 className="font-display text-2xl font-bold md:text-3xl">
+                      Conexão com a Temporada
+                    </h2>
+                    <p className="text-sm text-muted-foreground">
+                      {course.seasons.title}
+                    </p>
                   </div>
                 </div>
-              )}
+                <p className="whitespace-pre-line text-muted-foreground leading-relaxed">
+                  {seasonConnectionText}
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Instructor Context (Why it matters) - from partner description */}
+        {instructorContext && (
+          <section className="py-12 md:py-16 border-t border-border">
+            <div className="container">
+              <div className="max-w-3xl">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
+                    <Lightbulb className="h-5 w-5 text-primary" />
+                  </div>
+                  <h2 className="font-display text-2xl font-bold md:text-3xl">
+                    Por que isso importa
+                  </h2>
+                </div>
+                <p className="whitespace-pre-line text-muted-foreground leading-relaxed">
+                  {instructorContext}
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Instructor Video & Info */}
+        {course.partners && (
+          <section className="border-t border-border py-12 md:py-16">
+            <div className="container">
+              <div className="max-w-3xl">
+                <div className="flex items-center gap-4">
+                  {course.partners.logo_url && (
+                    <img
+                      src={course.partners.logo_url}
+                      alt={course.partners.name}
+                      className="h-16 w-16 rounded-xl object-cover"
+                    />
+                  )}
+                  <div>
+                    <p className="text-sm text-muted-foreground">Instrutor</p>
+                    <Link
+                      to={`/instrutor/${course.partners.slug}`}
+                      className="font-display text-lg font-semibold hover:text-primary transition-colors"
+                    >
+                      {course.partners.name}
+                    </Link>
+                  </div>
+                </div>
+
+                {instructorVideo && (
+                  <div className="mt-8">
+                    <h3 className="font-display text-lg font-semibold mb-4">
+                      Conheça o instrutor
+                    </h3>
+                    <div className="aspect-video overflow-hidden rounded-2xl border border-border">
+                      <iframe
+                        src={instructorVideo}
+                        title={`Vídeo de apresentação - ${course.partners.name}`}
+                        className="h-full w-full"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </section>
         )}
