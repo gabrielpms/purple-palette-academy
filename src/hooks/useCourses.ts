@@ -25,6 +25,9 @@ export interface Course {
   is_new?: boolean;
   is_season_highlight?: boolean;
   tags?: string[];
+  learning_topics?: string[];
+  season_connection_text?: string;
+  season_id?: string;
   created_at: string;
   updated_at: string;
 }
@@ -108,13 +111,14 @@ export function useCourse(slug: string) {
         .select(`
           *,
           categories(id, name, slug),
-          partners(id, name, slug, logo_url, website_url, description, bio, linkedin_url, twitter_url, instagram_url, video_url, is_active)
+          partners(id, name, slug, logo_url, website_url, description, bio, linkedin_url, twitter_url, instagram_url, video_url, is_active),
+          seasons(id, title, slug, concept, subtitle)
         `)
         .eq("slug", slug)
         .single();
 
       if (error) throw error;
-      return data as Course & { categories: Category; partners: Partner };
+      return data as Course & { categories: Category; partners: Partner; seasons: { id: string; title: string; slug: string; concept: string; subtitle: string | null } | null };
     },
     enabled: !!slug,
   });

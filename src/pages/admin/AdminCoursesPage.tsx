@@ -50,7 +50,7 @@ export default function AdminCoursesPage() {
         .order("created_at", { ascending: false });
       
       if (error) throw error;
-      return data;
+      return data as unknown as (Course & { categories: { name: string } | null })[];
     },
   });
 

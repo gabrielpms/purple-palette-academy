@@ -58,12 +58,14 @@ export type Database = {
           is_featured: boolean | null
           is_new: boolean | null
           is_season_highlight: boolean | null
+          learning_topics: Json | null
           level: string | null
           original_price: number | null
           partner_id: string | null
           price: number
           rating: number | null
           reviews_count: number | null
+          season_connection_text: string | null
           season_id: string | null
           short_description: string | null
           slug: string
@@ -86,12 +88,14 @@ export type Database = {
           is_featured?: boolean | null
           is_new?: boolean | null
           is_season_highlight?: boolean | null
+          learning_topics?: Json | null
           level?: string | null
           original_price?: number | null
           partner_id?: string | null
           price?: number
           rating?: number | null
           reviews_count?: number | null
+          season_connection_text?: string | null
           season_id?: string | null
           short_description?: string | null
           slug: string
@@ -114,12 +118,14 @@ export type Database = {
           is_featured?: boolean | null
           is_new?: boolean | null
           is_season_highlight?: boolean | null
+          learning_topics?: Json | null
           level?: string | null
           original_price?: number | null
           partner_id?: string | null
           price?: number
           rating?: number | null
           reviews_count?: number | null
+          season_connection_text?: string | null
           season_id?: string | null
           short_description?: string | null
           slug?: string

@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Course, Category, Partner } from "@/hooks/useCourses";
+import { Plus, Trash2 } from "lucide-react";
 
 const courseSchema = z.object({
   title: z.string().min(1, "Título é obrigatório"),
@@ -46,6 +47,7 @@ const courseSchema = z.object({
   is_new: z.boolean().default(false),
   is_season_highlight: z.boolean().default(false),
   tags: z.string().optional(),
+  season_connection_text: z.string().optional(),
 });
 
 type CourseFormData = z.infer<typeof courseSchema>;
@@ -60,6 +62,9 @@ export function CourseForm({ course, onSuccess, onCancel }: CourseFormProps) {
   const [categories, setCategories] = useState<Category[]>([]);
   const [partners, setPartners] = useState<Partner[]>([]);
   const [loading, setLoading] = useState(false);
+  const [learningTopics, setLearningTopics] = useState<string[]>(
+    (course?.learning_topics as string[]) || []
+  );
 
   const form = useForm<CourseFormData>({
     resolver: zodResolver(courseSchema),
@@ -83,6 +88,7 @@ export function CourseForm({ course, onSuccess, onCancel }: CourseFormProps) {
       is_new: course?.is_new || false,
       is_season_highlight: course?.is_season_highlight || false,
       tags: course?.tags?.join(", ") || "",
+      season_connection_text: course?.season_connection_text || "",
     },
   });
 
@@ -113,6 +119,14 @@ export function CourseForm({ course, onSuccess, onCancel }: CourseFormProps) {
     }
   }, [title, course, form]);
 
+  const addTopic = () => setLearningTopics([...learningTopics, ""]);
+  const removeTopic = (index: number) => setLearningTopics(learningTopics.filter((_, i) => i !== index));
+  const updateTopic = (index: number, value: string) => {
+    const updated = [...learningTopics];
+    updated[index] = value;
+    setLearningTopics(updated);
+  };
+
   const onSubmit = async (data: CourseFormData) => {
     setLoading(true);
 
@@ -136,6 +150,8 @@ export function CourseForm({ course, onSuccess, onCancel }: CourseFormProps) {
       is_featured: data.is_featured,
       is_new: data.is_new,
       is_season_highlight: data.is_season_highlight,
+      learning_topics: learningTopics.filter(Boolean),
+      season_connection_text: data.season_connection_text || null,
     };
 
     let error;
@@ -222,6 +238,60 @@ export function CourseForm({ course, onSuccess, onCancel }: CourseFormProps) {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Learning Topics */}
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <FormLabel>O que você vai aprender</FormLabel>
+            <Button type="button" variant="outline" size="sm" onClick={addTopic}>
+              <Plus className="h-4 w-4 mr-1" />
+              Adicionar tópico
+            </Button>
+          </div>
+          {learningTopics.map((topic, index) => (
+            <div key={index} className="flex gap-2">
+              <Input
+                value={topic}
+                onChange={(e) => updateTopic(index, e.target.value)}
+                placeholder={`Tópico ${index + 1}`}
+              />
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="text-destructive hover:text-destructive shrink-0"
+                onClick={() => removeTopic(index)}
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            </div>
+          ))}
+          {learningTopics.length === 0 && (
+            <p className="text-sm text-muted-foreground">Nenhum tópico adicionado</p>
+          )}
+        </div>
+
+        {/* Season Connection */}
+        <FormField
+          control={form.control}
+          name="season_connection_text"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Conexão com a Temporada</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Descreva como esta masterclass se conecta com a temporada atual..."
+                  className="min-h-24"
+                  {...field}
+                />
+              </FormControl>
+              <FormDescription>
+                Se ficar em branco, esta seção não será exibida na página do curso
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
