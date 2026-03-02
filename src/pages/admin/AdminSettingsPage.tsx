@@ -17,6 +17,7 @@ export default function AdminSettingsPage() {
   const [primaryColor, setPrimaryColor] = useState("#f97316");
   const [secondaryColor, setSecondaryColor] = useState("#262626");
   const [showTestimonials, setShowTestimonials] = useState(true);
+  const [showSubscription, setShowSubscription] = useState(true);
 
   // Subscription fields
   const [subTitle, setSubTitle] = useState("");
@@ -36,6 +37,7 @@ export default function AdminSettingsPage() {
       setPrimaryColor(settings.primary_color);
       setSecondaryColor(settings.secondary_color);
       setShowTestimonials(settings.show_testimonials);
+      setShowSubscription(settings.show_subscription ?? true);
       setSubTitle(settings.subscription_title || "");
       setSubDescription(settings.subscription_description || "");
       setSubPrice(String(settings.subscription_price ?? ""));
@@ -55,6 +57,7 @@ export default function AdminSettingsPage() {
       primary_color: primaryColor,
       secondary_color: secondaryColor,
       show_testimonials: showTestimonials,
+      show_subscription: showSubscription,
       subscription_title: subTitle || null,
       subscription_description: subDescription || null,
       subscription_price: subPrice ? Number(subPrice) : null,
@@ -228,6 +231,18 @@ export default function AdminSettingsPage() {
               <CardDescription>
                 Edite os textos e valores exibidos na seção de assinatura da página inicial.
               </CardDescription>
+              <div className="flex items-center justify-between pt-2">
+                <div>
+                  <p className="font-medium text-sm">Exibir seção de assinatura</p>
+                  <p className="text-xs text-muted-foreground">
+                    Quando desativado, a seção não aparece na home.
+                  </p>
+                </div>
+                <Switch
+                  checked={showSubscription}
+                  onCheckedChange={setShowSubscription}
+                />
+              </div>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">

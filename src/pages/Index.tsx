@@ -70,7 +70,7 @@ export default function Index() {
         )}
         
         {/* Subscription CTA */}
-        <SubscriptionSection />
+        {settings?.show_subscription !== false && <SubscriptionSection />}
         
         {/* Lead Capture */}
         <LeadCapture />
