@@ -384,6 +384,7 @@ export type Database = {
           logo_url: string | null
           primary_color: string | null
           secondary_color: string | null
+          show_subscription: boolean | null
           show_testimonials: boolean | null
           subscription_annual_price: number | null
           subscription_cta_text: string | null
@@ -403,6 +404,7 @@ export type Database = {
           logo_url?: string | null
           primary_color?: string | null
           secondary_color?: string | null
+          show_subscription?: boolean | null
           show_testimonials?: boolean | null
           subscription_annual_price?: number | null
           subscription_cta_text?: string | null
@@ -422,6 +424,7 @@ export type Database = {
           logo_url?: string | null
           primary_color?: string | null
           secondary_color?: string | null
+          show_subscription?: boolean | null
           show_testimonials?: boolean | null
           subscription_annual_price?: number | null
           subscription_cta_text?: string | null

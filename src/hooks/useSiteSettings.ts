@@ -8,6 +8,7 @@ export interface SiteSettings {
   primary_color: string;
   secondary_color: string;
   show_testimonials: boolean;
+  show_subscription: boolean;
   subscription_title: string | null;
   subscription_description: string | null;
   subscription_price: number | null;
