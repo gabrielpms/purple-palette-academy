@@ -173,6 +173,9 @@ export default function AdminCoursesPage() {
                         {course.is_season_highlight && (
                           <Badge variant="outline">Temporada</Badge>
                         )}
+                        {(course as any).is_coming_soon && (
+                          <Badge className="bg-amber-500 text-white border-0">Em Breve</Badge>
+                        )}
                       </div>
                     </TableCell>
                     <TableCell>

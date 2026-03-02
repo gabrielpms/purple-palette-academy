@@ -20,6 +20,7 @@ interface CourseCardProps {
     students_count?: number;
     is_new?: boolean;
     is_featured?: boolean;
+    is_coming_soon?: boolean;
     tags?: string[];
   };
   variant?: "default" | "featured" | "compact";
@@ -94,7 +95,12 @@ export function CourseCard({ course, variant = "default" }: CourseCardProps) {
 
         {/* Badges */}
         <div className="absolute left-4 top-4 flex flex-wrap gap-2">
-          {course.is_new && (
+          {course.is_coming_soon && (
+            <span className="rounded-full bg-amber-500 px-3 py-1 text-xs font-bold text-white">
+              Em Breve
+            </span>
+          )}
+          {course.is_new && !course.is_coming_soon && (
             <span className="rounded-full bg-primary px-3 py-1 text-xs font-medium text-primary-foreground">
               Novo
             </span>
@@ -150,16 +156,22 @@ export function CourseCard({ course, variant = "default" }: CourseCardProps) {
 
         {/* Price */}
         <div className="mt-auto flex items-end justify-between pt-3">
-          <div>
-            {hasDiscount && (
-              <span className="text-xs text-muted-foreground line-through">
-                R$ {course.original_price?.toFixed(0)}
-              </span>
-            )}
-            <p className="font-display text-lg font-bold text-primary">
-              R$ {course.price.toFixed(0)}
+          {course.is_coming_soon ? (
+            <p className="font-display text-lg font-bold text-amber-500">
+              Em Breve
             </p>
-          </div>
+          ) : (
+            <div>
+              {hasDiscount && (
+                <span className="text-xs text-muted-foreground line-through">
+                  R$ {course.original_price?.toFixed(0)}
+                </span>
+              )}
+              <p className="font-display text-lg font-bold text-primary">
+                R$ {course.price.toFixed(0)}
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </Link>

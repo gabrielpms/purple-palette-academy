@@ -110,7 +110,12 @@ export default function CourseDetailPage() {
                       </Badge>
                     </Link>
                   )}
-                  {course.is_new && (
+                  {(course as any).is_coming_soon && (
+                    <Badge className="bg-amber-500 text-white border-0 text-sm px-3 py-1">
+                      Em Breve
+                    </Badge>
+                  )}
+                  {course.is_new && !(course as any).is_coming_soon && (
                     <Badge className="bg-success text-primary-foreground border-0">
                       Novo
                     </Badge>
@@ -216,33 +221,49 @@ export default function CourseDetailPage() {
                   </div>
 
                   <div className="p-6">
-                    {/* Price */}
-                    <div className="flex items-baseline gap-3">
-                      <span className="font-display text-4xl font-bold text-primary">
-                        R$ {course.price.toFixed(0)}
-                      </span>
-                      {hasDiscount && (
-                        <span className="text-lg text-muted-foreground line-through">
-                          R$ {course.original_price?.toFixed(0)}
-                        </span>
-                      )}
-                    </div>
+                    {(course as any).is_coming_soon ? (
+                      <>
+                        <div className="flex items-center justify-center gap-3 rounded-xl bg-amber-500/10 border border-amber-500/30 p-4">
+                          <Clock className="h-6 w-6 text-amber-500" />
+                          <span className="font-display text-2xl font-bold text-amber-500">
+                            Em Breve
+                          </span>
+                        </div>
+                        <p className="mt-3 text-center text-sm text-muted-foreground">
+                          Este curso estará disponível em breve. Fique atento!
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        {/* Price */}
+                        <div className="flex items-baseline gap-3">
+                          <span className="font-display text-4xl font-bold text-primary">
+                            R$ {course.price.toFixed(0)}
+                          </span>
+                          {hasDiscount && (
+                            <span className="text-lg text-muted-foreground line-through">
+                              R$ {course.original_price?.toFixed(0)}
+                            </span>
+                          )}
+                        </div>
 
-                    {/* CTA */}
-                    <Button
-                      size="lg"
-                      className="mt-6 w-full bg-gradient-primary hover:opacity-90 gap-2 h-14 text-lg"
-                      asChild
-                    >
-                      <a href={course.hotmart_url} target="_blank" rel="noopener noreferrer">
-                        Comprar Agora
-                        <ArrowRight className="h-5 w-5" />
-                      </a>
-                    </Button>
+                        {/* CTA */}
+                        <Button
+                          size="lg"
+                          className="mt-6 w-full bg-gradient-primary hover:opacity-90 gap-2 h-14 text-lg"
+                          asChild
+                        >
+                          <a href={course.hotmart_url} target="_blank" rel="noopener noreferrer">
+                            Comprar Agora
+                            <ArrowRight className="h-5 w-5" />
+                          </a>
+                        </Button>
 
-                    <p className="mt-3 text-center text-sm text-muted-foreground">
-                      Pagamento seguro via Hotmart
-                    </p>
+                        <p className="mt-3 text-center text-sm text-muted-foreground">
+                          Pagamento seguro via Hotmart
+                        </p>
+                      </>
+                    )}
 
                     {/* Benefits */}
                     <div className="mt-6 space-y-3 border-t border-border pt-6">

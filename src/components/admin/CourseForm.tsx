@@ -46,6 +46,7 @@ const courseSchema = z.object({
   is_featured: z.boolean().default(false),
   is_new: z.boolean().default(false),
   is_season_highlight: z.boolean().default(false),
+  is_coming_soon: z.boolean().default(false),
   tags: z.string().optional(),
   season_connection_text: z.string().optional(),
 });
@@ -87,6 +88,7 @@ export function CourseForm({ course, onSuccess, onCancel }: CourseFormProps) {
       is_featured: course?.is_featured || false,
       is_new: course?.is_new || false,
       is_season_highlight: course?.is_season_highlight || false,
+      is_coming_soon: course?.is_coming_soon || false,
       tags: course?.tags?.join(", ") || "",
       season_connection_text: course?.season_connection_text || "",
     },
@@ -150,6 +152,7 @@ export function CourseForm({ course, onSuccess, onCancel }: CourseFormProps) {
       is_featured: data.is_featured,
       is_new: data.is_new,
       is_season_highlight: data.is_season_highlight,
+      is_coming_soon: data.is_coming_soon,
       learning_topics: learningTopics.filter(Boolean),
       season_connection_text: data.season_connection_text || null,
     };
@@ -505,7 +508,7 @@ export function CourseForm({ course, onSuccess, onCancel }: CourseFormProps) {
           )}
         />
 
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           <FormField
             control={form.control}
             name="is_featured"
@@ -544,8 +547,24 @@ export function CourseForm({ course, onSuccess, onCancel }: CourseFormProps) {
             render={({ field }) => (
               <FormItem className="flex items-center justify-between rounded-lg border p-4">
                 <div className="space-y-0.5">
-                  <FormLabel className="text-base">Destaque Temporada</FormLabel>
+                  <FormLabel className="text-base">Temporada</FormLabel>
                   <FormDescription>Tema principal</FormDescription>
+                </div>
+                <FormControl>
+                  <Switch checked={field.value} onCheckedChange={field.onChange} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="is_coming_soon"
+            render={({ field }) => (
+              <FormItem className="flex items-center justify-between rounded-lg border p-4">
+                <div className="space-y-0.5">
+                  <FormLabel className="text-base">Em Breve</FormLabel>
+                  <FormDescription>Ainda não disponível</FormDescription>
                 </div>
                 <FormControl>
                   <Switch checked={field.value} onCheckedChange={field.onChange} />

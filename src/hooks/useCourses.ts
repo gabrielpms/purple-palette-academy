@@ -24,6 +24,7 @@ export interface Course {
   is_featured?: boolean;
   is_new?: boolean;
   is_season_highlight?: boolean;
+  is_coming_soon?: boolean;
   tags?: string[];
   learning_topics?: string[];
   season_connection_text?: string;
