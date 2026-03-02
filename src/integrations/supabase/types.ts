@@ -55,6 +55,7 @@ export type Database = {
           instructor_avatar: string | null
           instructor_bio: string | null
           instructor_name: string
+          is_coming_soon: boolean | null
           is_featured: boolean | null
           is_new: boolean | null
           is_season_highlight: boolean | null
@@ -85,6 +86,7 @@ export type Database = {
           instructor_avatar?: string | null
           instructor_bio?: string | null
           instructor_name: string
+          is_coming_soon?: boolean | null
           is_featured?: boolean | null
           is_new?: boolean | null
           is_season_highlight?: boolean | null
@@ -115,6 +117,7 @@ export type Database = {
           instructor_avatar?: string | null
           instructor_bio?: string | null
           instructor_name?: string
+          is_coming_soon?: boolean | null
           is_featured?: boolean | null
           is_new?: boolean | null
           is_season_highlight?: boolean | null
