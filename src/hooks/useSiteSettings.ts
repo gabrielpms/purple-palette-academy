@@ -19,6 +19,17 @@ export interface SiteSettings {
   subscription_cta_url: string | null;
   subscription_note: string | null;
   subscription_features: { title: string; description: string }[] | null;
+  hero_title: string | null;
+  hero_description: string | null;
+  hero_cta_primary_text: string | null;
+  hero_cta_primary_url: string | null;
+  hero_cta_secondary_text: string | null;
+  hero_cta_secondary_url: string | null;
+  hero_stats: { value: string; label: string }[] | null;
+  hero_background_images: string[] | null;
+  value_prop_title: string | null;
+  value_prop_subtitle: string | null;
+  value_prop_features: { icon: string; title: string; description: string }[] | null;
   created_at: string;
   updated_at: string;
 }
