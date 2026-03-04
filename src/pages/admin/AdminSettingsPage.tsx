@@ -8,6 +8,8 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2, Save, Palette, Image, MessageSquare, CreditCard, Plus, Trash2 } from "lucide-react";
+import { HeroSettingsCard } from "@/components/admin/HeroSettingsCard";
+import { ValuePropSettingsCard } from "@/components/admin/ValuePropSettingsCard";
 
 export default function AdminSettingsPage() {
   const { data: settings, isLoading } = useSiteSettings();
@@ -31,6 +33,21 @@ export default function AdminSettingsPage() {
   const [subNote, setSubNote] = useState("");
   const [subFeatures, setSubFeatures] = useState<{ title: string; description: string }[]>([]);
 
+  // Hero fields
+  const [heroTitle, setHeroTitle] = useState("");
+  const [heroDescription, setHeroDescription] = useState("");
+  const [heroCtaPrimaryText, setHeroCtaPrimaryText] = useState("");
+  const [heroCtaPrimaryUrl, setHeroCtaPrimaryUrl] = useState("");
+  const [heroCtaSecondaryText, setHeroCtaSecondaryText] = useState("");
+  const [heroCtaSecondaryUrl, setHeroCtaSecondaryUrl] = useState("");
+  const [heroStats, setHeroStats] = useState<{ value: string; label: string }[]>([]);
+  const [heroBackgroundImages, setHeroBackgroundImages] = useState<string[]>([]);
+
+  // Value Prop fields
+  const [vpTitle, setVpTitle] = useState("");
+  const [vpSubtitle, setVpSubtitle] = useState("");
+  const [vpFeatures, setVpFeatures] = useState<{ icon: string; title: string; description: string }[]>([]);
+
   useEffect(() => {
     if (settings) {
       setLogoUrl(settings.logo_url || "");
@@ -48,6 +65,19 @@ export default function AdminSettingsPage() {
       setSubCtaUrl(settings.subscription_cta_url || "");
       setSubNote(settings.subscription_note || "");
       setSubFeatures(settings.subscription_features || []);
+      // Hero
+      setHeroTitle(settings.hero_title || "");
+      setHeroDescription(settings.hero_description || "");
+      setHeroCtaPrimaryText(settings.hero_cta_primary_text || "");
+      setHeroCtaPrimaryUrl(settings.hero_cta_primary_url || "");
+      setHeroCtaSecondaryText(settings.hero_cta_secondary_text || "");
+      setHeroCtaSecondaryUrl(settings.hero_cta_secondary_url || "");
+      setHeroStats(settings.hero_stats || []);
+      setHeroBackgroundImages(settings.hero_background_images || []);
+      // Value Prop
+      setVpTitle(settings.value_prop_title || "");
+      setVpSubtitle(settings.value_prop_subtitle || "");
+      setVpFeatures(settings.value_prop_features || []);
     }
   }, [settings]);
 
@@ -68,6 +98,17 @@ export default function AdminSettingsPage() {
       subscription_cta_url: subCtaUrl || null,
       subscription_note: subNote || null,
       subscription_features: subFeatures.length ? subFeatures : null,
+      hero_title: heroTitle || null,
+      hero_description: heroDescription || null,
+      hero_cta_primary_text: heroCtaPrimaryText || null,
+      hero_cta_primary_url: heroCtaPrimaryUrl || null,
+      hero_cta_secondary_text: heroCtaSecondaryText || null,
+      hero_cta_secondary_url: heroCtaSecondaryUrl || null,
+      hero_stats: heroStats.length ? heroStats : null,
+      hero_background_images: heroBackgroundImages.filter(Boolean).length ? heroBackgroundImages.filter(Boolean) : null,
+      value_prop_title: vpTitle || null,
+      value_prop_subtitle: vpSubtitle || null,
+      value_prop_features: vpFeatures.length ? vpFeatures : null,
     });
   };
 
@@ -180,18 +221,31 @@ export default function AdminSettingsPage() {
               <div className="p-4 bg-muted rounded-lg space-y-2">
                 <p className="text-sm text-muted-foreground">Preview:</p>
                 <div className="flex gap-2">
-                  <div
-                    className="w-16 h-10 rounded"
-                    style={{ backgroundColor: primaryColor }}
-                  />
-                  <div
-                    className="w-16 h-10 rounded"
-                    style={{ backgroundColor: secondaryColor }}
-                  />
+                  <div className="w-16 h-10 rounded" style={{ backgroundColor: primaryColor }} />
+                  <div className="w-16 h-10 rounded" style={{ backgroundColor: secondaryColor }} />
                 </div>
               </div>
             </CardContent>
           </Card>
+
+          {/* Hero Settings */}
+          <HeroSettingsCard
+            heroTitle={heroTitle} setHeroTitle={setHeroTitle}
+            heroDescription={heroDescription} setHeroDescription={setHeroDescription}
+            heroCtaPrimaryText={heroCtaPrimaryText} setHeroCtaPrimaryText={setHeroCtaPrimaryText}
+            heroCtaPrimaryUrl={heroCtaPrimaryUrl} setHeroCtaPrimaryUrl={setHeroCtaPrimaryUrl}
+            heroCtaSecondaryText={heroCtaSecondaryText} setHeroCtaSecondaryText={setHeroCtaSecondaryText}
+            heroCtaSecondaryUrl={heroCtaSecondaryUrl} setHeroCtaSecondaryUrl={setHeroCtaSecondaryUrl}
+            heroStats={heroStats} setHeroStats={setHeroStats}
+            heroBackgroundImages={heroBackgroundImages} setHeroBackgroundImages={setHeroBackgroundImages}
+          />
+
+          {/* Value Proposition Settings */}
+          <ValuePropSettingsCard
+            title={vpTitle} setTitle={setVpTitle}
+            subtitle={vpSubtitle} setSubtitle={setVpSubtitle}
+            features={vpFeatures} setFeatures={setVpFeatures}
+          />
 
           {/* Testimonials Toggle */}
           <Card className="md:col-span-2">
@@ -220,7 +274,6 @@ export default function AdminSettingsPage() {
             </CardContent>
           </Card>
 
-
           {/* Subscription Settings */}
           <Card className="md:col-span-2">
             <CardHeader>
@@ -247,105 +300,49 @@ export default function AdminSettingsPage() {
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="subTitle">Título</Label>
-                <Input
-                  id="subTitle"
-                  value={subTitle}
-                  onChange={(e) => setSubTitle(e.target.value)}
-                  placeholder="Aprenda continuamente. Evolua constantemente."
-                />
+                <Input id="subTitle" value={subTitle} onChange={(e) => setSubTitle(e.target.value)} placeholder="Aprenda continuamente. Evolua constantemente." />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="subDescription">Descrição</Label>
-                <Textarea
-                  id="subDescription"
-                  value={subDescription}
-                  onChange={(e) => setSubDescription(e.target.value)}
-                  placeholder="Nossa assinatura te dá acesso..."
-                  rows={3}
-                />
+                <Textarea id="subDescription" value={subDescription} onChange={(e) => setSubDescription(e.target.value)} placeholder="Nossa assinatura te dá acesso..." rows={3} />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="subPrice">Preço mensal (R$)</Label>
-                  <Input
-                    id="subPrice"
-                    type="number"
-                    value={subPrice}
-                    onChange={(e) => setSubPrice(e.target.value)}
-                    placeholder="79"
-                  />
+                  <Input id="subPrice" type="number" value={subPrice} onChange={(e) => setSubPrice(e.target.value)} placeholder="79" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="subOriginalPrice">Preço original (R$)</Label>
-                  <Input
-                    id="subOriginalPrice"
-                    type="number"
-                    value={subOriginalPrice}
-                    onChange={(e) => setSubOriginalPrice(e.target.value)}
-                    placeholder="149"
-                  />
+                  <Input id="subOriginalPrice" type="number" value={subOriginalPrice} onChange={(e) => setSubOriginalPrice(e.target.value)} placeholder="149" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="subAnnualPrice">Preço anual (R$)</Label>
-                  <Input
-                    id="subAnnualPrice"
-                    type="number"
-                    value={subAnnualPrice}
-                    onChange={(e) => setSubAnnualPrice(e.target.value)}
-                    placeholder="569"
-                  />
+                  <Input id="subAnnualPrice" type="number" value={subAnnualPrice} onChange={(e) => setSubAnnualPrice(e.target.value)} placeholder="569" />
                 </div>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="subDiscountText">Texto de desconto</Label>
-                <Input
-                  id="subDiscountText"
-                  value={subDiscountText}
-                  onChange={(e) => setSubDiscountText(e.target.value)}
-                  placeholder="Economize 47% - Oferta de lançamento"
-                />
+                <Input id="subDiscountText" value={subDiscountText} onChange={(e) => setSubDiscountText(e.target.value)} placeholder="Economize 47% - Oferta de lançamento" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="subCtaText">Texto do botão (CTA)</Label>
-                <Input
-                  id="subCtaText"
-                  value={subCtaText}
-                  onChange={(e) => setSubCtaText(e.target.value)}
-                  placeholder="Começar 7 dias grátis"
-                />
+                <Input id="subCtaText" value={subCtaText} onChange={(e) => setSubCtaText(e.target.value)} placeholder="Começar 7 dias grátis" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="subCtaUrl">Link do botão (CTA)</Label>
-                <Input
-                  id="subCtaUrl"
-                  value={subCtaUrl}
-                  onChange={(e) => setSubCtaUrl(e.target.value)}
-                  placeholder="/assinatura ou https://..."
-                />
+                <Input id="subCtaUrl" value={subCtaUrl} onChange={(e) => setSubCtaUrl(e.target.value)} placeholder="/assinatura ou https://..." />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="subNote">Nota sobre masterclasses</Label>
-                <Textarea
-                  id="subNote"
-                  value={subNote}
-                  onChange={(e) => setSubNote(e.target.value)}
-                  placeholder="As masterclasses são vendidas separadamente..."
-                  rows={2}
-                />
+                <Textarea id="subNote" value={subNote} onChange={(e) => setSubNote(e.target.value)} placeholder="As masterclasses são vendidas separadamente..." rows={2} />
               </div>
 
               {/* Features / Diferenciais */}
               <div className="space-y-3 pt-4 border-t">
                 <div className="flex items-center justify-between">
                   <Label>Diferenciais</Label>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setSubFeatures([...subFeatures, { title: "", description: "" }])}
-                  >
-                    <Plus className="h-4 w-4 mr-1" />
-                    Adicionar
+                  <Button type="button" variant="outline" size="sm" onClick={() => setSubFeatures([...subFeatures, { title: "", description: "" }])}>
+                    <Plus className="h-4 w-4 mr-1" /> Adicionar
                   </Button>
                 </div>
                 {subFeatures.map((feat, idx) => (
@@ -370,13 +367,7 @@ export default function AdminSettingsPage() {
                         placeholder="Descrição do diferencial"
                       />
                     </div>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      className="text-destructive mt-1"
-                      onClick={() => setSubFeatures(subFeatures.filter((_, i) => i !== idx))}
-                    >
+                    <Button type="button" variant="ghost" size="icon" className="text-destructive mt-1" onClick={() => setSubFeatures(subFeatures.filter((_, i) => i !== idx))}>
                       <Trash2 className="h-4 w-4" />
                     </Button>
                   </div>

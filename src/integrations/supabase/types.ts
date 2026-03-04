@@ -383,6 +383,14 @@ export type Database = {
       site_settings: {
         Row: {
           created_at: string
+          hero_background_images: Json | null
+          hero_cta_primary_text: string | null
+          hero_cta_primary_url: string | null
+          hero_cta_secondary_text: string | null
+          hero_cta_secondary_url: string | null
+          hero_description: string | null
+          hero_stats: Json | null
+          hero_title: string | null
           id: string
           logo_url: string | null
           primary_color: string | null
@@ -400,9 +408,20 @@ export type Database = {
           subscription_price: number | null
           subscription_title: string | null
           updated_at: string
+          value_prop_features: Json | null
+          value_prop_subtitle: string | null
+          value_prop_title: string | null
         }
         Insert: {
           created_at?: string
+          hero_background_images?: Json | null
+          hero_cta_primary_text?: string | null
+          hero_cta_primary_url?: string | null
+          hero_cta_secondary_text?: string | null
+          hero_cta_secondary_url?: string | null
+          hero_description?: string | null
+          hero_stats?: Json | null
+          hero_title?: string | null
           id?: string
           logo_url?: string | null
           primary_color?: string | null
@@ -420,9 +439,20 @@ export type Database = {
           subscription_price?: number | null
           subscription_title?: string | null
           updated_at?: string
+          value_prop_features?: Json | null
+          value_prop_subtitle?: string | null
+          value_prop_title?: string | null
         }
         Update: {
           created_at?: string
+          hero_background_images?: Json | null
+          hero_cta_primary_text?: string | null
+          hero_cta_primary_url?: string | null
+          hero_cta_secondary_text?: string | null
+          hero_cta_secondary_url?: string | null
+          hero_description?: string | null
+          hero_stats?: Json | null
+          hero_title?: string | null
           id?: string
           logo_url?: string | null
           primary_color?: string | null
@@ -440,6 +470,9 @@ export type Database = {
           subscription_price?: number | null
           subscription_title?: string | null
           updated_at?: string
+          value_prop_features?: Json | null
+          value_prop_subtitle?: string | null
+          value_prop_title?: string | null
         }
         Relationships: []
       }
