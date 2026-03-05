@@ -10,6 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Loader2, Save, Palette, Image, MessageSquare, CreditCard, Plus, Trash2 } from "lucide-react";
 import { HeroSettingsCard } from "@/components/admin/HeroSettingsCard";
 import { ValuePropSettingsCard } from "@/components/admin/ValuePropSettingsCard";
+import { AboutSettingsCard } from "@/components/admin/AboutSettingsCard";
 
 export default function AdminSettingsPage() {
   const { data: settings, isLoading } = useSiteSettings();
@@ -48,6 +49,17 @@ export default function AdminSettingsPage() {
   const [vpSubtitle, setVpSubtitle] = useState("");
   const [vpFeatures, setVpFeatures] = useState<{ icon: string; title: string; description: string }[]>([]);
 
+  // About fields
+  const [aboutHeroTitle, setAboutHeroTitle] = useState("");
+  const [aboutHeroDescription, setAboutHeroDescription] = useState("");
+  const [aboutStoryTitle, setAboutStoryTitle] = useState("");
+  const [aboutStoryParagraphs, setAboutStoryParagraphs] = useState<string[]>([]);
+  const [aboutStoryImageUrl, setAboutStoryImageUrl] = useState("");
+  const [aboutValuesTitle, setAboutValuesTitle] = useState("");
+  const [aboutValuesSubtitle, setAboutValuesSubtitle] = useState("");
+  const [aboutValues, setAboutValues] = useState<{ icon: string; title: string; description: string }[]>([]);
+  const [aboutNumbers, setAboutNumbers] = useState<{ value: string; label: string }[]>([]);
+
   useEffect(() => {
     if (settings) {
       setLogoUrl(settings.logo_url || "");
@@ -65,7 +77,6 @@ export default function AdminSettingsPage() {
       setSubCtaUrl(settings.subscription_cta_url || "");
       setSubNote(settings.subscription_note || "");
       setSubFeatures(settings.subscription_features || []);
-      // Hero
       setHeroTitle(settings.hero_title || "");
       setHeroDescription(settings.hero_description || "");
       setHeroCtaPrimaryText(settings.hero_cta_primary_text || "");
@@ -74,10 +85,19 @@ export default function AdminSettingsPage() {
       setHeroCtaSecondaryUrl(settings.hero_cta_secondary_url || "");
       setHeroStats(settings.hero_stats || []);
       setHeroBackgroundImages(settings.hero_background_images || []);
-      // Value Prop
       setVpTitle(settings.value_prop_title || "");
       setVpSubtitle(settings.value_prop_subtitle || "");
       setVpFeatures(settings.value_prop_features || []);
+      // About
+      setAboutHeroTitle(settings.about_hero_title || "");
+      setAboutHeroDescription(settings.about_hero_description || "");
+      setAboutStoryTitle(settings.about_story_title || "");
+      setAboutStoryParagraphs(settings.about_story_paragraphs || []);
+      setAboutStoryImageUrl(settings.about_story_image_url || "");
+      setAboutValuesTitle(settings.about_values_title || "");
+      setAboutValuesSubtitle(settings.about_values_subtitle || "");
+      setAboutValues(settings.about_values || []);
+      setAboutNumbers(settings.about_numbers || []);
     }
   }, [settings]);
 
@@ -109,7 +129,16 @@ export default function AdminSettingsPage() {
       value_prop_title: vpTitle || null,
       value_prop_subtitle: vpSubtitle || null,
       value_prop_features: vpFeatures.length ? vpFeatures : null,
-    });
+      about_hero_title: aboutHeroTitle || null,
+      about_hero_description: aboutHeroDescription || null,
+      about_story_title: aboutStoryTitle || null,
+      about_story_paragraphs: aboutStoryParagraphs.length ? aboutStoryParagraphs : null,
+      about_story_image_url: aboutStoryImageUrl || null,
+      about_values_title: aboutValuesTitle || null,
+      about_values_subtitle: aboutValuesSubtitle || null,
+      about_values: aboutValues.length ? aboutValues : null,
+      about_numbers: aboutNumbers.length ? aboutNumbers : null,
+    } as any);
   };
 
   if (isLoading) {
@@ -185,37 +214,15 @@ export default function AdminSettingsPage() {
               <div className="space-y-2">
                 <Label htmlFor="primaryColor">Cor Primária</Label>
                 <div className="flex gap-2">
-                  <Input
-                    type="color"
-                    id="primaryColor"
-                    value={primaryColor}
-                    onChange={(e) => setPrimaryColor(e.target.value)}
-                    className="w-16 h-10 p-1 cursor-pointer"
-                  />
-                  <Input
-                    value={primaryColor}
-                    onChange={(e) => setPrimaryColor(e.target.value)}
-                    placeholder="#f97316"
-                    className="flex-1"
-                  />
+                  <Input type="color" id="primaryColor" value={primaryColor} onChange={(e) => setPrimaryColor(e.target.value)} className="w-16 h-10 p-1 cursor-pointer" />
+                  <Input value={primaryColor} onChange={(e) => setPrimaryColor(e.target.value)} placeholder="#f97316" className="flex-1" />
                 </div>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="secondaryColor">Cor Secundária</Label>
                 <div className="flex gap-2">
-                  <Input
-                    type="color"
-                    id="secondaryColor"
-                    value={secondaryColor}
-                    onChange={(e) => setSecondaryColor(e.target.value)}
-                    className="w-16 h-10 p-1 cursor-pointer"
-                  />
-                  <Input
-                    value={secondaryColor}
-                    onChange={(e) => setSecondaryColor(e.target.value)}
-                    placeholder="#262626"
-                    className="flex-1"
-                  />
+                  <Input type="color" id="secondaryColor" value={secondaryColor} onChange={(e) => setSecondaryColor(e.target.value)} className="w-16 h-10 p-1 cursor-pointer" />
+                  <Input value={secondaryColor} onChange={(e) => setSecondaryColor(e.target.value)} placeholder="#262626" className="flex-1" />
                 </div>
               </div>
               <div className="p-4 bg-muted rounded-lg space-y-2">
@@ -247,6 +254,19 @@ export default function AdminSettingsPage() {
             features={vpFeatures} setFeatures={setVpFeatures}
           />
 
+          {/* About Page Settings */}
+          <AboutSettingsCard
+            heroTitle={aboutHeroTitle} setHeroTitle={setAboutHeroTitle}
+            heroDescription={aboutHeroDescription} setHeroDescription={setAboutHeroDescription}
+            storyTitle={aboutStoryTitle} setStoryTitle={setAboutStoryTitle}
+            storyParagraphs={aboutStoryParagraphs} setStoryParagraphs={setAboutStoryParagraphs}
+            storyImageUrl={aboutStoryImageUrl} setStoryImageUrl={setAboutStoryImageUrl}
+            valuesTitle={aboutValuesTitle} setValuesTitle={setAboutValuesTitle}
+            valuesSubtitle={aboutValuesSubtitle} setValuesSubtitle={setAboutValuesSubtitle}
+            values={aboutValues} setValues={setAboutValues}
+            numbers={aboutNumbers} setNumbers={setAboutNumbers}
+          />
+
           {/* Testimonials Toggle */}
           <Card className="md:col-span-2">
             <CardHeader>
@@ -266,10 +286,7 @@ export default function AdminSettingsPage() {
                     Quando ativado, os depoimentos serão exibidos na página inicial.
                   </p>
                 </div>
-                <Switch
-                  checked={showTestimonials}
-                  onCheckedChange={setShowTestimonials}
-                />
+                <Switch checked={showTestimonials} onCheckedChange={setShowTestimonials} />
               </div>
             </CardContent>
           </Card>
@@ -287,14 +304,9 @@ export default function AdminSettingsPage() {
               <div className="flex items-center justify-between pt-2">
                 <div>
                   <p className="font-medium text-sm">Exibir seção de assinatura</p>
-                  <p className="text-xs text-muted-foreground">
-                    Quando desativado, a seção não aparece na home.
-                  </p>
+                  <p className="text-xs text-muted-foreground">Quando desativado, a seção não aparece na home.</p>
                 </div>
-                <Switch
-                  checked={showSubscription}
-                  onCheckedChange={setShowSubscription}
-                />
+                <Switch checked={showSubscription} onCheckedChange={setShowSubscription} />
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -336,8 +348,6 @@ export default function AdminSettingsPage() {
                 <Label htmlFor="subNote">Nota sobre masterclasses</Label>
                 <Textarea id="subNote" value={subNote} onChange={(e) => setSubNote(e.target.value)} placeholder="As masterclasses são vendidas separadamente..." rows={2} />
               </div>
-
-              {/* Features / Diferenciais */}
               <div className="space-y-3 pt-4 border-t">
                 <div className="flex items-center justify-between">
                   <Label>Diferenciais</Label>
@@ -348,24 +358,8 @@ export default function AdminSettingsPage() {
                 {subFeatures.map((feat, idx) => (
                   <div key={idx} className="flex gap-3 items-start">
                     <div className="flex-1 space-y-2">
-                      <Input
-                        value={feat.title}
-                        onChange={(e) => {
-                          const updated = [...subFeatures];
-                          updated[idx] = { ...updated[idx], title: e.target.value };
-                          setSubFeatures(updated);
-                        }}
-                        placeholder="Título do diferencial"
-                      />
-                      <Input
-                        value={feat.description}
-                        onChange={(e) => {
-                          const updated = [...subFeatures];
-                          updated[idx] = { ...updated[idx], description: e.target.value };
-                          setSubFeatures(updated);
-                        }}
-                        placeholder="Descrição do diferencial"
-                      />
+                      <Input value={feat.title} onChange={(e) => { const updated = [...subFeatures]; updated[idx] = { ...updated[idx], title: e.target.value }; setSubFeatures(updated); }} placeholder="Título do diferencial" />
+                      <Input value={feat.description} onChange={(e) => { const updated = [...subFeatures]; updated[idx] = { ...updated[idx], description: e.target.value }; setSubFeatures(updated); }} placeholder="Descrição do diferencial" />
                     </div>
                     <Button type="button" variant="ghost" size="icon" className="text-destructive mt-1" onClick={() => setSubFeatures(subFeatures.filter((_, i) => i !== idx))}>
                       <Trash2 className="h-4 w-4" />
