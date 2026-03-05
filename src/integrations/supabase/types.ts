@@ -382,6 +382,15 @@ export type Database = {
       }
       site_settings: {
         Row: {
+          about_hero_description: string | null
+          about_hero_title: string | null
+          about_numbers: Json | null
+          about_story_image_url: string | null
+          about_story_paragraphs: Json | null
+          about_story_title: string | null
+          about_values: Json | null
+          about_values_subtitle: string | null
+          about_values_title: string | null
           created_at: string
           hero_background_images: Json | null
           hero_cta_primary_text: string | null
@@ -413,6 +422,15 @@ export type Database = {
           value_prop_title: string | null
         }
         Insert: {
+          about_hero_description?: string | null
+          about_hero_title?: string | null
+          about_numbers?: Json | null
+          about_story_image_url?: string | null
+          about_story_paragraphs?: Json | null
+          about_story_title?: string | null
+          about_values?: Json | null
+          about_values_subtitle?: string | null
+          about_values_title?: string | null
           created_at?: string
           hero_background_images?: Json | null
           hero_cta_primary_text?: string | null
@@ -444,6 +462,15 @@ export type Database = {
           value_prop_title?: string | null
         }
         Update: {
+          about_hero_description?: string | null
+          about_hero_title?: string | null
+          about_numbers?: Json | null
+          about_story_image_url?: string | null
+          about_story_paragraphs?: Json | null
+          about_story_title?: string | null
+          about_values?: Json | null
+          about_values_subtitle?: string | null
+          about_values_title?: string | null
           created_at?: string
           hero_background_images?: Json | null
           hero_cta_primary_text?: string | null

@@ -30,6 +30,15 @@ export interface SiteSettings {
   value_prop_title: string | null;
   value_prop_subtitle: string | null;
   value_prop_features: { icon: string; title: string; description: string }[] | null;
+  about_hero_title: string | null;
+  about_hero_description: string | null;
+  about_story_title: string | null;
+  about_story_paragraphs: string[] | null;
+  about_story_image_url: string | null;
+  about_values_title: string | null;
+  about_values_subtitle: string | null;
+  about_values: { icon: string; title: string; description: string }[] | null;
+  about_numbers: { value: string; label: string }[] | null;
   created_at: string;
   updated_at: string;
 }
