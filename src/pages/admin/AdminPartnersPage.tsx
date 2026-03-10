@@ -86,6 +86,7 @@ export default function AdminPartnersPage() {
         instagram_url: partner.instagram_url || "",
         video_url: (partner as any).video_url || "",
         is_active: partner.is_active,
+        is_featured: (partner as any).is_featured || false,
       });
     } else {
       setEditingPartner(null);
