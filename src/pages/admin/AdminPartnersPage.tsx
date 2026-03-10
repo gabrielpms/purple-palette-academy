@@ -101,7 +101,8 @@ export default function AdminPartnersPage() {
         twitter_url: "",
         instagram_url: "",
         video_url: "",
-        is_active: true 
+        is_active: true,
+        is_featured: false,
       });
     }
     setIsFormOpen(true);
