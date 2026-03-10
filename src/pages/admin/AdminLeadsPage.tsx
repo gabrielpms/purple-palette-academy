@@ -32,6 +32,7 @@ interface PartnerRequest {
   id: string;
   name: string;
   email: string;
+  whatsapp: string | null;
   company: string | null;
   website: string | null;
   message: string | null;
