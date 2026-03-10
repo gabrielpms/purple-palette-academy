@@ -407,6 +407,19 @@ export default function AdminPartnersPage() {
 
               <div className="flex items-center justify-between rounded-lg border p-4">
                 <div className="space-y-0.5">
+                  <Label>Destaque na Home</Label>
+                  <p className="text-sm text-muted-foreground">
+                    Instrutor aparecerá no carrossel de destaque da página inicial
+                  </p>
+                </div>
+                <Switch
+                  checked={formData.is_featured}
+                  onCheckedChange={(checked) => setFormData(prev => ({ ...prev, is_featured: checked }))}
+                />
+              </div>
+
+              <div className="flex items-center justify-between rounded-lg border p-4">
+                <div className="space-y-0.5">
                   <Label>Ativo</Label>
                   <p className="text-sm text-muted-foreground">
                     Instrutores inativos não aparecem no site
