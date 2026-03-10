@@ -14,6 +14,7 @@ export interface Instructor {
   instagram_url: string | null;
   video_url: string | null;
   is_active: boolean;
+  is_featured: boolean;
   created_at: string;
   updated_at: string;
 }

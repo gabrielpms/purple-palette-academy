@@ -14,7 +14,7 @@ import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Index() {
-  const { data: featuredCourses, isLoading: loadingFeatured } = useCourses({ featured: true });
+  
   const { data: allCourses, isLoading: loadingAll } = useCourses();
   const { data: testimonials, isLoading: loadingTestimonials } = useFeaturedTestimonials();
   const { data: settings } = useSiteSettings();
@@ -37,20 +37,7 @@ export default function Index() {
         <SeasonHighlight />
         
         {/* Featured Instructors */}
-        {loadingFeatured ? (
-          <section className="py-24">
-            <div className="container">
-              <Skeleton className="h-12 w-64 mx-auto mb-16" />
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {[1, 2, 3, 4, 5, 6].map((i) => (
-                  <Skeleton key={i} className="aspect-[3/4] rounded-2xl" />
-                ))}
-              </div>
-            </div>
-          </section>
-        ) : (
-          <FeaturedInstructors courses={featuredCourses || []} />
-        )}
+        <FeaturedInstructors />
         
         {/* New Courses */}
         {loadingAll ? (

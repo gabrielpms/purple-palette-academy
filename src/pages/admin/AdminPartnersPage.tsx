@@ -54,6 +54,7 @@ export default function AdminPartnersPage() {
     instagram_url: "",
     video_url: "",
     is_active: true,
+    is_featured: false,
   });
   const [loading, setLoading] = useState(false);
 
@@ -85,6 +86,7 @@ export default function AdminPartnersPage() {
         instagram_url: partner.instagram_url || "",
         video_url: (partner as any).video_url || "",
         is_active: partner.is_active,
+        is_featured: (partner as any).is_featured || false,
       });
     } else {
       setEditingPartner(null);
@@ -99,7 +101,8 @@ export default function AdminPartnersPage() {
         twitter_url: "",
         instagram_url: "",
         video_url: "",
-        is_active: true 
+        is_active: true,
+        is_featured: false,
       });
     }
     setIsFormOpen(true);
@@ -122,6 +125,7 @@ export default function AdminPartnersPage() {
       twitter_url: formData.twitter_url || null,
       instagram_url: formData.instagram_url || null,
       video_url: formData.video_url || null,
+      is_featured: formData.is_featured,
       is_active: formData.is_active,
     };
 
@@ -399,6 +403,19 @@ export default function AdminPartnersPage() {
                     />
                   </div>
                 </div>
+              </div>
+
+              <div className="flex items-center justify-between rounded-lg border p-4">
+                <div className="space-y-0.5">
+                  <Label>Destaque na Home</Label>
+                  <p className="text-sm text-muted-foreground">
+                    Instrutor aparecerá no carrossel de destaque da página inicial
+                  </p>
+                </div>
+                <Switch
+                  checked={formData.is_featured}
+                  onCheckedChange={(checked) => setFormData(prev => ({ ...prev, is_featured: checked }))}
+                />
               </div>
 
               <div className="flex items-center justify-between rounded-lg border p-4">
