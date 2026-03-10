@@ -125,6 +125,7 @@ export default function AdminPartnersPage() {
       twitter_url: formData.twitter_url || null,
       instagram_url: formData.instagram_url || null,
       video_url: formData.video_url || null,
+      is_featured: formData.is_featured,
       is_active: formData.is_active,
     };
 
