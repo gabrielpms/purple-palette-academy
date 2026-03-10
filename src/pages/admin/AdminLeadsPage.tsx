@@ -183,6 +183,7 @@ export default function AdminLeadsPage() {
                   <TableRow>
                     <TableHead>Nome</TableHead>
                     <TableHead>Email</TableHead>
+                    <TableHead className="hidden md:table-cell">WhatsApp</TableHead>
                     <TableHead className="hidden md:table-cell">Empresa</TableHead>
                     <TableHead className="hidden lg:table-cell">Mensagem</TableHead>
                     <TableHead>Status</TableHead>
