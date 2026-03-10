@@ -14,7 +14,7 @@ import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Index() {
-  const { data: allCourses2, isLoading: loadingFeatured } = useCourses({ featured: true }); // kept for skeleton
+  
   const { data: allCourses, isLoading: loadingAll } = useCourses();
   const { data: testimonials, isLoading: loadingTestimonials } = useFeaturedTestimonials();
   const { data: settings } = useSiteSettings();
