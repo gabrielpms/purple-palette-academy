@@ -33,6 +33,7 @@ export default function BecomePartnerPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    whatsapp: "",
     company: "",
     website: "",
     message: "",
