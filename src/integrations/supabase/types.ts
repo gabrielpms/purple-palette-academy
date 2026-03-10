@@ -232,6 +232,7 @@ export type Database = {
           name: string
           status: string | null
           website: string | null
+          whatsapp: string | null
         }
         Insert: {
           company?: string | null
@@ -242,6 +243,7 @@ export type Database = {
           name: string
           status?: string | null
           website?: string | null
+          whatsapp?: string | null
         }
         Update: {
           company?: string | null
@@ -252,6 +254,7 @@ export type Database = {
           name?: string
           status?: string | null
           website?: string | null
+          whatsapp?: string | null
         }
         Relationships: []
       }

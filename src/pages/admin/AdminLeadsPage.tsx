@@ -32,6 +32,7 @@ interface PartnerRequest {
   id: string;
   name: string;
   email: string;
+  whatsapp: string | null;
   company: string | null;
   website: string | null;
   message: string | null;
@@ -182,6 +183,7 @@ export default function AdminLeadsPage() {
                   <TableRow>
                     <TableHead>Nome</TableHead>
                     <TableHead>Email</TableHead>
+                    <TableHead className="hidden md:table-cell">WhatsApp</TableHead>
                     <TableHead className="hidden md:table-cell">Empresa</TableHead>
                     <TableHead className="hidden lg:table-cell">Mensagem</TableHead>
                     <TableHead>Status</TableHead>
@@ -191,7 +193,7 @@ export default function AdminLeadsPage() {
                 <TableBody>
                   {partnerRequests?.length === 0 ? (
                     <TableRow>
-                      <TableCell colSpan={6} className="text-center py-12">
+                      <TableCell colSpan={7} className="text-center py-12">
                         <Building2 className="h-12 w-12 mx-auto text-muted-foreground/50 mb-4" />
                         <p className="text-muted-foreground">Nenhuma solicitação recebida ainda.</p>
                       </TableCell>
@@ -204,6 +206,18 @@ export default function AdminLeadsPage() {
                           <a href={`mailto:${req.email}`} className="text-primary hover:underline">
                             {req.email}
                           </a>
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell text-muted-foreground">
+                          {req.whatsapp ? (
+                            <a
+                              href={`https://wa.me/${req.whatsapp.replace(/\D/g, "")}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-primary hover:underline"
+                            >
+                              {req.whatsapp}
+                            </a>
+                          ) : "-"}
                         </TableCell>
                         <TableCell className="hidden md:table-cell text-muted-foreground">
                           {req.company || "-"}

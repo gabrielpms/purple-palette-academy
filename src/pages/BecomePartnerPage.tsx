@@ -33,6 +33,7 @@ export default function BecomePartnerPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    whatsapp: "",
     company: "",
     website: "",
     message: "",
@@ -163,7 +164,18 @@ export default function BecomePartnerPage() {
                       </div>
                     </div>
 
-                    <div className="grid gap-6 sm:grid-cols-2">
+                    <div className="grid gap-6 sm:grid-cols-3">
+                      <div className="space-y-2">
+                        <Label htmlFor="whatsapp">WhatsApp</Label>
+                        <Input
+                          id="whatsapp"
+                          name="whatsapp"
+                          type="tel"
+                          value={formData.whatsapp}
+                          onChange={handleChange}
+                          placeholder="(11) 99999-9999"
+                        />
+                      </div>
                       <div className="space-y-2">
                         <Label htmlFor="company">Empresa</Label>
                         <Input
