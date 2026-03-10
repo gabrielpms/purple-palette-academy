@@ -54,6 +54,7 @@ export default function AdminPartnersPage() {
     instagram_url: "",
     video_url: "",
     is_active: true,
+    is_featured: false,
   });
   const [loading, setLoading] = useState(false);
 
