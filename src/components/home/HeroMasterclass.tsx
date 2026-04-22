@@ -11,19 +11,19 @@ const defaultInstructorImages = [
 ];
 
 const defaultStats = [
-  { value: "200+", label: "Aulas disponíveis" },
+  { value: "200+", label: "Aulas" },
   { value: "15+", label: "Masterclasses" },
-  { value: "5.000+", label: "Alunos formados" },
+  { value: "1", label: "Comunidade ativa" },
 ];
 
 export function HeroMasterclass() {
   const { data: settings } = useSiteSettings();
 
-  const title = settings?.hero_title || "APRENDA COM QUEM FAZ O MERCADO.";
-  const description = settings?.hero_description || "Masterclasses individuais ou assinatura com nano aulas e sessões de mentoria. Aprenda design estratégico com os melhores profissionais do Brasil.";
+  const title = settings?.hero_title || "DESIGN COMEÇA POR UMA PERGUNTA.";
+  const description = settings?.hero_description || "Masterclasses e temporadas para quem quer pensar o design com profundidade — e transformar essa reflexão em prática.";
   const ctaPrimaryText = settings?.hero_cta_primary_text || "Ver Masterclasses";
   const ctaPrimaryUrl = settings?.hero_cta_primary_url || "/cursos";
-  const ctaSecondaryText = settings?.hero_cta_secondary_text || "Conhecer a Plataforma";
+  const ctaSecondaryText = settings?.hero_cta_secondary_text || "Conhecer a Plots";
   const ctaSecondaryUrl = settings?.hero_cta_secondary_url || "/sobre";
   const stats = settings?.hero_stats?.length ? settings.hero_stats : defaultStats;
   const backgroundImages = settings?.hero_background_images?.length ? settings.hero_background_images : defaultInstructorImages;

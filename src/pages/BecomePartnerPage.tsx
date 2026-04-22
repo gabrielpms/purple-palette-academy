@@ -13,17 +13,17 @@ const benefits = [
   {
     icon: Building2,
     title: "Exposição de Marca",
-    description: "Sua empresa visível para milhares de profissionais de design e produto.",
+    description: "Sua presença visível para uma comunidade de designers e profissionais de produto.",
   },
   {
     icon: Users,
     title: "Comunidade Qualificada",
-    description: "Acesso a uma comunidade engajada de designers estratégicos.",
+    description: "Diálogo com uma comunidade engajada de designers estratégicos.",
   },
   {
     icon: TrendingUp,
     title: "Crescimento Mútuo",
-    description: "Parcerias que beneficiam ambos os lados e geram resultados reais.",
+    description: "Parcerias em coautoria, que constroem caminho para os dois lados.",
   },
 ];
 
@@ -80,7 +80,7 @@ export default function BecomePartnerPage() {
                 Seja um <span className="text-gradient">Parceiro</span>
               </h1>
               <p className="mt-6 text-lg text-muted-foreground">
-                Junte-se a nós e faça parte da transformação da educação em design no Brasil.
+                Plots é um espaço para quem quer ensinar o que vive — e aprender enquanto compartilha.
               </p>
             </div>
           </div>
@@ -123,17 +123,17 @@ export default function BecomePartnerPage() {
                     Solicitação Enviada!
                   </h2>
                   <p className="mt-3 text-muted-foreground">
-                    Obrigado pelo interesse! Entraremos em contato em breve.
+                    Recebemos sua mensagem. Em breve continuamos a conversa.
                   </p>
                 </div>
               ) : (
                 <>
                   <div className="text-center mb-10">
                     <h2 className="font-display text-2xl font-bold md:text-3xl">
-                      Entre em Contato
+                      Vamos conversar
                     </h2>
                     <p className="mt-2 text-muted-foreground">
-                      Preencha o formulário abaixo e nossa equipe entrará em contato.
+                      Conte um pouco sobre você. A gente responde em breve.
                     </p>
                   </div>
 
@@ -205,7 +205,7 @@ export default function BecomePartnerPage() {
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
-                        placeholder="Conte um pouco sobre como gostaria de colaborar..."
+                        placeholder="O que você gostaria de ensinar — e por quê?"
                         rows={5}
                       />
                     </div>

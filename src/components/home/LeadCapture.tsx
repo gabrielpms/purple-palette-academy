@@ -56,7 +56,7 @@ export function LeadCapture() {
               Cadastro realizado com sucesso!
             </h3>
             <p className="mt-4 text-primary-foreground/80">
-              Em breve você receberá nossas novidades e conteúdos exclusivos.
+              Em breve você recebe nossas próximas reflexões e convites.
             </p>
           </div>
         </div>
@@ -78,14 +78,13 @@ export function LeadCapture() {
             <div className="text-center">
               <div className="inline-flex items-center gap-2 rounded-full bg-primary/20 px-4 py-1.5 text-sm font-medium text-primary mb-6">
                 <Sparkles className="h-4 w-4" />
-                Newsletter Exclusiva
+                Newsletter Plots
               </div>
               <h2 className="font-display text-2xl font-bold text-primary-foreground md:text-3xl lg:text-4xl">
-                Fique por dentro das novidades
+                Cada temporada começa com uma pergunta.
               </h2>
               <p className="mt-4 text-primary-foreground/80 max-w-lg mx-auto">
-                Cadastre-se para receber em primeira mão conteúdos exclusivos, 
-                lançamentos de cursos e dicas dos nossos especialistas.
+                Receba reflexões, novas masterclasses e convites para encontros da comunidade.
               </p>
             </div>
 

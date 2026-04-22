@@ -6,17 +6,17 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 const defaultFeatures = [
-  { icon: "BookOpen", title: "Masterclasses Completas", description: "Cursos profundos com profissionais referência no mercado brasileiro." },
-  { icon: "Zap", title: "Nano Aulas", description: "Conteúdos rápidos de 5-15 minutos para aprender no seu ritmo." },
-  { icon: "Users", title: "Mentorias ao Vivo", description: "Sessões exclusivas mensais com os melhores designers." },
-  { icon: "Layers", title: "Projetos Práticos", description: "Cases reais para você aplicar e adicionar ao seu portfólio." },
+  { icon: "BookOpen", title: "Masterclasses", description: "Aulas profundas com quem vive o que ensina." },
+  { icon: "Zap", title: "Nano aulas", description: "Conteúdos curtos para aprender no seu ritmo." },
+  { icon: "Users", title: "Encontros ao vivo", description: "Conversas mensais com parceiros da comunidade." },
+  { icon: "Layers", title: "Prática real", description: "Cases para você aplicar e construir repertório." },
 ];
 
 export function ValuePropositionMinimal() {
   const { data: settings } = useSiteSettings();
 
-  const title = settings?.value_prop_title || "O que está incluso";
-  const subtitle = settings?.value_prop_subtitle || "Tudo que você precisa para se tornar um designer estratégico.";
+  const title = settings?.value_prop_title || "Como você aprende na Plots";
+  const subtitle = settings?.value_prop_subtitle || "Um caminho desenhado para quem quer pensar e praticar design com propósito.";
   const features = settings?.value_prop_features?.length ? settings.value_prop_features : defaultFeatures;
 
   return (

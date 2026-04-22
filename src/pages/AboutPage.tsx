@@ -11,29 +11,29 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 const defaultValues = [
-  { icon: "Target", title: "Foco em Resultado", description: "Nossos cursos são desenhados para gerar impacto real na sua carreira, não apenas certificados." },
-  { icon: "Heart", title: "Comunidade Forte", description: "Fazemos parte de uma comunidade vibrante de designers que se apoiam e crescem juntos." },
-  { icon: "Lightbulb", title: "Inovação Constante", description: "Estamos sempre atualizando nosso conteúdo com as práticas mais recentes do mercado." },
-  { icon: "Users", title: "Acessibilidade", description: "Acreditamos que educação de qualidade deve ser acessível a todos os profissionais." },
+  { icon: "Target", title: "Foco em Resultado", description: "Aprendizado pensado para gerar impacto real na sua prática, não apenas no seu currículo." },
+  { icon: "Heart", title: "Comunidade Forte", description: "Uma rede de designers que se escutam, trocam e crescem em coautoria." },
+  { icon: "Lightbulb", title: "Inovação Constante", description: "Conteúdos vivos, atualizados a partir das perguntas que o mercado faz hoje." },
+  { icon: "Users", title: "Acessibilidade", description: "Educação que cabe em jornadas diferentes." },
 ];
 
 const defaultNumbers = [
-  { value: "15+", label: "Cursos disponíveis" },
-  { value: "5.000+", label: "Alunos formados" },
-  { value: "4.9", label: "Avaliação média" },
-  { value: "20+", label: "Instrutores experts" },
+  { value: "15+", label: "Masterclasses" },
+  { value: "200+", label: "Aulas publicadas" },
+  { value: "20+", label: "Parceiros" },
+  { value: "1", label: "Comunidade ativa" },
 ];
 
 export default function AboutPage() {
   const { data: settings } = useSiteSettings();
 
-  const heroTitle = settings?.about_hero_title || "Sobre a DesignSchool";
-  const heroDescription = settings?.about_hero_description || "Somos a plataforma brasileira de educação em design e produto estratégico. Nossa missão é formar a próxima geração de designers que pensam como estrategistas e executam com excelência.";
+  const heroTitle = settings?.about_hero_title || "Sobre a Plots";
+  const heroDescription = settings?.about_hero_description || "A Plots é uma comunidade de design e produto para quem quer pensar de forma crítica, sistêmica e estratégica — e construir significado junto.";
   const storyTitle = settings?.about_story_title || "Nossa História";
   const storyParagraphs = settings?.about_story_paragraphs || [
-    "A DesignSchool nasceu da frustração de profissionais que não encontravam conteúdo de qualidade sobre design estratégico em português.",
-    "Reunimos os melhores profissionais do mercado brasileiro para criar cursos que realmente fazem diferença.",
-    "Hoje, já formamos mais de 5.000 profissionais e somos referência em educação de design no Brasil.",
+    "A Plots nasceu do desejo de abrir espaço para um design que pensa: crítico, sistêmico e conectado ao que importa.",
+    "Reunimos parceiros que dividem prática real para construir, em coautoria, uma educação de design com propósito.",
+    "Hoje, somos uma comunidade ativa de pessoas que aprendem ensinando e ensinam aprendendo.",
   ];
   const storyImageUrl = settings?.about_story_image_url || "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800";
   const valuesTitle = settings?.about_values_title || "Nossos Valores";

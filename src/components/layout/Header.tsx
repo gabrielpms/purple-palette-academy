@@ -8,7 +8,7 @@ const navLinks = [
   { name: "Masterclasses", path: "/cursos" },
   { name: "Assinatura", path: "/assinatura" },
   { name: "Sobre", path: "/sobre" },
-  { name: "Instrutores", path: "/instrutores" },
+  { name: "Parceiros", path: "/instrutores" },
 ];
 
 export function Header() {
@@ -57,7 +57,7 @@ export function Header() {
             Entrar
           </Link>
           <Button size="sm" className="h-10 px-6 font-semibold" asChild>
-            <Link to="/cursos">Começar</Link>
+            <Link to="/cursos">Entrar na Plots</Link>
           </Button>
         </div>
 
@@ -94,7 +94,7 @@ export function Header() {
               </Button>
               <Button asChild>
                 <Link to="/cursos" onClick={() => setIsOpen(false)}>
-                  Começar
+                  Entrar na Plots
                 </Link>
               </Button>
             </div>
