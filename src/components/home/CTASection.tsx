@@ -16,16 +16,15 @@ export function CTASection() {
           <div className="relative mx-auto max-w-2xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full bg-primary-foreground/10 px-4 py-1.5 text-sm font-medium text-primary-foreground backdrop-blur-sm">
               <Sparkles className="h-4 w-4" />
-              Comece sua jornada hoje
+              Sua jornada começa aqui
             </div>
 
             <h2 className="mt-6 font-display text-3xl font-bold text-primary-foreground md:text-4xl lg:text-5xl">
-              Pronto para transformar sua carreira em design?
+              E se design for, antes de tudo, uma forma de pensar?
             </h2>
 
             <p className="mt-4 text-lg text-primary-foreground/80">
-              Junte-se a milhares de profissionais que já estão evoluindo suas habilidades 
-              com os melhores instrutores do Brasil.
+              Entre na comunidade Plots e construa sua jornada com parceiros que praticam o que ensinam.
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-4">
@@ -46,7 +45,7 @@ export function CTASection() {
                 asChild
               >
                 <Link to="/sobre">
-                  Conhecer a Escola
+                  Conhecer a Plots
                 </Link>
               </Button>
             </div>

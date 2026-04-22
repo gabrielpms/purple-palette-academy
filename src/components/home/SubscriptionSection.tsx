@@ -22,17 +22,17 @@ const featureIcons = [Zap, Users, Play, Sparkles];
 
 const benefits = [
   "Acesso ilimitado a nano aulas",
-  "Sessões de mentoria ao vivo",
-  "Comunidade exclusiva de designers",
-  "Certificados de participação",
+  "Encontros ao vivo com parceiros",
+  "Comunidade de designers em diálogo",
+  "Certificados de jornada",
   "Cancele quando quiser",
 ];
 
 export function SubscriptionSection() {
   const { data: settings } = useSiteSettings();
 
-  const title = settings?.subscription_title || "Aprenda continuamente. Evolua constantemente.";
-  const description = settings?.subscription_description || "Nossa assinatura te dá acesso a nano aulas exclusivas e sessões de mentoria ao vivo com profissionais de mercado. Ideal para quem quer manter-se atualizado e evoluir constantemente.";
+  const title = settings?.subscription_title || "Aprender é um processo. A Plots caminha com você.";
+  const description = settings?.subscription_description || "Com a assinatura você acessa nano aulas e encontros ao vivo com parceiros da comunidade. Um espaço para evoluir no seu ritmo.";
   const price = settings?.subscription_price ?? 79;
   const originalPrice = settings?.subscription_original_price ?? 149;
   const discountText = settings?.subscription_discount_text || "Economize 47% - Oferta de lançamento";
@@ -150,7 +150,7 @@ export function SubscriptionSection() {
             {/* Masterclass CTA */}
             <div className="mt-6 p-6 rounded-2xl bg-secondary/50 border border-border text-center">
               <p className="text-sm text-muted-foreground">
-                Prefere comprar uma masterclass individual?
+                Prefere uma masterclass específica?
               </p>
               <Button variant="link" className="mt-2 text-primary gap-1" asChild>
                 <Link to="/cursos">

@@ -26,9 +26,8 @@ export function SeasonHighlight() {
 
           {/* Description */}
           <p className="mt-8 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Estratégia sempre esteve onde as escolhas importam. Esta temporada é dedicada a resgatar 
-            seu verdadeiro papel dentro do design — não como uma abstração corporativa, mas como um 
-            motor real de transformação para pessoas e negócios.
+            Onde estratégia encontra design, escolhas ganham significado. Esta temporada propõe uma
+            releitura: estratégia não como abstração, mas como motor de transformação.
           </p>
 
           {/* Key points */}
@@ -61,7 +60,7 @@ export function SeasonHighlight() {
               asChild
             >
               <Link to="/temporada/retorno-estrategia">
-                Conhecer a temporada completa
+                Entrar na temporada
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </Button>

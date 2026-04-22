@@ -14,12 +14,12 @@ export function FeaturedInstructors() {
       <div className="container">
         <div className="text-center mb-16">
           <h2 className="font-display text-3xl font-bold md:text-4xl lg:text-5xl">
-            Aprenda com quem
+            Quem ensina,
             <br />
-            <span className="text-muted-foreground">faz o mercado</span>
+            <span className="text-muted-foreground">também aprende</span>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto">
-            Nossos instrutores são profissionais que lideram times nas maiores empresas do Brasil.
+            Parceiros que dividem prática real e abrem espaço para novas perguntas.
           </p>
         </div>
 
@@ -49,7 +49,7 @@ export function FeaturedInstructors() {
                 )}
 
                 <div className="mt-3 flex items-center gap-1 text-sm font-medium text-primary opacity-0 transform translate-y-2 transition-all group-hover:opacity-100 group-hover:translate-y-0">
-                  Ver perfil
+                  Ver parceiro
                   <ArrowRight className="h-4 w-4" />
                 </div>
               </div>

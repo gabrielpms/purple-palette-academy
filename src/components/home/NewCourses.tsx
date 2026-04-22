@@ -40,15 +40,15 @@ export function NewCourses({ courses }: NewCoursesProps) {
               Novidades
             </div>
             <h2 className="mt-4 font-display text-3xl font-bold md:text-4xl">
-              Recém Lançados
+              Novas masterclasses
             </h2>
             <p className="mt-2 max-w-xl text-muted-foreground">
-              Os cursos mais recentes da plataforma, fresquinhos para você começar a aprender.
+              Conteúdos recentes para começar uma nova jornada.
             </p>
           </div>
           <Button variant="outline" className="gap-2" asChild>
             <Link to="/cursos">
-              Explorar mais
+              Ver todas
               <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>

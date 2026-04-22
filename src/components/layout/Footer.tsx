@@ -40,7 +40,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-xs">
-              Aprenda design estratégico com os melhores profissionais do Brasil.
+              Uma comunidade de design para pensar com profundidade e praticar com propósito.
             </p>
           </div>
 
