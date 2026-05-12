@@ -69,6 +69,7 @@ export default function AdminSettingsPage() {
       setSecondaryColor(settings.secondary_color);
       setShowTestimonials(settings.show_testimonials);
       setShowSubscription(settings.show_subscription ?? true);
+      setActiveVersion((settings.active_version as "site" | "landing") || "site");
       setSubTitle(settings.subscription_title || "");
       setSubDescription(settings.subscription_description || "");
       setSubPrice(String(settings.subscription_price ?? ""));
