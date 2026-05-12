@@ -112,6 +112,7 @@ export default function AdminSettingsPage() {
       show_testimonials: showTestimonials,
       show_subscription: showSubscription,
       active_version: activeVersion,
+      subscription_title: subTitle || null,
       subscription_description: subDescription || null,
       subscription_price: subPrice ? Number(subPrice) : null,
       subscription_original_price: subOriginalPrice ? Number(subOriginalPrice) : null,
