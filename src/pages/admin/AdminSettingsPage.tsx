@@ -22,6 +22,7 @@ export default function AdminSettingsPage() {
   const [secondaryColor, setSecondaryColor] = useState("#262626");
   const [showTestimonials, setShowTestimonials] = useState(true);
   const [showSubscription, setShowSubscription] = useState(true);
+  const [activeVersion, setActiveVersion] = useState<"site" | "landing">("site");
 
   // Subscription fields
   const [subTitle, setSubTitle] = useState("");
