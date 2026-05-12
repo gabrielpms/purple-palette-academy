@@ -165,6 +165,51 @@ export default function AdminSettingsPage() {
           </p>
         </div>
 
+        {/* Active Version */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Globe className="h-5 w-5" />
+              Versão Ativa do Site
+            </CardTitle>
+            <CardDescription>
+              Escolha qual versão é exibida quando alguém acessa a URL principal do projeto.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <RadioGroup
+              value={activeVersion}
+              onValueChange={(v) => setActiveVersion(v as "site" | "landing")}
+              className="grid gap-3 md:grid-cols-2"
+            >
+              <label
+                htmlFor="version-site"
+                className="flex items-start gap-3 rounded-lg border p-4 cursor-pointer hover:bg-muted/50 transition-colors"
+              >
+                <RadioGroupItem value="site" id="version-site" className="mt-1" />
+                <div>
+                  <p className="font-medium">Site completo</p>
+                  <p className="text-sm text-muted-foreground">
+                    Carrega o site Plots com todas as seções e páginas.
+                  </p>
+                </div>
+              </label>
+              <label
+                htmlFor="version-landing"
+                className="flex items-start gap-3 rounded-lg border p-4 cursor-pointer hover:bg-muted/50 transition-colors"
+              >
+                <RadioGroupItem value="landing" id="version-landing" className="mt-1" />
+                <div>
+                  <p className="font-medium">Landing page</p>
+                  <p className="text-sm text-muted-foreground">
+                    Carrega a versão landing.html (página única). Outras rotas, como /admin, continuam acessíveis.
+                  </p>
+                </div>
+              </label>
+            </RadioGroup>
+          </CardContent>
+        </Card>
+
         <div className="grid gap-6 md:grid-cols-2">
           {/* Logo Settings */}
           <Card>
