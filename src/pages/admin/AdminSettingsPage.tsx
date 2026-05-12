@@ -111,7 +111,7 @@ export default function AdminSettingsPage() {
       secondary_color: secondaryColor,
       show_testimonials: showTestimonials,
       show_subscription: showSubscription,
-      subscription_title: subTitle || null,
+      active_version: activeVersion,
       subscription_description: subDescription || null,
       subscription_price: subPrice ? Number(subPrice) : null,
       subscription_original_price: subOriginalPrice ? Number(subOriginalPrice) : null,
