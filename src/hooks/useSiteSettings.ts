@@ -39,6 +39,7 @@ export interface SiteSettings {
   about_values_subtitle: string | null;
   about_values: { icon: string; title: string; description: string }[] | null;
   about_numbers: { value: string; label: string }[] | null;
+  active_version: string;
   created_at: string;
   updated_at: string;
 }
