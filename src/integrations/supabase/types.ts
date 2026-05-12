@@ -397,6 +397,7 @@ export type Database = {
           about_values: Json | null
           about_values_subtitle: string | null
           about_values_title: string | null
+          active_version: string
           created_at: string
           hero_background_images: Json | null
           hero_cta_primary_text: string | null
@@ -437,6 +438,7 @@ export type Database = {
           about_values?: Json | null
           about_values_subtitle?: string | null
           about_values_title?: string | null
+          active_version?: string
           created_at?: string
           hero_background_images?: Json | null
           hero_cta_primary_text?: string | null
@@ -477,6 +479,7 @@ export type Database = {
           about_values?: Json | null
           about_values_subtitle?: string | null
           about_values_title?: string | null
+          active_version?: string
           created_at?: string
           hero_background_images?: Json | null
           hero_cta_primary_text?: string | null

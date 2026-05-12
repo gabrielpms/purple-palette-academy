@@ -17,7 +17,18 @@ export default function Index() {
   
   const { data: allCourses, isLoading: loadingAll } = useCourses();
   const { data: testimonials, isLoading: loadingTestimonials } = useFeaturedTestimonials();
-  const { data: settings } = useSiteSettings();
+  const { data: settings, isLoading: loadingSettings } = useSiteSettings();
+
+  // Redirect to landing.html if active_version is 'landing'
+  if (settings?.active_version === "landing") {
+    window.location.replace("/landing.html");
+    return <div className="min-h-screen bg-background" />;
+  }
+
+  // Avoid flashing the site while we don't know the active version
+  if (loadingSettings) {
+    return <div className="min-h-screen bg-background" />;
+  }
 
   // Get the 3 most recent courses
   const recentCourses = allCourses?.slice(0, 3) || [];

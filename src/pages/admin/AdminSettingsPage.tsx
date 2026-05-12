@@ -7,7 +7,8 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, Save, Palette, Image, MessageSquare, CreditCard, Plus, Trash2 } from "lucide-react";
+import { Loader2, Save, Palette, Image, MessageSquare, CreditCard, Plus, Trash2, Globe } from "lucide-react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { HeroSettingsCard } from "@/components/admin/HeroSettingsCard";
 import { ValuePropSettingsCard } from "@/components/admin/ValuePropSettingsCard";
 import { AboutSettingsCard } from "@/components/admin/AboutSettingsCard";
@@ -21,6 +22,7 @@ export default function AdminSettingsPage() {
   const [secondaryColor, setSecondaryColor] = useState("#262626");
   const [showTestimonials, setShowTestimonials] = useState(true);
   const [showSubscription, setShowSubscription] = useState(true);
+  const [activeVersion, setActiveVersion] = useState<"site" | "landing">("site");
 
   // Subscription fields
   const [subTitle, setSubTitle] = useState("");
@@ -67,6 +69,7 @@ export default function AdminSettingsPage() {
       setSecondaryColor(settings.secondary_color);
       setShowTestimonials(settings.show_testimonials);
       setShowSubscription(settings.show_subscription ?? true);
+      setActiveVersion((settings.active_version as "site" | "landing") || "site");
       setSubTitle(settings.subscription_title || "");
       setSubDescription(settings.subscription_description || "");
       setSubPrice(String(settings.subscription_price ?? ""));
@@ -108,6 +111,7 @@ export default function AdminSettingsPage() {
       secondary_color: secondaryColor,
       show_testimonials: showTestimonials,
       show_subscription: showSubscription,
+      active_version: activeVersion,
       subscription_title: subTitle || null,
       subscription_description: subDescription || null,
       subscription_price: subPrice ? Number(subPrice) : null,
@@ -160,6 +164,51 @@ export default function AdminSettingsPage() {
             Personalize a aparência e funcionalidades do seu site.
           </p>
         </div>
+
+        {/* Active Version */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Globe className="h-5 w-5" />
+              Versão Ativa do Site
+            </CardTitle>
+            <CardDescription>
+              Escolha qual versão é exibida quando alguém acessa a URL principal do projeto.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <RadioGroup
+              value={activeVersion}
+              onValueChange={(v) => setActiveVersion(v as "site" | "landing")}
+              className="grid gap-3 md:grid-cols-2"
+            >
+              <label
+                htmlFor="version-site"
+                className="flex items-start gap-3 rounded-lg border p-4 cursor-pointer hover:bg-muted/50 transition-colors"
+              >
+                <RadioGroupItem value="site" id="version-site" className="mt-1" />
+                <div>
+                  <p className="font-medium">Site completo</p>
+                  <p className="text-sm text-muted-foreground">
+                    Carrega o site Plots com todas as seções e páginas.
+                  </p>
+                </div>
+              </label>
+              <label
+                htmlFor="version-landing"
+                className="flex items-start gap-3 rounded-lg border p-4 cursor-pointer hover:bg-muted/50 transition-colors"
+              >
+                <RadioGroupItem value="landing" id="version-landing" className="mt-1" />
+                <div>
+                  <p className="font-medium">Landing page</p>
+                  <p className="text-sm text-muted-foreground">
+                    Carrega a versão landing.html (página única). Outras rotas, como /admin, continuam acessíveis.
+                  </p>
+                </div>
+              </label>
+            </RadioGroup>
+          </CardContent>
+        </Card>
 
         <div className="grid gap-6 md:grid-cols-2">
           {/* Logo Settings */}
