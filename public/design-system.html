@@ -577,6 +577,21 @@ img { max-width: 100%; display: block; }
   <div class="nav-section">Sistema</div>
   <a href="#temas">11 — Temas</a>
   <a href="#stack">12 — Stack</a>
+  <div class="nav-section">Landing</div>
+  <a href="#logo">13 — Logo</a>
+  <a href="#cursor">14 — Cursor</a>
+  <a href="#navbar">15 — Navbar</a>
+  <a href="#scroll-indicator">16 — Scroll Indicator</a>
+  <a href="#marquee-full">17 — Marquee</a>
+  <a href="#instructor-card">18 — Instructor Card</a>
+  <a href="#pillar-card">19 — Pillar Card</a>
+  <a href="#trilhas-card">20 — Trilhas Card</a>
+  <a href="#split-panel">21 — Split Panel</a>
+  <a href="#counter-strip">22 — Counter Strip</a>
+  <a href="#cta-strip">23 — CTA Strip</a>
+  <a href="#modal">24 — Modal</a>
+  <a href="#footer">25 — Footer</a>
+  <a href="#watermark">26 — Watermark</a>
 </nav>
 
 <main class="ds-main">
@@ -1279,6 +1294,651 @@ img { max-width: 100%; display: block; }
       <div style="padding:24px;background:var(--surface);"><p style="font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:4px;">Lucide React</p><p class="text-xs text-muted">Icon Library</p></div>
       <div style="padding:24px;background:var(--surface);"><p style="font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:4px;">Supabase</p><p class="text-xs text-muted">Backend + Auth</p></div>
       <div style="padding:24px;background:var(--surface);"><p style="font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:4px;">React Query</p><p class="text-xs text-muted">Server State</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     LANDING.HTML — COMPONENTES AUSENTES
+     ════════════════════════════════════════════════════════════════════════ -->
+
+<!-- ── 13 Logo ────────────────────────────────────────────────────────────── -->
+<section class="section" id="logo">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>13 — Logo</span>
+      <h2>Marca <em>Plots</em></h2>
+      <p>Logomark geométrico em SVG + wordmark serifado. O ícone é um "P" estilizado formado por um recorte quadrado.</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start;">
+
+      <!-- Mark only, dark bg -->
+      <div class="box" style="display:flex;flex-direction:column;gap:16px;align-items:center;min-width:160px;">
+        <p style="font-size:10px;font-family:monospace;color:var(--muted-fg);margin-bottom:4px;">Mark — fundo escuro</p>
+        <svg width="56" height="56" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="4" fill="#2B2BFF"/><path fill-rule="evenodd" clip-rule="evenodd" d="M8 8H24V16H32V32H16V24H8V8ZM16 16H24V24H16V16Z" fill="white"/></svg>
+        <p style="font-size:10px;font-family:monospace;color:var(--muted-fg);">rect rx=4 · fill primary<br/>path fill white</p>
+      </div>
+
+      <!-- Mark + wordmark -->
+      <div class="box" style="display:flex;flex-direction:column;gap:16px;align-items:center;min-width:200px;">
+        <p style="font-size:10px;font-family:monospace;color:var(--muted-fg);margin-bottom:4px;">Mark + Wordmark</p>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <svg width="28" height="28" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="4" fill="#2B2BFF"/><path fill-rule="evenodd" clip-rule="evenodd" d="M8 8H24V16H32V32H16V24H8V8ZM16 16H24V24H16V16Z" fill="white"/></svg>
+          <svg width="64" height="17" viewBox="0 0 90 24" fill="none"><text font-family="Cormorant Garamond,Georgia,serif" font-size="24" fill="white" y="21" letter-spacing="-0.5" font-weight="600">PLOTS</text></svg>
+        </div>
+        <p style="font-size:10px;font-family:monospace;color:var(--muted-fg);">Cormorant Garamond 600<br/>letter-spacing -0.5</p>
+      </div>
+
+      <!-- Mark sizes -->
+      <div class="box" style="display:flex;flex-direction:column;gap:12px;min-width:200px;">
+        <p style="font-size:10px;font-family:monospace;color:var(--muted-fg);margin-bottom:4px;">Tamanhos do mark</p>
+        <div style="display:flex;align-items:flex-end;gap:16px;">
+          <div style="text-align:center;">
+            <svg width="16" height="16" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="4" fill="#2B2BFF"/><path fill-rule="evenodd" clip-rule="evenodd" d="M8 8H24V16H32V32H16V24H8V8ZM16 16H24V24H16V16Z" fill="white"/></svg>
+            <p style="font-size:9px;color:var(--muted-fg);margin-top:4px;font-family:monospace;">16px</p>
+          </div>
+          <div style="text-align:center;">
+            <svg width="24" height="24" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="4" fill="#2B2BFF"/><path fill-rule="evenodd" clip-rule="evenodd" d="M8 8H24V16H32V32H16V24H8V8ZM16 16H24V24H16V16Z" fill="white"/></svg>
+            <p style="font-size:9px;color:var(--muted-fg);margin-top:4px;font-family:monospace;">24px</p>
+          </div>
+          <div style="text-align:center;">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="4" fill="#2B2BFF"/><path fill-rule="evenodd" clip-rule="evenodd" d="M8 8H24V16H32V32H16V24H8V8ZM16 16H24V24H16V16Z" fill="white"/></svg>
+            <p style="font-size:9px;color:var(--muted-fg);margin-top:4px;font-family:monospace;">40px</p>
+          </div>
+          <div style="text-align:center;">
+            <svg width="64" height="64" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="4" fill="#2B2BFF"/><path fill-rule="evenodd" clip-rule="evenodd" d="M8 8H24V16H32V32H16V24H8V8ZM16 16H24V24H16V16Z" fill="white"/></svg>
+            <p style="font-size:9px;color:var(--muted-fg);margin-top:4px;font-family:monospace;">64px</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Watermark use -->
+      <div class="box" style="display:flex;flex-direction:column;gap:12px;min-width:160px;position:relative;overflow:hidden;">
+        <p style="font-size:10px;font-family:monospace;color:var(--muted-fg);">Watermark (opacity .07)</p>
+        <div style="position:relative;height:80px;display:flex;align-items:center;justify-content:center;">
+          <svg style="opacity:.07;position:absolute;animation:cmWm 20s linear infinite;" width="120" height="120" viewBox="0 0 40 40" fill="none">
+            <rect width="40" height="40" rx="3" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M8 8H24V16H32V32H16V24H8V8ZM16 16H24V24H16V16Z" fill="#2B2BFF"/>
+          </svg>
+          <p style="position:relative;z-index:1;font-size:13px;color:var(--muted-fg);">Plano de fundo</p>
+        </div>
+        <p style="font-size:10px;font-family:monospace;color:var(--muted-fg);">rotate 40s linear infinite</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 14 Cursor ───────────────────────────────────────────────────────────── -->
+<section class="section" id="cursor">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>14 — Cursor Customizado</span>
+      <h2>Cursor <em>editorial</em></h2>
+      <p>Cursor personalizado: ponto sólido central + anel com lag de seguimento. Desativado em mobile.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+      <div class="box">
+        <p style="font-size:11px;font-family:monospace;color:var(--muted-fg);margin-bottom:16px;">Estado padrão</p>
+        <div style="position:relative;height:80px;display:flex;align-items:center;justify-content:center;gap:32px;">
+          <div style="position:relative;width:80px;height:80px;">
+            <!-- dot -->
+            <div style="position:absolute;width:5px;height:5px;background:white;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;"></div>
+            <!-- ring -->
+            <div style="position:absolute;width:32px;height:32px;border:1px solid rgba(255,255,255,.3);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+          </div>
+          <div style="font-size:11px;font-family:monospace;color:var(--muted-fg);line-height:2;">
+            <div>#cd: 5×5px · white · solid</div>
+            <div>#cr: 32×32px · border 1px white/30</div>
+          </div>
+        </div>
+      </div>
+      <div class="box">
+        <p style="font-size:11px;font-family:monospace;color:var(--muted-fg);margin-bottom:16px;">Hover em link/button</p>
+        <div style="position:relative;height:80px;display:flex;align-items:center;justify-content:center;gap:32px;">
+          <div style="position:relative;width:80px;height:80px;">
+            <div style="position:absolute;width:5px;height:5px;background:white;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;"></div>
+            <div style="position:absolute;width:52px;height:52px;border:1px solid var(--primary);background:rgba(43,43,255,.08);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);transition:all .4s;"></div>
+          </div>
+          <div style="font-size:11px;font-family:monospace;color:var(--muted-fg);line-height:2;">
+            <div>#cr: 52×52px (expand)</div>
+            <div>border-color: primary</div>
+            <div>bg: primary/8%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;">
+      <div>Lag do anel: rx += (mx - rx) * 0.12 por frame via requestAnimationFrame</div>
+      <div>Trigger: body:has(a:hover) #cr, body:has(button:hover) #cr { width:52px; height:52px }</div>
+      <div>Mobile: cursor:auto; #cd, #cr { display:none } em max-width:900px</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 15 Navbar ──────────────────────────────────────────────────────────── -->
+<section class="section" id="navbar">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>15 — Navbar</span>
+      <h2>Navegação <em>fixa</em></h2>
+      <p>Sticky no topo. Ao rolar, comprime e adiciona backdrop-blur com fundo semi-transparente.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <!-- Estado padrão -->
+      <div>
+        <p style="font-size:10px;font-family:monospace;color:var(--muted-fg);margin-bottom:8px;">Estado padrão (topo da página)</p>
+        <div style="position:relative;height:72px;background:transparent;border:1px solid var(--border);border-radius:2px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;overflow:hidden;">
+          <div class="editorial-grid" style="position:absolute;inset:0;opacity:.3;pointer-events:none;"></div>
+          <div style="display:flex;align-items:center;gap:10px;position:relative;">
+            <svg width="22" height="22" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="4" fill="#2B2BFF"/><path fill-rule="evenodd" clip-rule="evenodd" d="M8 8H24V16H32V32H16V24H8V8ZM16 16H24V24H16V16Z" fill="white"/></svg>
+            <svg width="52" height="14" viewBox="0 0 90 24" fill="none"><text font-family="Cormorant Garamond,serif" font-size="24" fill="white" y="21" letter-spacing="-0.5" font-weight="600">PLOTS</text></svg>
+          </div>
+          <div style="display:flex;align-items:center;gap:36px;position:relative;">
+            <a style="font-size:12px;font-weight:500;letter-spacing:.5px;color:rgba(255,255,255,.42);">Para quem</a>
+            <a style="font-size:12px;font-weight:500;letter-spacing:.5px;color:rgba(255,255,255,.42);">Trilhas</a>
+            <button class="btn btn-sm btn-white btn-sweep" style="cursor:default;"><span>Participar</span></button>
+          </div>
+        </div>
+        <p style="margin-top:6px;font-size:10px;font-family:monospace;color:var(--muted-fg);">padding: 28px 60px · background: transparent</p>
+      </div>
+      <!-- Estado scrolled -->
+      <div>
+        <p style="font-size:10px;font-family:monospace;color:var(--muted-fg);margin-bottom:8px;">Estado scrolled (.s)</p>
+        <div style="position:relative;height:52px;background:rgba(8,8,8,.92);border:1px solid rgba(255,255,255,.05);border-radius:2px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;backdrop-filter:blur(18px);">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <svg width="18" height="18" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="4" fill="#2B2BFF"/><path fill-rule="evenodd" clip-rule="evenodd" d="M8 8H24V16H32V32H16V24H8V8ZM16 16H24V24H16V16Z" fill="white"/></svg>
+            <svg width="48" height="13" viewBox="0 0 90 24" fill="none"><text font-family="Cormorant Garamond,serif" font-size="24" fill="white" y="21" letter-spacing="-0.5" font-weight="600">PLOTS</text></svg>
+          </div>
+          <div style="display:flex;align-items:center;gap:36px;">
+            <a style="font-size:12px;font-weight:500;letter-spacing:.5px;color:rgba(255,255,255,.42);">Para quem</a>
+            <a style="font-size:12px;font-weight:500;letter-spacing:.5px;color:rgba(255,255,255,.42);">Trilhas</a>
+            <button class="btn btn-sm btn-white btn-sweep" style="cursor:default;"><span>Participar</span></button>
+          </div>
+        </div>
+        <p style="margin-top:6px;font-size:10px;font-family:monospace;color:var(--muted-fg);">padding: 15px 60px · background: rgba(8,8,8,.92) · backdrop-filter: blur(18px) · border-bottom: 1px solid rgba(255,255,255,.05)</p>
+      </div>
+    </div>
+    <div style="margin-top:16px;padding:16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;">
+      <div>Trigger: window.scrollY &gt; 40 → nav.classList.add('s')</div>
+      <div>Transição: padding .5s cubic-bezier(0.16,1,0.3,1) + background .4s</div>
+      <div>Nav links: font-size 12px · font-weight 500 · letter-spacing .5px · color rgba(255,255,255,.42) → white no hover</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 16 Scroll Indicator ────────────────────────────────────────────────── -->
+<section class="section" id="scroll-indicator">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>16 — Scroll Indicator</span>
+      <h2>Indicador de <em>scroll</em></h2>
+      <p>Aparece no rodapé do hero. Linha vertical pulsante com label uppercase.</p>
+    </div>
+    <div style="display:flex;gap:48px;align-items:flex-start;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <span style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.2);font-family:'Space Grotesk',sans-serif;font-weight:600;">Role</span>
+        <div style="width:1px;height:40px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.3));animation:scroll-line 1.8s ease-in-out infinite;"></div>
+      </div>
+      <div style="font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:2;margin-top:4px;">
+        <div>Label: 10px · 3px letter-spacing · uppercase · white/20</div>
+        <div>Linha: 1×40px · linear-gradient(transparent → white/30)</div>
+        <div>Animação: scroll-line 1.8s ease-in-out infinite</div>
+        <div>scaleY: 0→1 (origin top) → 0 (origin bottom)</div>
+        <div>Entrada: opacity 0, animation delay 1.5s após hero load</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 17 Marquee completo ────────────────────────────────────────────────── -->
+<section class="section" id="marquee-full">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>17 — Marquee</span>
+      <h2>Faixa <em>deslizante</em></h2>
+      <p>Separa seções. Itens em uppercase com separador ✦ azul. Pausa no hover.</p>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);padding:18px 0;overflow:hidden;margin-bottom:24px;">
+      <div style="display:flex;animation:marquee 18s linear infinite;white-space:nowrap;">
+        <span style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.18);padding:0 48px;flex-shrink:0;font-family:'Space Grotesk',sans-serif;"><span style="color:#2B2BFF;">✦</span> Estratégia de Produto</span>
+        <span style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.18);padding:0 48px;flex-shrink:0;font-family:'Space Grotesk',sans-serif;"><span style="color:#2B2BFF;">✦</span> Product Design</span>
+        <span style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.18);padding:0 48px;flex-shrink:0;font-family:'Space Grotesk',sans-serif;"><span style="color:#2B2BFF;">✦</span> Design Leadership</span>
+        <span style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.18);padding:0 48px;flex-shrink:0;font-family:'Space Grotesk',sans-serif;"><span style="color:#2B2BFF;">✦</span> UX Research</span>
+        <span style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.18);padding:0 48px;flex-shrink:0;font-family:'Space Grotesk',sans-serif;"><span style="color:#2B2BFF;">✦</span> Design Systems</span>
+        <span style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.18);padding:0 48px;flex-shrink:0;font-family:'Space Grotesk',sans-serif;"><span style="color:#2B2BFF;">✦</span> Growth & Métricas</span>
+        <!-- duplicated for seamless loop -->
+        <span style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.18);padding:0 48px;flex-shrink:0;font-family:'Space Grotesk',sans-serif;"><span style="color:#2B2BFF;">✦</span> Estratégia de Produto</span>
+        <span style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.18);padding:0 48px;flex-shrink:0;font-family:'Space Grotesk',sans-serif;"><span style="color:#2B2BFF;">✦</span> Product Design</span>
+        <span style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.18);padding:0 48px;flex-shrink:0;font-family:'Space Grotesk',sans-serif;"><span style="color:#2B2BFF;">✦</span> Design Leadership</span>
+        <span style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.18);padding:0 48px;flex-shrink:0;font-family:'Space Grotesk',sans-serif;"><span style="color:#2B2BFF;">✦</span> UX Research</span>
+        <span style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.18);padding:0 48px;flex-shrink:0;font-family:'Space Grotesk',sans-serif;"><span style="color:#2B2BFF;">✦</span> Design Systems</span>
+        <span style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.18);padding:0 48px;flex-shrink:0;font-family:'Space Grotesk',sans-serif;"><span style="color:#2B2BFF;">✦</span> Growth & Métricas</span>
+      </div>
+    </div>
+    <div style="padding:16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;">
+      <div>Container: border-top/bottom 1px rgba(255,255,255,.06) · padding 18px 0 · overflow:hidden</div>
+      <div>Item: font-size 11px · 3px letter-spacing · uppercase · white/18 · padding 0 48px</div>
+      <div>Separador ✦: color primary (Electric Blue)</div>
+      <div>Hover item: color white/60 (transition .3s)</div>
+      <div>Pause: .mt:hover { animation-play-state: paused }</div>
+      <div>Loop: conteúdo duplicado, translateX(-50%) · 24s linear infinite</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 18 Instructor Card ─────────────────────────────────────────────────── -->
+<section class="section" id="instructor-card">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>18 — Instructor Card</span>
+      <h2>Card de <em>instrutor</em></h2>
+      <p>Scroll horizontal com cursor grab. Hover: scale 1.03, overlay azul, CTA desliza de baixo.</p>
+    </div>
+    <div style="display:flex;gap:16px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none;">
+      <!-- Card 1 -->
+      <div class="inst-card-demo" style="flex-shrink:0;width:220px;height:300px;border-radius:4px;position:relative;overflow:hidden;background:var(--surface);border:1px solid var(--border);">
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1a1a2e,#0d0d1a);"></div>
+        <!-- initial letter watermark -->
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);font-family:'Cormorant Garamond',serif;font-size:120px;font-weight:400;color:rgba(255,255,255,.07);line-height:1;z-index:1;pointer-events:none;">A</div>
+        <!-- overlay gradient -->
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),rgba(0,0,0,.2) 60%,transparent);z-index:2;"></div>
+        <!-- blue hover overlay (shown static for demo) -->
+        <div style="position:absolute;inset:0;background:rgba(43,43,255,.15);opacity:0;z-index:3;" class="ic-hover-demo"></div>
+        <!-- info -->
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:20px 16px;z-index:4;">
+          <div style="font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px;">Product Design</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:white;line-height:1.1;">Ana Cardoso</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.4);margin-top:4px;">Senior Designer · Nubank</div>
+          <!-- CTA — hidden by default, revealed on hover -->
+          <div style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--primary);margin-top:10px;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s;" class="ic-cta-demo">Ver perfil →</div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="inst-card-demo" style="flex-shrink:0;width:220px;height:300px;border-radius:4px;position:relative;overflow:hidden;background:var(--surface);border:1px solid var(--border);">
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1a0d0d,#0d1a0d);"></div>
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);font-family:'Cormorant Garamond',serif;font-size:120px;font-weight:400;color:rgba(255,255,255,.07);line-height:1;z-index:1;">B</div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),rgba(0,0,0,.2) 60%,transparent);z-index:2;"></div>
+        <div style="position:absolute;inset:0;background:rgba(43,43,255,.15);opacity:0;z-index:3;" class="ic-hover-demo"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:20px 16px;z-index:4;">
+          <div style="font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px;">Estratégia</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:white;line-height:1.1;">Bruno Meireles</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.4);margin-top:4px;">Head of Product · iFood</div>
+          <div style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--primary);margin-top:10px;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s;" class="ic-cta-demo">Ver perfil →</div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="inst-card-demo" style="flex-shrink:0;width:220px;height:300px;border-radius:4px;position:relative;overflow:hidden;background:var(--surface);border:1px solid var(--border);">
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0d1a1a,#1a1a0d);"></div>
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);font-family:'Cormorant Garamond',serif;font-size:120px;font-weight:400;color:rgba(255,255,255,.07);line-height:1;z-index:1;">C</div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),rgba(0,0,0,.2) 60%,transparent);z-index:2;"></div>
+        <div style="position:absolute;inset:0;background:rgba(43,43,255,.15);opacity:0;z-index:3;" class="ic-hover-demo"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:20px 16px;z-index:4;">
+          <div style="font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px;">Design Leadership</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:white;line-height:1.1;">Camila Dutra</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.4);margin-top:4px;">Design Lead · Itaú</div>
+          <div style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--primary);margin-top:10px;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s;" class="ic-cta-demo">Ver perfil →</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:16px;padding:16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;">
+      <div>Dimensões: 260×340px (desktop) · 220×290px (mobile) · border-radius: 4px</div>
+      <div>Hover: scale(1.03) · .ic-bg scale(1.08) · overlay blue rgba(43,43,255,.15) opacity 0→1</div>
+      <div>Initial letter: font-serif 120px · white/7 · posição translate(-50%,-60%)</div>
+      <div>CTA: opacity 0 + translateY(8px) → 1/0 no hover · 350ms</div>
+      <div>Scroll: overflow-x:auto · scrollbar-width:none · cursor:grab/:active:grabbing</div>
+      <div>Stagger entrada: opacity 0 + translateY(32px) scale(.97) → animado com .crd-on</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 19 Pillar Card ─────────────────────────────────────────────────────── -->
+<section class="section" id="pillar-card">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>19 — Pillar Card</span>
+      <h2>Card de <em>pilar</em></h2>
+      <p>Grid 3 colunas com gap de 1px (linha visível). Número azul, título em clip-reveal, linha crescente no hover.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.07);margin-bottom:24px;">
+      <div class="pillar-card-demo" style="background:var(--surface);padding:48px 40px;position:relative;overflow:hidden;cursor:default;transition:background .35s;" onmouseenter="this.style.background='#1c1c1c';this.querySelector('.pline').style.width='100%'" onmouseleave="this.style.background='var(--surface)';this.querySelector('.pline').style.width='0'">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:12px;font-weight:400;letter-spacing:2px;color:var(--primary);margin-bottom:28px;display:block;">01</span>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2vw,26px);font-weight:600;color:white;line-height:1.1;text-transform:uppercase;letter-spacing:-.3px;margin-bottom:16px;">Professores que praticam</div>
+        <p style="font-size:14px;line-height:1.7;color:rgba(255,255,255,.38);font-weight:300;">Cada instrutor é um profissional ativo no mercado. Nada de teoria desconectada da realidade.</p>
+        <div class="pline" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--primary);transition:width .5s cubic-bezier(0.16,1,0.3,1);"></div>
+      </div>
+      <div class="pillar-card-demo" style="background:var(--surface);padding:48px 40px;position:relative;overflow:hidden;cursor:default;transition:background .35s;" onmouseenter="this.style.background='#1c1c1c';this.querySelector('.pline').style.width='100%'" onmouseleave="this.style.background='var(--surface)';this.querySelector('.pline').style.width='0'">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:12px;font-weight:400;letter-spacing:2px;color:var(--primary);margin-bottom:28px;display:block;">02</span>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2vw,26px);font-weight:600;color:white;line-height:1.1;text-transform:uppercase;letter-spacing:-.3px;margin-bottom:16px;">Profundidade, não volume</div>
+        <p style="font-size:14px;line-height:1.7;color:rgba(255,255,255,.38);font-weight:300;">Cursos focados, densos e diretos. Feitos para quem valoriza o tempo e quer ir fundo num tema.</p>
+        <div class="pline" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--primary);transition:width .5s cubic-bezier(0.16,1,0.3,1);"></div>
+      </div>
+      <div class="pillar-card-demo" style="background:var(--surface);padding:48px 40px;position:relative;overflow:hidden;cursor:default;transition:background .35s;" onmouseenter="this.style.background='#1c1c1c';this.querySelector('.pline').style.width='100%'" onmouseleave="this.style.background='var(--surface)';this.querySelector('.pline').style.width='0'">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:12px;font-weight:400;letter-spacing:2px;color:var(--primary);margin-bottom:28px;display:block;">03</span>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2vw,26px);font-weight:600;color:white;line-height:1.1;text-transform:uppercase;letter-spacing:-.3px;margin-bottom:16px;">Comunidade real</div>
+        <p style="font-size:14px;line-height:1.7;color:rgba(255,255,255,.38);font-weight:300;">Conectamos alunos e professores numa rede ativa de profissionais que se ajudam e crescem juntos.</p>
+        <div class="pline" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--primary);transition:width .5s cubic-bezier(0.16,1,0.3,1);"></div>
+      </div>
+    </div>
+    <div style="padding:16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;">
+      <div>Grid: repeat(3,1fr) · gap 1px · background rgba(255,255,255,.07) — gap vira linha visível</div>
+      <div>Número: Cormorant 12px · 2px letter-spacing · color primary</div>
+      <div>Título: uppercase · clip-path reveal (.9s, delay escalado por filho)</div>
+      <div>Desc: fade-up com delay escalonado</div>
+      <div>Hover: background #1c1c1c · linha azul 2px crescendo width 0→100% (.5s)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 20 Trilhas Card ────────────────────────────────────────────────────── -->
+<section class="section" id="trilhas-card">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>20 — Trilhas Card</span>
+      <h2>Card de <em>trilha</em></h2>
+      <p>Número fantasma gigante no canto. Descrição e arrow revelam-se no hover. Area vira azul.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06);margin-bottom:24px;">
+      <div style="background:var(--surface);padding:48px 40px;position:relative;overflow:hidden;cursor:default;transition:background .4s;" onmouseenter="this.style.background='#1d1d1d';this.querySelector('.ta').style.color='var(--primary)';this.querySelector('.td').style.maxHeight='80px';this.querySelector('.td').style.opacity='1';this.querySelector('.tarr').style.borderColor='var(--primary)';this.querySelector('.tarr').style.background='var(--primary)';this.querySelector('.tarr').style.color='white';this.querySelector('.tnum').style.color='rgba(43,43,255,.15)';this.querySelector('.tnum').style.transform='scale(1.1)'" onmouseleave="this.style.background='var(--surface)';this.querySelector('.ta').style.color='rgba(255,255,255,.25)';this.querySelector('.td').style.maxHeight='0';this.querySelector('.td').style.opacity='0';this.querySelector('.tarr').style.borderColor='rgba(255,255,255,.1)';this.querySelector('.tarr').style.background='transparent';this.querySelector('.tarr').style.color='rgba(255,255,255,.2)';this.querySelector('.tnum').style.color='rgba(255,255,255,.04)';this.querySelector('.tnum').style.transform='scale(1)'">
+        <div class="tnum" style="font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:400;color:rgba(255,255,255,.04);position:absolute;top:16px;right:24px;line-height:1;pointer-events:none;transition:color .4s,transform .5s cubic-bezier(0.16,1,0.3,1);">01</div>
+        <div class="ta" style="font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:20px;transition:color .3s;">Product Design</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2.2vw,30px);font-weight:500;color:white;line-height:1.1;margin-bottom:16px;">Forma e Intenção</div>
+        <div class="td" style="font-size:13px;line-height:1.7;color:rgba(255,255,255,.35);max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(0.16,1,0.3,1),opacity .4s;opacity:0;font-weight:300;">Do conceito ao pixel — com propósito estratégico em cada decisão visual.</div>
+        <div class="tarr" style="position:absolute;bottom:32px;right:32px;width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.2);transition:border-color .3s,color .3s,background .3s;font-size:14px;">→</div>
+      </div>
+      <div style="background:var(--surface);padding:48px 40px;position:relative;overflow:hidden;cursor:default;transition:background .4s;" onmouseenter="this.style.background='#1d1d1d';this.querySelector('.ta').style.color='var(--primary)';this.querySelector('.td').style.maxHeight='80px';this.querySelector('.td').style.opacity='1';this.querySelector('.tarr').style.borderColor='var(--primary)';this.querySelector('.tarr').style.background='var(--primary)';this.querySelector('.tarr').style.color='white';this.querySelector('.tnum').style.color='rgba(43,43,255,.15)';this.querySelector('.tnum').style.transform='scale(1.1)'" onmouseleave="this.style.background='var(--surface)';this.querySelector('.ta').style.color='rgba(255,255,255,.25)';this.querySelector('.td').style.maxHeight='0';this.querySelector('.td').style.opacity='0';this.querySelector('.tarr').style.borderColor='rgba(255,255,255,.1)';this.querySelector('.tarr').style.background='transparent';this.querySelector('.tarr').style.color='rgba(255,255,255,.2)';this.querySelector('.tnum').style.color='rgba(255,255,255,.04)';this.querySelector('.tnum').style.transform='scale(1)'">
+        <div class="tnum" style="font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:400;color:rgba(255,255,255,.04);position:absolute;top:16px;right:24px;line-height:1;pointer-events:none;transition:color .4s,transform .5s cubic-bezier(0.16,1,0.3,1);">02</div>
+        <div class="ta" style="font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:20px;transition:color .3s;">Estratégia</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2.2vw,30px);font-weight:500;color:white;line-height:1.1;margin-bottom:16px;">Produto com Propósito</div>
+        <div class="td" style="font-size:13px;line-height:1.7;color:rgba(255,255,255,.35);max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(0.16,1,0.3,1),opacity .4s;opacity:0;font-weight:300;">Visão sistêmica de produto — da descoberta ao lançamento.</div>
+        <div class="tarr" style="position:absolute;bottom:32px;right:32px;width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.2);transition:border-color .3s,color .3s,background .3s;font-size:14px;">→</div>
+      </div>
+      <div style="background:var(--surface);padding:48px 40px;position:relative;overflow:hidden;cursor:default;transition:background .4s;" onmouseenter="this.style.background='#1d1d1d';this.querySelector('.ta').style.color='var(--primary)';this.querySelector('.td').style.maxHeight='80px';this.querySelector('.td').style.opacity='1';this.querySelector('.tarr').style.borderColor='var(--primary)';this.querySelector('.tarr').style.background='var(--primary)';this.querySelector('.tarr').style.color='white';this.querySelector('.tnum').style.color='rgba(43,43,255,.15)';this.querySelector('.tnum').style.transform='scale(1.1)'" onmouseleave="this.style.background='var(--surface)';this.querySelector('.ta').style.color='rgba(255,255,255,.25)';this.querySelector('.td').style.maxHeight='0';this.querySelector('.td').style.opacity='0';this.querySelector('.tarr').style.borderColor='rgba(255,255,255,.1)';this.querySelector('.tarr').style.background='transparent';this.querySelector('.tarr').style.color='rgba(255,255,255,.2)';this.querySelector('.tnum').style.color='rgba(255,255,255,.04)';this.querySelector('.tnum').style.transform='scale(1)'">
+        <div class="tnum" style="font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:400;color:rgba(255,255,255,.04);position:absolute;top:16px;right:24px;line-height:1;pointer-events:none;transition:color .4s,transform .5s cubic-bezier(0.16,1,0.3,1);">03</div>
+        <div class="ta" style="font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:20px;transition:color .3s;">Design Leadership</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2.2vw,30px);font-weight:500;color:white;line-height:1.1;margin-bottom:16px;">Lidere com Clareza</div>
+        <div class="td" style="font-size:13px;line-height:1.7;color:rgba(255,255,255,.35);max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(0.16,1,0.3,1),opacity .4s;opacity:0;font-weight:300;">Gestão de times criativos com visão de negócio e cultura de excelência.</div>
+        <div class="tarr" style="position:absolute;bottom:32px;right:32px;width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.2);transition:border-color .3s,color .3s,background .3s;font-size:14px;">→</div>
+      </div>
+    </div>
+    <div style="padding:16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;">
+      <div>Número fantasma: Cormorant 80px · white/4 → blue/15 no hover · scale(1.1) no hover</div>
+      <div>Area label: white/25 → primary no hover · 3s transition</div>
+      <div>Descrição: max-height 0→80px + opacity 0→1 no hover · .5s cubic-bezier</div>
+      <div>Arrow: border-radius 50% · border white/10 → primary fill no hover</div>
+      <div>Stagger entrada: opacity + translateY(28px) · .crd-on por IntersectionObserver</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 21 Split Panel ─────────────────────────────────────────────────────── -->
+<section class="section" id="split-panel">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>21 — Split Panel</span>
+      <h2>Painel <em>dividido</em></h2>
+      <p>Dois painéis lado a lado: fundo creme (light) e fundo escuro (dark). Para Quem.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;margin-bottom:24px;">
+      <!-- Light panel -->
+      <div style="background:var(--cream);padding:64px 48px;display:flex;flex-direction:column;gap:40px;">
+        <div>
+          <div style="font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(0,0,0,.35);margin-bottom:20px;font-family:'Space Grotesk',sans-serif;">Para quem quer aprender</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,52px);font-weight:500;line-height:.93;letter-spacing:-1.5px;color:#1a1310;margin-bottom:32px;">Saia do operacional. <em style="color:var(--primary);">Pense produto.</em></h3>
+          <div style="display:flex;flex-direction:column;gap:0;">
+            <div style="display:flex;gap:18px;padding:16px 0;border-top:1px solid rgba(0,0,0,.1);border-bottom:1px solid rgba(0,0,0,.1);">
+              <span style="font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(0,0,0,.2);flex-shrink:0;padding-top:2px;">01</span>
+              <div style="font-size:13px;line-height:1.65;color:rgba(0,0,0,.65);"><strong style="font-weight:600;display:block;margin-bottom:2px;color:#1a1310;">Designers e PMs em evolução</strong>Você quer pensar mais estratégico, não só executar.</div>
+            </div>
+          </div>
+        </div>
+        <a style="display:inline-flex;align-items:center;gap:12px;padding:14px 28px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;background:#1a1310;color:white;border-radius:1px;font-family:'Space Grotesk',sans-serif;max-width:fit-content;">Quero aprender →</a>
+      </div>
+      <!-- Dark panel -->
+      <div style="background:#0a0a0a;padding:64px 48px;display:flex;flex-direction:column;gap:40px;">
+        <div>
+          <div style="font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--primary);margin-bottom:20px;font-family:'Space Grotesk',sans-serif;">Para quem quer ensinar</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,52px);font-weight:500;line-height:.93;letter-spacing:-1.5px;color:white;margin-bottom:32px;">Você já sabe. <em>Passa adiante.</em></h3>
+          <div style="display:flex;flex-direction:column;gap:0;">
+            <div style="display:flex;gap:18px;padding:16px 0;border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07);">
+              <span style="font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(255,255,255,.18);flex-shrink:0;padding-top:2px;">01</span>
+              <div style="font-size:13px;line-height:1.65;color:rgba(255,255,255,.55);"><strong style="font-weight:600;display:block;margin-bottom:2px;color:white;">Líderes com experiência real</strong>Você tem bagagem que o mercado precisa.</div>
+            </div>
+          </div>
+        </div>
+        <a style="display:inline-flex;align-items:center;gap:12px;padding:14px 28px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;background:var(--primary);color:white;border-radius:1px;font-family:'Space Grotesk',sans-serif;max-width:fit-content;">Quero ensinar →</a>
+      </div>
+    </div>
+    <div style="padding:16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;">
+      <div>Grid: 1fr 1fr (sem gap — painéis colados)</div>
+      <div>Painel light: background cream (#F2EDE6) · texto #1a1310 · em em azul · CTA dark background</div>
+      <div>Painel dark: background #0a0a0a · em em cream · CTA primary background</div>
+      <div>Itens: border-top/bottom · número em Cormorant · stagger reveal por translateX(-16px)</div>
+      <div>Min-height: 600px (desktop)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 22 Counter Strip ───────────────────────────────────────────────────── -->
+<section class="section" id="counter-strip">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>22 — Counter Strip</span>
+      <h2>Faixa de <em>números</em></h2>
+      <p>Números grandes com clip-path reveal de baixo para cima. Barra azul cresce da esquerda. Label em uppercase.</p>
+    </div>
+    <div style="display:flex;gap:0;border:1px solid rgba(255,255,255,.07);border-radius:2px;overflow:hidden;margin-bottom:24px;">
+      <div style="flex:1;padding:28px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.07);position:relative;overflow:hidden;">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,56px);font-weight:600;color:white;line-height:1;display:block;">+3.200</span>
+        <span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:8px;display:block;font-family:'Space Grotesk',sans-serif;">Alunos ativos</span>
+        <div style="position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--primary);transform-origin:left;transform:scaleX(1);transition:transform 1.4s cubic-bezier(0.16,1,0.3,1) .4s;"></div>
+      </div>
+      <div style="flex:1;padding:28px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.07);position:relative;overflow:hidden;">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,56px);font-weight:600;color:white;line-height:1;display:block;">48</span>
+        <span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:8px;display:block;font-family:'Space Grotesk',sans-serif;">Instrutores</span>
+        <div style="position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--primary);transform-origin:left;transform:scaleX(1);transition:transform 1.4s cubic-bezier(0.16,1,0.3,1) .52s;"></div>
+      </div>
+      <div style="flex:1;padding:28px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.07);position:relative;overflow:hidden;">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,56px);font-weight:600;color:white;line-height:1;display:block;">120+</span>
+        <span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:8px;display:block;font-family:'Space Grotesk',sans-serif;">Horas de conteúdo</span>
+        <div style="position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--primary);transform-origin:left;transform:scaleX(1);transition:transform 1.4s cubic-bezier(0.16,1,0.3,1) .64s;"></div>
+      </div>
+      <div style="flex:1;padding:28px 20px;text-align:center;position:relative;overflow:hidden;">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,56px);font-weight:600;color:white;line-height:1;display:block;">8</span>
+        <span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:8px;display:block;font-family:'Space Grotesk',sans-serif;">Trilhas</span>
+        <div style="position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--primary);transform-origin:left;transform:scaleX(1);transition:transform 1.4s cubic-bezier(0.16,1,0.3,1) .76s;"></div>
+      </div>
+    </div>
+    <div style="padding:16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;">
+      <div>Container: border 1px rgba(255,255,255,.07) · border-radius 2px · overflow hidden</div>
+      <div>Número: Cormorant 600 · clip-path inset(0 0 100%→0% 0) no scroll</div>
+      <div>Label: 11px · 2px letter-spacing · uppercase · white/30 · opacity 0→1 com delay .6s</div>
+      <div>Barra: 2px height · primary · scaleX(0→1) · stagger delay 0.12s por item · 1.4s</div>
+      <div>Separador: border-right 1px rgba(255,255,255,.07)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 23 CTA Strip ───────────────────────────────────────────────────────── -->
+<section class="section" id="cta-strip">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>23 — CTA Strip</span>
+      <h2>CTA Strip <em>azul</em></h2>
+      <p>Seção azul sólida com grid sutil branco 6% (60px) e dois botões: primary (branco) e secondary (outline transparente).</p>
+    </div>
+    <div style="background:var(--primary);padding:80px 60px;text-align:center;position:relative;overflow:hidden;border-radius:2px;margin-bottom:24px;">
+      <!-- Grid texture diferente: 60px, white 50% opacity mas só 6% da seção -->
+      <div style="position:absolute;inset:0;opacity:.06;background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;"></div>
+      <p style="font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:28px;font-family:'Space Grotesk',sans-serif;">A diferença está em quem ensina</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(48px,5.5vw,88px);font-weight:500;line-height:.93;letter-spacing:-2px;color:white;margin-bottom:20px;position:relative;">"Não aprendi com quem leu — aprendi com quem <em style="font-style:italic;color:var(--cream);">fez.</em>"</h2>
+      <p style="font-size:17px;color:rgba(255,255,255,.65);margin-bottom:40px;font-weight:300;max-width:480px;margin-left:auto;margin-right:auto;position:relative;">Esse é o espírito da Plots: conexão direta com profissionais que estão construindo os produtos que você usa todo dia.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;">
+        <button style="padding:16px 40px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;border-radius:1px;background:white;color:var(--primary);border:1px solid white;font-family:'Space Grotesk',sans-serif;cursor:default;transition:background .2s,color .2s;">Começar agora</button>
+        <button style="padding:16px 40px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;border-radius:1px;background:transparent;color:white;border:1px solid rgba(255,255,255,.3);font-family:'Space Grotesk',sans-serif;cursor:default;">Conhecer a Plots</button>
+      </div>
+    </div>
+    <div style="padding:16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;">
+      <div>Background: primary (#2B2BFF) sólido</div>
+      <div>Grid texture: 60px × 60px · white 50% opacity · seção a 6% opacity — diferente do editorial-grid (80px · 2.5%)</div>
+      <div>Btn primary: background white · color primary → hover: background ink · color white</div>
+      <div>Btn secondary: transparent · color white · border rgba(255,255,255,.3) → hover: border white</div>
+      <div>Hover btns: translateY(-2px) · .2s transition</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 24 Modal ───────────────────────────────────────────────────────────── -->
+<section class="section" id="modal">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>24 — Modal</span>
+      <h2>Modal com <em>tabs</em></h2>
+      <p>Backdrop blur 12px. Box com tabs, formulário com campos full-border e estado de sucesso.</p>
+    </div>
+    <div style="position:relative;display:flex;gap:24px;flex-wrap:wrap;">
+      <!-- Modal box static demo -->
+      <div style="background:#111;border:1px solid rgba(255,255,255,.1);border-radius:8px;width:100%;max-width:480px;padding:40px;position:relative;">
+        <button style="position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.07);border:none;color:rgba(255,255,255,.5);font-size:14px;cursor:default;display:flex;align-items:center;justify-content:center;">✕</button>
+        <!-- Tabs -->
+        <div style="display:flex;gap:0;margin-bottom:32px;border-bottom:1px solid rgba(255,255,255,.1);">
+          <button style="flex:1;padding:12px 0;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;background:none;border:none;color:white;cursor:default;position:relative;">Quero aprender
+            <span style="position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--primary);"></span>
+          </button>
+          <button style="flex:1;padding:12px 0;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;background:none;border:none;color:rgba(255,255,255,.35);cursor:default;">Quero ensinar</button>
+        </div>
+        <!-- Form -->
+        <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;color:white;margin-bottom:24px;letter-spacing:-.5px;">Entre para a lista</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+          <div>
+            <label style="display:block;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;color:rgba(255,255,255,.35);font-family:'Space Grotesk',sans-serif;">Nome</label>
+            <input type="text" placeholder="Seu nome" style="width:100%;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.07);color:white;font-family:'Space Grotesk',sans-serif;font-size:14px;padding:12px 16px;outline:none;border-radius:1px;" readonly />
+          </div>
+          <div>
+            <label style="display:block;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;color:rgba(255,255,255,.35);font-family:'Space Grotesk',sans-serif;">Sobrenome</label>
+            <input type="text" placeholder="Sobrenome" style="width:100%;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.07);color:white;font-family:'Space Grotesk',sans-serif;font-size:14px;padding:12px 16px;outline:none;border-radius:1px;" readonly />
+          </div>
+        </div>
+        <div style="margin-bottom:14px;">
+          <label style="display:block;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;color:rgba(255,255,255,.35);font-family:'Space Grotesk',sans-serif;">E-mail</label>
+          <input type="email" placeholder="voce@email.com" style="width:100%;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.07);color:white;font-family:'Space Grotesk',sans-serif;font-size:14px;padding:12px 16px;outline:none;border-radius:1px;" readonly />
+        </div>
+        <div style="margin-bottom:14px;">
+          <label style="display:block;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;color:rgba(255,255,255,.35);font-family:'Space Grotesk',sans-serif;">Área de interesse</label>
+          <select style="width:100%;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.07);color:rgba(255,255,255,.4);font-family:'Space Grotesk',sans-serif;font-size:14px;padding:12px 16px;outline:none;border-radius:1px;appearance:none;">
+            <option>Selecione...</option>
+            <option>Product Design</option>
+            <option>Estratégia de Produto</option>
+          </select>
+        </div>
+        <button style="width:100%;border:none;padding:16px;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:default;border-radius:1px;margin-top:8px;background:var(--primary);color:white;position:relative;overflow:hidden;">Quero participar →</button>
+      </div>
+
+      <!-- Success state -->
+      <div style="background:#111;border:1px solid rgba(255,255,255,.1);border-radius:8px;width:260px;padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
+        <div style="width:50px;height:50px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:18px;">✓</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:white;margin-bottom:8px;">Você está na lista!</div>
+        <p style="font-size:13px;color:rgba(255,255,255,.4);">Vamos te avisar assim que os cursos abrirem.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;padding:16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;">
+      <div>Backdrop: position fixed · background rgba(0,0,0,.85) · backdrop-filter blur(12px)</div>
+      <div>Box: background #111 · border rgba(255,255,255,.1) · border-radius 8px · max-width 520px</div>
+      <div>Tab ativo: color white · ::after 2px primary scaleX(0→1)</div>
+      <div>Campos: border 1px rgba(255,255,255,.09) · background rgba(255,255,255,.07) · focus: border primary</div>
+      <div>Label campo: 10px · 2px letter-spacing · uppercase · white/35 (diferente do EditorialInput que é bottom-only)</div>
+      <div>Sucesso: ícone circular primary · Cormorant heading · animação: scale-in + fade-in</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 25 Footer ──────────────────────────────────────────────────────────── -->
+<section class="section" id="footer">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>25 — Footer</span>
+      <h2>Rodapé <em>azul</em></h2>
+      <p>Footer em fundo primary com tagline + social links. Barra preta com copyright separada abaixo.</p>
+    </div>
+    <div style="border-radius:2px;overflow:hidden;margin-bottom:24px;">
+      <!-- Main footer -->
+      <div style="background:var(--primary);padding:56px 48px 40px;color:white;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:56px;flex-wrap:wrap;gap:24px;">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,52px);font-weight:500;line-height:.95;letter-spacing:-1px;max-width:500px;color:white;">A escola onde estratégia e design <em style="font-style:italic;color:rgba(255,255,255,.7);">se encontram.</em></h3>
+          <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end;">
+            <a style="color:rgba(255,255,255,.7);font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;font-family:'Space Grotesk',sans-serif;transition:color .2s;">Instagram</a>
+            <a style="color:rgba(255,255,255,.7);font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;font-family:'Space Grotesk',sans-serif;">LinkedIn</a>
+            <a style="color:rgba(255,255,255,.7);font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;font-family:'Space Grotesk',sans-serif;">Twitter</a>
+          </div>
+        </div>
+      </div>
+      <!-- Footer bar -->
+      <div style="background:#000;color:white;padding:16px 48px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+          <span style="font-size:11px;color:rgba(255,255,255,.55);letter-spacing:.3px;">© 2026 Plots. Todos os direitos reservados.</span>
+          <div style="display:flex;gap:24px;">
+            <a style="font-size:11px;color:rgba(255,255,255,.6);font-family:'Space Grotesk',sans-serif;">Privacidade</a>
+            <a style="font-size:11px;color:rgba(255,255,255,.6);font-family:'Space Grotesk',sans-serif;">Termos</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;">
+      <div>Footer principal: background primary · padding 72px 60px 56px</div>
+      <div>Tagline: Cormorant · em em rgba(255,255,255,.7) — não cream — para contraste no fundo azul</div>
+      <div>Social links: 12px · 2px letter-spacing · uppercase · white/70 → white hover</div>
+      <div>Barra: background #000 (preto puro) · padding 18px 60px</div>
+      <div>Copyright: 11px · white/55 · Privacidade/Termos: white/60</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 26 Watermark ───────────────────────────────────────────────────────── -->
+<section class="section" id="watermark">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>26 — Watermark</span>
+      <h2>Marca d'água <em>giratória</em></h2>
+      <p>Logomarca aplicada como elemento decorativo de fundo em duas seções da landing.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+      <!-- Manifesto watermark -->
+      <div class="box" style="position:relative;height:200px;overflow:hidden;">
+        <p style="font-size:10px;font-family:monospace;color:var(--muted-fg);margin-bottom:8px;position:relative;z-index:2;">Manifesto Blue — gira 40s · bottom-right</p>
+        <div style="position:absolute;bottom:-60px;right:-60px;opacity:.07;pointer-events:none;animation:cmWm 40s linear infinite;z-index:1;">
+          <svg width="280" height="280" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="3" fill="black"/><path fill-rule="evenodd" clip-rule="evenodd" d="M8 8H24V16H32V32H16V24H8V8ZM16 16H24V24H16V16Z" fill="#2B2BFF"/></svg>
+        </div>
+        <div style="position:absolute;inset:0;background:var(--primary);z-index:0;"></div>
+        <p style="position:relative;z-index:2;font-family:'Cormorant Garamond',serif;font-size:28px;padding-top:24px;">Aprender é um <em>verbo coletivo.</em></p>
+      </div>
+      <!-- Statement watermark -->
+      <div class="box" style="position:relative;height:200px;overflow:hidden;">
+        <p style="font-size:10px;font-family:monospace;color:var(--muted-fg);margin-bottom:8px;position:relative;z-index:2;">Statement — opacity .04→.07 no scroll · rotate 12deg scale 1.1</p>
+        <div style="position:absolute;bottom:-40px;right:-40px;opacity:.04;pointer-events:none;transform:rotate(12deg) scale(1.1);z-index:1;">
+          <svg width="240" height="240" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="3" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M8 8H24V16H32V32H16V24H8V8ZM16 16H24V24H16V16Z" fill="#2B2BFF"/></svg>
+        </div>
+        <p style="position:relative;z-index:2;font-family:'Cormorant Garamond',serif;font-size:24px;padding-top:24px;">A Plots nasceu de uma <em>frustração.</em></p>
+      </div>
+    </div>
+    <div style="padding:16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;">
+      <div>Manifesto: position absolute · bottom -60px right -60px · opacity .07 · animation rotate 40s linear infinite</div>
+      <div>Statement: position absolute · bottom -80px right -80px · opacity .04→.07 no scroll · transform rotate(12deg) scale(1.1)</div>
+      <div>Versão manifesto: fundo preto no SVG (contraste com bg azul)</div>
+      <div>Versão statement: fundo branco no SVG (contraste com bg dark)</div>
     </div>
   </div>
 </section>
