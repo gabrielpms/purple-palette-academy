@@ -213,7 +213,16 @@
     clip-path: inset(0 100% 0 0);
     transition: clip-path 0.9s cubic-bezier(0.16,1,0.3,1);
   }
-  .reveal-clip.is-visible { clip-path: inset(0 0 0 0); }
+  .reveal-clip.is-visible,
+  .is-visible .reveal-clip { clip-path: inset(0 0 0 0); }
+
+  .reveal-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal-up.is-visible,
+  .is-visible .reveal-up { opacity: 1; transform: translateY(0); }
 
   .reveal-up {
     opacity: 0;
