@@ -26,6 +26,7 @@ import AdminSettingsPage from "./pages/admin/AdminSettingsPage";
 import AdminTestimonialsPage from "./pages/admin/AdminTestimonialsPage";
 import AdminLeadsPage from "./pages/admin/AdminLeadsPage";
 import SubscriptionPage from "./pages/SubscriptionPage";
+import DesignSystemPage from "./pages/DesignSystemPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -123,6 +124,7 @@ const App = () => (
                 </ProtectedRoute>
               }
             />
+            <Route path="/design-system" element={<DesignSystemPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
