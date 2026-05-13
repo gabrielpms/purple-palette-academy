@@ -31,7 +31,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   };
 
   return (
-    <div className="min-h-screen bg-muted/30">
+    <div className="admin-theme min-h-screen bg-muted/30 text-foreground">
       {/* Header */}
       <header className="bg-card border-b sticky top-0 z-50">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
