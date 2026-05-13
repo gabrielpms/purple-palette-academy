@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Plots — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* ── Tokens ─────────────────────────────────────────────────────────────── */
+:root {
+  --background: #080808;
+  --foreground: #ffffff;
+  --surface:    #121212;
+  --surface-2:  #171717;
+  --muted:      #1c1c1c;
+  --border:     #1f1f1f;
+  --primary:    #2B2BFF;
+  --primary-fg: #ffffff;
+  --cream:      #F2EDE6;
+  --success:    #4DC877;
+  --destructive:#E53333;
+  --muted-fg:   #8C8C8C;
+  --blue-dark:  #0D0D99;
+  --blue-light: #8989FF;
+  --gold:       #F2EDE6;
+
+  --gradient-primary: linear-gradient(135deg, #2B2BFF 0%, #0D0D99 100%);
+  --gradient-subtle:  linear-gradient(180deg, #121212 0%, #080808 100%);
+  --gradient-dark:    linear-gradient(135deg, #0D0D0D 0%, #171717 100%);
+  --gradient-hero:    linear-gradient(180deg, #080808 0%, #0D0D0D 100%);
+
+  --shadow-sm:   0 2px  8px -2px  rgba(0,0,0,.4);
+  --shadow-md:   0 8px  24px -8px rgba(0,0,0,.5);
+  --shadow-lg:   0 16px 48px -12px rgba(0,0,0,.6);
+  --shadow-card: 0 4px  24px -8px rgba(0,0,0,.4);
+  --shadow-card-hover: 0 16px 48px -12px rgba(43,43,255,.25);
+  --shadow-glow: 0 0 60px -10px rgba(43,43,255,.45);
+
+  --ease: cubic-bezier(0.16,1,0.3,1);
+  --radius: 2px;
+}
+
+/* ── Reset ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* ── Typography ─────────────────────────────────────────────────────────── */
+.font-display, h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+}
+.font-display em, h1 em, h2 em, h3 em, h4 em {
+  font-style: italic;
+  color: var(--cream);
+}
+::selection { background: rgba(43,43,255,.4); color: #fff; }
+
+/* ── Layout ─────────────────────────────────────────────────────────────── */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 60px;
+}
+@media (max-width: 768px) { .container { padding: 0 24px; } }
+
+.section { padding: 80px 0; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 4px; }
+.grid-8 { display: grid; grid-template-columns: repeat(8,1fr); gap: 12px; }
+@media (max-width: 900px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+  .grid-8 { grid-template-columns: repeat(4,1fr); }
+}
+@media (max-width: 560px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .grid-8 { grid-template-columns: repeat(2,1fr); }
+}
+
+/* ── Utilities ──────────────────────────────────────────────────────────── */
+.label-upper {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.label-upper.muted { color: var(--muted-fg); }
+.label-upper.cream { color: var(--cream); }
+.label-upper .line {
+  width: 32px; height: 1px;
+  background: currentColor;
+  opacity: .4;
+  display: inline-block;
+}
+
+.section-header { margin-bottom: 48px; }
+.section-header .label-upper { margin-bottom: 16px; display: block; }
+.section-header h2 { font-size: 36px; margin-bottom: 12px; }
+.section-header p { color: var(--muted-fg); font-size: 14px; max-width: 480px; }
+
+.token-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-family: monospace;
+  background: var(--muted);
+  color: var(--primary);
+  border-radius: 2px;
+  border: 1px solid var(--border);
+}
+
+/* ── Editorial grid & glow ──────────────────────────────────────────────── */
+.editorial-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+.editorial-glow {
+  background: radial-gradient(circle, rgba(43,43,255,.32) 0%, rgba(43,43,255,.1) 40%, transparent 68%);
+  filter: blur(2px);
+}
+
+/* ── Sweep divider ──────────────────────────────────────────────────────── */
+.sweep-line {
+  display: block;
+  height: 1px;
+  background: rgba(255,255,255,.07);
+  position: relative;
+  overflow: hidden;
+}
+.sweep-line::after {
+  content: '';
+  position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  transition: left 1.2s var(--ease);
+}
+.sweep-line.visible::after { left: 200%; }
+
+/* ── Reveal animations ──────────────────────────────────────────────────── */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .8s var(--ease), transform .8s var(--ease);
+}
+.reveal-up.visible { opacity: 1; transform: translateY(0); }
+
+.reveal-clip {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path .9s var(--ease);
+}
+.reveal-clip.visible { clip-path: inset(0 0 0 0); }
+
+/* ── Keyframe animations ────────────────────────────────────────────────── */
+@keyframes glow-pulse {
+  0%,100% { opacity:.7; transform:translate(-50%,-55%) scale(1); }
+  50%      { opacity:1;  transform:translate(-50%,-58%) scale(1.06); }
+}
+@keyframes fade-in {
+  from { opacity:0; transform:translateY(10px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes fade-up {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes scale-in {
+  from { opacity:0; transform:scale(.95); }
+  to   { opacity:1; transform:scale(1); }
+}
+@keyframes shimmer {
+  from { background-position:200% 0; }
+  to   { background-position:-200% 0; }
+}
+@keyframes float {
+  0%,100% { transform:translateY(0); }
+  50%      { transform:translateY(-10px); }
+}
+@keyframes marquee {
+  0%   { transform:translateX(0); }
+  100% { transform:translateX(-50%); }
+}
+@keyframes scroll-line {
+  0%,100% { transform:scaleY(0); transform-origin:top; }
+  50%      { transform:scaleY(1); transform-origin:top; }
+  51%      { transform-origin:bottom; }
+}
+@keyframes clip-reveal {
+  from { clip-path:inset(0 100% 0 0); }
+  to   { clip-path:inset(0 0 0 0); }
+}
+@keyframes word-reveal {
+  from { transform:translateY(110%); }
+  to   { transform:translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sweep-line::after,
+  .reveal-up,
+  .reveal-clip { transition: none !important; }
+  .reveal-up   { opacity:1; transform:none; }
+  .reveal-clip { clip-path:inset(0 0 0 0); }
+}
+
+/* ── Btn sweep ──────────────────────────────────────────────────────────── */
+.btn-sweep { position:relative; overflow:hidden; }
+.btn-sweep::before {
+  content:'';
+  position:absolute; inset:0;
+  background:rgba(255,255,255,.15);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .4s var(--ease);
+  pointer-events:none;
+}
+.btn-sweep:hover::before { transform:scaleX(1); }
+
+/* ── Editorial button ───────────────────────────────────────────────────── */
+.btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  border-radius:2px;
+  border:none;
+  cursor:pointer;
+  transition:background .2s, color .2s, border-color .2s;
+}
+.btn span { position:relative; z-index:1; display:inline-flex; align-items:center; gap:8px; }
+.btn-sm  { padding:10px 20px; font-size:11px; }
+.btn-md  { padding:14px 28px; font-size:12px; }
+.btn-lg  { padding:16px 36px; font-size:13px; }
+
+.btn-white { background:#fff; color:#080808; }
+.btn-white:hover { background:var(--primary); color:#fff; }
+.btn-blue  { background:var(--primary); color:#fff; }
+.btn-blue:hover  { background:rgba(43,43,255,.9); }
+.btn-ghost { background:transparent; color:#fff; border:1px solid var(--border); }
+.btn-ghost:hover { border-color:var(--primary); color:var(--primary); }
+
+/* ── Section label ──────────────────────────────────────────────────────── */
+.section-label {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--primary);
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+}
+.section-label .divider {
+  width:32px; height:1px;
+  background:currentColor;
+  opacity:.4;
+}
+.section-label.cream { color:var(--cream); }
+.section-label.muted { color:var(--muted-fg); }
+
+/* ── Editorial input ────────────────────────────────────────────────────── */
+.editorial-input-wrap { position:relative; padding-top:20px; }
+.editorial-input-wrap label {
+  position:absolute; top:24px; left:0;
+  font-size:11px; font-weight:600;
+  letter-spacing:3px; text-transform:uppercase;
+  color:var(--muted-fg);
+  transition:top .25s var(--ease), font-size .25s, color .25s;
+  pointer-events:none;
+}
+.editorial-input-wrap input {
+  width:100%;
+  background:transparent;
+  border:none; border-bottom:1px solid var(--border);
+  color:#fff;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:15px;
+  padding:8px 0;
+  outline:none;
+  transition:border-color .25s;
+}
+.editorial-input-wrap input:focus { border-color:var(--primary); }
+.editorial-input-wrap input:focus + label,
+.editorial-input-wrap input:not(:placeholder-shown) + label {
+  top:0; font-size:10px; color:var(--primary);
+}
+/* swap label/input order in DOM for :focus+label trick */
+.editorial-input-wrap input { order:2; }
+.editorial-input-wrap label { order:1; position:relative; top:auto; left:auto; display:block; margin-bottom:4px; }
+.editorial-input-wrap { display:flex; flex-direction:column; }
+.editorial-input-wrap input:focus { border-color:var(--primary); }
+
+/* ── Color swatch ───────────────────────────────────────────────────────── */
+.color-swatch { border-radius:2px; overflow:hidden; border:1px solid var(--border); }
+.color-swatch .chip {
+  height:80px;
+  transition:height .3s var(--ease);
+}
+.color-swatch:hover .chip { height:112px; }
+.color-swatch .info {
+  padding:16px;
+  background:var(--surface);
+}
+.color-swatch .info .name  { font-size:13px; font-weight:600; margin-bottom:4px; }
+.color-swatch .info .hex   { font-family:monospace; font-size:11px; color:var(--muted-fg); }
+.color-swatch .info .hsl   { font-family:monospace; font-size:11px; color:var(--muted-fg); line-height:1.6; }
+.color-swatch .info .usage { font-family:monospace; font-size:10px; color:var(--primary); margin-top:4px; }
+
+/* ── Type specimen rows ─────────────────────────────────────────────────── */
+.type-row {
+  display:flex; align-items:baseline; gap:24px;
+  padding:12px 24px;
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  transition:background .15s;
+}
+.type-row:hover { background:var(--muted); }
+.type-row .meta {
+  width:200px; shrink:0; flex-shrink:0;
+  font-family:monospace; font-size:11px; color:var(--muted-fg);
+}
+.type-row .sample { font-family:'Cormorant Garamond',serif; }
+
+/* ── Shadow card ────────────────────────────────────────────────────────── */
+.shadow-card {
+  padding:24px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:2px;
+  transition:transform .3s var(--ease);
+}
+.shadow-card:hover { transform:scale(1.02); }
+.shadow-card .name  { font-family:monospace; font-size:11px; color:var(--primary); margin-bottom:6px; }
+.shadow-card .value { font-family:monospace; font-size:10px; color:var(--muted-fg); line-height:1.6; margin-bottom:12px; }
+
+/* ── Animation preview card ─────────────────────────────────────────────── */
+.anim-card {
+  padding:24px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:2px;
+}
+.anim-card:hover { border-color:rgba(43,43,255,.4); }
+.anim-card .anim-name { font-family:monospace; font-size:12px; color:var(--primary); margin-bottom:4px; }
+.anim-card .anim-dur  { font-family:monospace; font-size:10px; color:var(--muted-fg); margin-bottom:8px; }
+.anim-card .anim-desc { font-size:13px; color:rgba(255,255,255,.7); }
+
+/* ── Course card ────────────────────────────────────────────────────────── */
+.course-card {
+  display:flex; flex-direction:column;
+  border-radius:16px;
+  overflow:hidden;
+  background:var(--surface);
+  border:1px solid var(--border);
+  transition:border-color .3s, box-shadow .3s, transform .3s;
+  text-decoration:none; color:inherit;
+}
+.course-card:hover {
+  border-color:rgba(43,43,255,.2);
+  box-shadow:0 16px 48px -12px rgba(43,43,255,.2);
+}
+.course-card .thumb {
+  position:relative;
+  aspect-ratio:3/4;
+  overflow:hidden;
+  flex-shrink:0;
+}
+.course-card .thumb svg {
+  position:absolute; inset:0;
+  width:100%; height:100%;
+}
+.course-card .thumb .overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,.8) 0%, rgba(0,0,0,.3) 40%, transparent 100%);
+}
+.course-card .thumb .badges {
+  position:absolute; top:16px; left:16px;
+  display:flex; flex-wrap:wrap; gap:6px;
+}
+.badge {
+  display:inline-block;
+  padding:4px 12px;
+  border-radius:9999px;
+  font-size:11px; font-weight:600;
+}
+.badge-blue   { background:var(--primary); color:#fff; }
+.badge-amber  { background:#F59E0B; color:#fff; }
+.badge-red    { background:var(--destructive); color:#fff; }
+.badge-glass  { background:rgba(255,255,255,.15); color:#fff; backdrop-filter:blur(4px); }
+.course-card .thumb .title-overlay {
+  position:absolute; bottom:0; left:0; right:0;
+  padding:20px;
+}
+.course-card .thumb .title-overlay h3 {
+  font-size:20px; font-weight:700; color:#fff;
+  text-shadow:0 2px 8px rgba(0,0,0,.6);
+  line-height:1.2;
+}
+.course-card .body { padding:20px; display:flex; flex-direction:column; gap:8px; flex:1; }
+.course-card .instructor { display:flex; align-items:center; gap:8px; font-size:14px; font-weight:500; }
+.course-card .instructor .avatar {
+  width:24px; height:24px; border-radius:50%;
+  background:var(--gradient-primary);
+  display:flex; align-items:center; justify-content:center;
+  font-size:10px; font-weight:700; color:#fff; flex-shrink:0;
+}
+.course-card .description { font-size:13px; color:var(--muted-fg); line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.course-card .duration { display:flex; align-items:center; gap:6px; font-size:13px; color:var(--muted-fg); }
+.course-card .price-row { margin-top:auto; padding-top:12px; display:flex; align-items:flex-end; justify-content:space-between; }
+.course-card .price { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:700; color:var(--primary); }
+.course-card .price-old { font-size:11px; color:var(--muted-fg); text-decoration:line-through; margin-bottom:2px; }
+.course-card .price-coming { font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:700; color:#F59E0B; }
+
+/* Compact card */
+.course-card-compact {
+  display:flex; gap:16px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  padding:12px;
+  background:var(--surface);
+  transition:border-color .25s, background .25s;
+  text-decoration:none; color:inherit;
+}
+.course-card-compact:hover { border-color:rgba(43,43,255,.3); background:rgba(43,43,255,.04); }
+.course-card-compact .thumb {
+  position:relative;
+  width:112px; height:80px;
+  border-radius:8px;
+  overflow:hidden; flex-shrink:0;
+}
+.course-card-compact .thumb svg { position:absolute; inset:0; width:100%; height:100%; }
+.course-card-compact .info { display:flex; flex-direction:column; justify-content:space-between; flex:1; }
+.course-card-compact h4 { font-size:13px; font-family:'Cormorant Garamond',serif; font-weight:600; line-height:1.3; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.course-card-compact .bottom { display:flex; align-items:center; justify-content:space-between; }
+.course-card-compact .instructor-name { font-size:11px; color:var(--muted-fg); }
+.course-card-compact .price { font-family:'Cormorant Garamond',serif; font-weight:700; color:var(--primary); font-size:15px; }
+
+/* ── Block background previews ──────────────────────────────────────────── */
+.bg-preview { border-radius:2px; overflow:hidden; border:1px solid var(--border); }
+.bg-preview .preview-area {
+  height:160px; position:relative;
+  display:flex; align-items:center; justify-content:center;
+}
+.bg-preview .preview-area .preview-label {
+  position:relative; z-index:10;
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px; text-align:center; padding:0 16px;
+}
+.bg-preview .meta {
+  padding:20px;
+  background:var(--surface);
+}
+.bg-preview .meta .bg-name { font-family:'Cormorant Garamond',serif; font-size:18px; margin-bottom:4px; }
+.bg-preview .meta .bg-desc { font-size:13px; color:var(--muted-fg); margin-bottom:12px; }
+.bg-preview .layers { display:flex; flex-direction:column; gap:6px; }
+.bg-preview .layer { display:flex; gap:12px; }
+.bg-preview .layer .lbl { width:56px; flex-shrink:0; font-size:10px; font-family:monospace; color:var(--primary); padding-top:1px; }
+.bg-preview .layer code { font-size:10px; font-family:monospace; color:var(--muted-fg); line-height:1.6; }
+
+/* orb helper */
+.orb {
+  position:absolute; border-radius:50%;
+  pointer-events:none;
+}
+
+/* ── Nav sidebar ────────────────────────────────────────────────────────── */
+.ds-nav {
+  position:fixed; top:0; left:0; bottom:0;
+  width:220px;
+  background:var(--surface);
+  border-right:1px solid var(--border);
+  overflow-y:auto;
+  z-index:100;
+  padding:32px 0 32px;
+}
+.ds-nav .logo {
+  padding:0 24px 24px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:16px;
+}
+.ds-nav .logo p { font-family:'Cormorant Garamond',serif; font-size:20px; }
+.ds-nav .logo span { font-size:10px; color:var(--muted-fg); font-family:monospace; }
+.ds-nav a {
+  display:block;
+  padding:8px 24px;
+  font-size:12px;
+  color:var(--muted-fg);
+  transition:color .15s, background .15s;
+}
+.ds-nav a:hover { color:#fff; background:var(--muted); }
+.ds-nav a.active { color:var(--primary); }
+.ds-nav .nav-section {
+  font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase;
+  color:var(--border);
+  padding:16px 24px 4px;
+}
+
+.ds-main { margin-left:220px; }
+@media (max-width:768px) { .ds-nav { display:none; } .ds-main { margin-left:0; } }
+
+/* ── misc ───────────────────────────────────────────────────────────────── */
+.pill {
+  display:inline-block; padding:4px 10px;
+  border-radius:2px; border:1px solid var(--border);
+  font-family:monospace; font-size:11px;
+  background:var(--muted);
+  color:var(--muted-fg);
+}
+.box { background:var(--surface); border:1px solid var(--border); border-radius:2px; padding:32px; }
+.mono { font-family:monospace; }
+.mt4 { margin-top:16px; }
+.mt8 { margin-top:32px; }
+.mb4 { margin-bottom:16px; }
+.mb8 { margin-bottom:32px; }
+.gap4 { gap:16px; }
+.gap2 { gap:8px; }
+.flex { display:flex; }
+.flex-wrap { flex-wrap:wrap; }
+.items-center { align-items:center; }
+.items-end { align-items:flex-end; }
+.text-muted { color:var(--muted-fg); }
+.text-primary { color:var(--primary); }
+.text-cream { color:var(--cream); }
+.text-sm { font-size:13px; }
+.text-xs { font-size:11px; }
+.space-y > * + * { margin-top:12px; }
+.space-y-sm > * + * { margin-top:6px; }
+.text-gradient {
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text;
+  background-image:var(--gradient-primary);
+}
+</style>
+</head>
+<body>
+
+<!-- ── Sidebar nav ──────────────────────────────────────────────────────── -->
+<nav class="ds-nav">
+  <div class="logo">
+    <p>Plots <em>DS</em></p>
+    <span>v1.0</span>
+  </div>
+  <div class="nav-section">Fundação</div>
+  <a href="#cores">01 — Cores</a>
+  <a href="#tipografia">02 — Tipografia</a>
+  <a href="#espacamento">03 — Espaçamento</a>
+  <a href="#bordas">04 — Bordas</a>
+  <a href="#sombras">05 — Sombras</a>
+  <div class="nav-section">Componentes</div>
+  <a href="#componentes">06 — Componentes</a>
+  <a href="#course-cards">07 — Course Cards</a>
+  <div class="nav-section">Motion & Layout</div>
+  <a href="#animacoes">08 — Animações</a>
+  <a href="#utilitarios">09 — Utilitários</a>
+  <a href="#backgrounds">10 — Backgrounds</a>
+  <div class="nav-section">Sistema</div>
+  <a href="#temas">11 — Temas</a>
+  <a href="#stack">12 — Stack</a>
+</nav>
+
+<main class="ds-main">
+
+<!-- ── Hero ──────────────────────────────────────────────────────────────── -->
+<div style="position:relative;overflow:hidden;border-bottom:1px solid var(--border);">
+  <div class="editorial-grid" style="position:absolute;inset:0;pointer-events:none;"></div>
+  <div class="editorial-glow" style="position:absolute;left:50%;top:50%;width:900px;height:900px;transform:translate(-50%,-55%);border-radius:50%;pointer-events:none;animation:glow-pulse 7s ease-in-out infinite alternate;"></div>
+  <div class="container" style="position:relative;z-index:1;padding-top:80px;padding-bottom:80px;">
+    <span class="section-label reveal-clip" style="margin-bottom:24px;display:inline-flex;">
+      <span class="divider"></span>Plots — Design System
+    </span>
+    <h1 style="font-size:72px;margin-bottom:24px;" class="reveal-up">Design <em>System</em></h1>
+    <p style="color:var(--muted-fg);font-size:17px;max-width:520px;line-height:1.7;margin-bottom:32px;" class="reveal-up" data-delay="100">
+      Tokens, tipografia, componentes e padrões de animação que constroem a identidade editorial da Plots Academy.
+    </p>
+    <div class="flex flex-wrap gap2">
+      <span class="pill">v1.0</span>
+      <span class="pill">Cormorant + Space Grotesk</span>
+      <span class="pill">Tailwind CSS</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── 01 Cores ───────────────────────────────────────────────────────────── -->
+<section class="section" id="cores">
+  <div class="container">
+    <div class="sweep-line mb8" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>01 — Cores</span>
+      <h2>Paleta <em>Editorial</em></h2>
+      <p>Fundo Ink profundo, azul elétrico como acento de ação e creme para ênfase tipográfica em itálico.</p>
+    </div>
+
+    <!-- Core -->
+    <p class="label-upper muted mb4" style="margin-bottom:16px;"><span class="line"></span>Core</p>
+    <div class="grid-4" style="gap:16px;margin-bottom:40px;">
+      <div class="color-swatch"><div class="chip" style="background:#080808;"></div><div class="info"><div class="name">Ink</div><div class="hex">#080808</div><div class="hsl">0 0% 3%</div><div class="usage">--background</div></div></div>
+      <div class="color-swatch"><div class="chip" style="background:#2B2BFF;"></div><div class="info"><div class="name">Electric Blue</div><div class="hex">#2B2BFF</div><div class="hsl">240 100% 58%</div><div class="usage">--primary</div></div></div>
+      <div class="color-swatch"><div class="chip" style="background:#F2EDE6;"></div><div class="info"><div class="name">Cream</div><div class="hex">#F2EDE6</div><div class="hsl">36 35% 93%</div><div class="usage">--cream</div></div></div>
+      <div class="color-swatch"><div class="chip" style="background:#FFFFFF;border-bottom:1px solid #333;"></div><div class="info"><div class="name">White</div><div class="hex">#FFFFFF</div><div class="hsl">0 0% 100%</div><div class="usage">--foreground</div></div></div>
+    </div>
+
+    <!-- Surfaces -->
+    <p class="label-upper muted mb4" style="margin-bottom:16px;"><span class="line"></span>Surfaces</p>
+    <div class="grid-4" style="gap:16px;margin-bottom:40px;">
+      <div class="color-swatch"><div class="chip" style="background:#121212;"></div><div class="info"><div class="name">Surface</div><div class="hex">#121212</div><div class="hsl">0 0% 7%</div><div class="usage">--surface</div></div></div>
+      <div class="color-swatch"><div class="chip" style="background:#171717;"></div><div class="info"><div class="name">Surface 2</div><div class="hex">#171717</div><div class="hsl">0 0% 9%</div><div class="usage">--surface-2</div></div></div>
+      <div class="color-swatch"><div class="chip" style="background:#1C1C1C;"></div><div class="info"><div class="name">Muted</div><div class="hex">#1C1C1C</div><div class="hsl">0 0% 11%</div><div class="usage">--muted</div></div></div>
+      <div class="color-swatch"><div class="chip" style="background:#1F1F1F;"></div><div class="info"><div class="name">Border</div><div class="hex">#1F1F1F</div><div class="hsl">0 0% 12%</div><div class="usage">--border</div></div></div>
+    </div>
+
+    <!-- Semantic -->
+    <p class="label-upper muted mb4" style="margin-bottom:16px;"><span class="line"></span>Semânticas</p>
+    <div class="grid-4" style="gap:16px;margin-bottom:40px;">
+      <div class="color-swatch"><div class="chip" style="background:#4DC877;"></div><div class="info"><div class="name">Success</div><div class="hex">#4DC877</div><div class="hsl">142 50% 55%</div><div class="usage">--success</div></div></div>
+      <div class="color-swatch"><div class="chip" style="background:#E53333;"></div><div class="info"><div class="name">Destructive</div><div class="hex">#E53333</div><div class="hsl">0 80% 60%</div><div class="usage">--destructive</div></div></div>
+      <div class="color-swatch"><div class="chip" style="background:#8C8C8C;"></div><div class="info"><div class="name">Muted Text</div><div class="hex">#8C8C8C</div><div class="hsl">0 0% 55%</div><div class="usage">--muted-fg</div></div></div>
+      <div class="color-swatch"><div class="chip" style="background:#0D0D99;"></div><div class="info"><div class="name">Blue Dark</div><div class="hex">#0D0D99</div><div class="hsl">240 100% 30%</div><div class="usage">--blue-dark</div></div></div>
+    </div>
+
+    <!-- Gradients -->
+    <p class="label-upper muted mb4" style="margin-bottom:16px;"><span class="line"></span>Gradientes</p>
+    <div class="grid-4" style="gap:16px;">
+      <div class="color-swatch"><div class="chip" style="background:linear-gradient(135deg,#2B2BFF,#0D0D99);"></div><div class="info"><div class="hex">gradient-primary</div><div class="hsl">135deg · Blue → Blue Dark</div></div></div>
+      <div class="color-swatch"><div class="chip" style="background:linear-gradient(180deg,#121212,#080808);"></div><div class="info"><div class="hex">gradient-subtle</div><div class="hsl">180deg · Surface → Ink</div></div></div>
+      <div class="color-swatch"><div class="chip" style="background:linear-gradient(135deg,#0D0D0D,#171717);"></div><div class="info"><div class="hex">gradient-dark</div><div class="hsl">135deg · Ink vars</div></div></div>
+      <div class="color-swatch"><div class="chip" style="background:linear-gradient(180deg,#080808,#0D0D0D);"></div><div class="info"><div class="hex">gradient-hero</div><div class="hsl">180deg · Hero base</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 02 Tipografia ──────────────────────────────────────────────────────── -->
+<section class="section" id="tipografia">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>02 — Tipografia</span>
+      <h2>Duas <em>famílias</em></h2>
+      <p>Cormorant Garamond para display editorial; Space Grotesk para interface e corpo de texto.</p>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:48px;">
+      <div class="box">
+        <p class="label-upper muted mb4" style="margin-bottom:16px;"><span class="line"></span>Display — Cormorant Garamond</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:56px;line-height:.95;letter-spacing:-.01em;">Forma e <em>função</em></p>
+        <div style="margin-top:24px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:2;">
+          <div>font-family: Cormorant Garamond, Georgia, serif</div>
+          <div>weights: 400, 500, 600, 700 + italic</div>
+          <div>tracking: -0.01em · leading: 0.95</div>
+        </div>
+      </div>
+      <div class="box">
+        <p class="label-upper muted mb4" style="margin-bottom:16px;"><span class="line"></span>UI — Space Grotesk</p>
+        <p style="font-size:40px;font-weight:500;line-height:1.1;">Design é estratégia</p>
+        <div style="margin-top:24px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:2;">
+          <div>font-family: Space Grotesk, system-ui, sans-serif</div>
+          <div>weights: 300, 400, 500, 600, 700</div>
+          <div>tracking: default / 3px (labels)</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="label-upper muted" style="margin-bottom:16px;display:block;"><span class="line"></span>Escala Display</p>
+    <div style="border:1px solid var(--border);margin-bottom:40px;">
+      <div class="type-row"><span class="meta">Display / 72px</span><span class="sample" style="font-size:72px;line-height:1;">Plots</span></div>
+      <div class="type-row"><span class="meta">H1 / 56px</span><span class="sample" style="font-size:56px;line-height:1;">Headline One</span></div>
+      <div class="type-row"><span class="meta">H2 / 40px</span><span class="sample" style="font-size:40px;line-height:1.1;">Headline Two</span></div>
+      <div class="type-row"><span class="meta">H3 / 28px</span><span class="sample" style="font-size:28px;line-height:1.2;">Headline Three</span></div>
+      <div class="type-row"><span class="meta">H4 / 22px</span><span class="sample" style="font-size:22px;line-height:1.3;">Headline Four</span></div>
+    </div>
+
+    <p class="label-upper muted" style="margin-bottom:16px;display:block;"><span class="line"></span>Escala UI</p>
+    <div style="border:1px solid var(--border);margin-bottom:40px;">
+      <div class="type-row"><span class="meta">Body Large / 18px</span><span style="font-size:18px;">Design é estratégia, produto é consequência</span></div>
+      <div class="type-row"><span class="meta">Body / 16px</span><span style="font-size:16px;">Design é estratégia, produto é consequência</span></div>
+      <div class="type-row"><span class="meta">Body Small / 14px</span><span style="font-size:14px;">Design é estratégia, produto é consequência</span></div>
+      <div class="type-row"><span class="meta">Label / 12px · 600</span><span style="font-size:12px;font-weight:600;">Design é estratégia, produto é consequência</span></div>
+      <div class="type-row"><span class="meta">Label Upper / 11px</span><span style="font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;">Design é estratégia</span></div>
+    </div>
+
+    <div style="padding:24px;border:1px solid rgba(43,43,255,.2);background:rgba(43,43,255,.05);border-radius:2px;">
+      <p class="label-upper" style="margin-bottom:16px;"><span class="line"></span>Itálico Editorial — Acento Creme</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:32px;line-height:1.2;letter-spacing:-.01em;">Aprender design é aprender a ver o <em>invisível</em></p>
+      <p style="margin-top:12px;font-family:monospace;font-size:11px;color:var(--muted-fg);">&lt;em&gt; dentro de headings → font-style: italic + color: var(--cream)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 03 Espaçamento ─────────────────────────────────────────────────────── -->
+<section class="section" id="espacamento">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>03 — Espaçamento</span>
+      <h2>Grid de <em>8px</em></h2>
+      <p>Escala baseada em múltiplos de 4px. Seções usam 100px vertical no desktop.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:center;gap:16px;"><span style="width:48px;font-family:monospace;font-size:11px;color:var(--muted-fg);">4px</span><div style="height:20px;background:var(--primary);width:4px;border-radius:1px;"></div></div>
+      <div style="display:flex;align-items:center;gap:16px;"><span style="width:48px;font-family:monospace;font-size:11px;color:var(--muted-fg);">8px</span><div style="height:20px;background:var(--primary);width:8px;border-radius:1px;"></div></div>
+      <div style="display:flex;align-items:center;gap:16px;"><span style="width:48px;font-family:monospace;font-size:11px;color:var(--muted-fg);">12px</span><div style="height:20px;background:var(--primary);width:12px;border-radius:1px;"></div></div>
+      <div style="display:flex;align-items:center;gap:16px;"><span style="width:48px;font-family:monospace;font-size:11px;color:var(--muted-fg);">16px</span><div style="height:20px;background:var(--primary);width:16px;border-radius:1px;"></div></div>
+      <div style="display:flex;align-items:center;gap:16px;"><span style="width:48px;font-family:monospace;font-size:11px;color:var(--muted-fg);">24px</span><div style="height:20px;background:var(--primary);width:24px;border-radius:1px;"></div></div>
+      <div style="display:flex;align-items:center;gap:16px;"><span style="width:48px;font-family:monospace;font-size:11px;color:var(--muted-fg);">32px</span><div style="height:20px;background:var(--primary);width:32px;border-radius:1px;"></div></div>
+      <div style="display:flex;align-items:center;gap:16px;"><span style="width:48px;font-family:monospace;font-size:11px;color:var(--muted-fg);">48px</span><div style="height:20px;background:var(--primary);width:48px;border-radius:1px;"></div></div>
+      <div style="display:flex;align-items:center;gap:16px;"><span style="width:48px;font-family:monospace;font-size:11px;color:var(--muted-fg);">64px</span><div style="height:20px;background:var(--primary);width:64px;border-radius:1px;"></div></div>
+      <div style="display:flex;align-items:center;gap:16px;"><span style="width:48px;font-family:monospace;font-size:11px;color:var(--muted-fg);">80px</span><div style="height:20px;background:var(--primary);width:80px;border-radius:1px;"></div></div>
+      <div style="display:flex;align-items:center;gap:16px;"><span style="width:48px;font-family:monospace;font-size:11px;color:var(--muted-fg);">100px</span><div style="height:20px;background:var(--primary);width:100px;border-radius:1px;"></div></div>
+    </div>
+
+    <div class="grid-3" style="gap:1px;margin-top:40px;">
+      <div class="box"><p class="label-upper muted" style="margin-bottom:12px;"><span class="line"></span>Container</p><p style="font-family:'Cormorant Garamond',serif;font-size:22px;margin-bottom:6px;">max-w 1400px</p><p class="text-sm text-muted">px-60px desktop · px-24px mobile</p></div>
+      <div class="box"><p class="label-upper muted" style="margin-bottom:12px;"><span class="line"></span>Seção</p><p style="font-family:'Cormorant Garamond',serif;font-size:22px;margin-bottom:6px;">py-100px</p><p class="text-sm text-muted">100px desktop · 72–80px mobile</p></div>
+      <div class="box"><p class="label-upper muted" style="margin-bottom:12px;"><span class="line"></span>Grid editorial</p><p style="font-family:'Cormorant Garamond',serif;font-size:22px;margin-bottom:6px;">80px × 80px</p><p class="text-sm text-muted">1px branco 2.5% opacidade</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 04 Bordas ──────────────────────────────────────────────────────────── -->
+<section class="section" id="bordas">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>04 — Bordas</span>
+      <h2>Quase <em>quadrado</em></h2>
+    </div>
+    <div class="flex flex-wrap items-end" style="gap:32px;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;"><div style="width:64px;height:64px;background:var(--primary);border-radius:0;"></div><p style="font-size:10px;font-family:monospace;color:var(--muted-fg);text-align:center;max-width:80px;">0px</p></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;"><div style="width:64px;height:64px;background:var(--primary);border-radius:2px;"></div><p style="font-size:10px;font-family:monospace;color:var(--muted-fg);text-align:center;max-width:80px;">2px (padrão)</p></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;"><div style="width:64px;height:64px;background:var(--primary);border-radius:4px;"></div><p style="font-size:10px;font-family:monospace;color:var(--muted-fg);text-align:center;max-width:80px;">4px</p></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;"><div style="width:64px;height:64px;background:var(--primary);border-radius:8px;"></div><p style="font-size:10px;font-family:monospace;color:var(--muted-fg);text-align:center;max-width:80px;">8px (admin)</p></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;"><div style="width:64px;height:64px;background:var(--primary);border-radius:16px;"></div><p style="font-size:10px;font-family:monospace;color:var(--muted-fg);text-align:center;max-width:80px;">16px (cards std)</p></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;"><div style="width:64px;height:64px;background:var(--primary);border-radius:9999px;"></div><p style="font-size:10px;font-family:monospace;color:var(--muted-fg);text-align:center;max-width:80px;">9999px (badges)</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 05 Sombras ─────────────────────────────────────────────────────────── -->
+<section class="section" id="sombras">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>05 — Sombras</span>
+      <h2>Profundidade <em>sutil</em></h2>
+    </div>
+    <div class="grid-3" style="gap:16px;">
+      <div class="shadow-card" style="box-shadow:var(--shadow-sm);"><div class="name">shadow-sm</div><div class="value">0 2px 8px -2px rgba(0,0,0,.4)</div><span class="token-badge">--shadow-sm</span></div>
+      <div class="shadow-card" style="box-shadow:var(--shadow-md);"><div class="name">shadow-md</div><div class="value">0 8px 24px -8px rgba(0,0,0,.5)</div><span class="token-badge">--shadow-md</span></div>
+      <div class="shadow-card" style="box-shadow:var(--shadow-lg);"><div class="name">shadow-lg</div><div class="value">0 16px 48px -12px rgba(0,0,0,.6)</div><span class="token-badge">--shadow-lg</span></div>
+      <div class="shadow-card" style="box-shadow:var(--shadow-card);"><div class="name">shadow-card</div><div class="value">0 4px 24px -8px rgba(0,0,0,.4)</div><span class="token-badge">--shadow-card</span></div>
+      <div class="shadow-card" style="box-shadow:var(--shadow-card-hover);"><div class="name">shadow-card-hover</div><div class="value">Blue glow — primary/25</div><span class="token-badge">--shadow-card-hover</span></div>
+      <div class="shadow-card" style="box-shadow:var(--shadow-glow);"><div class="name">shadow-glow</div><div class="value">0 0 60px -10px primary/45</div><span class="token-badge">--shadow-glow</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 06 Componentes ─────────────────────────────────────────────────────── -->
+<section class="section" id="componentes">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>06 — Componentes</span>
+      <h2>Peças <em>editoriais</em></h2>
+    </div>
+
+    <!-- EditorialButton -->
+    <p class="label-upper muted" style="margin-bottom:16px;"><span class="line"></span>EditorialButton</p>
+    <div class="box" style="margin-bottom:32px;">
+      <p style="font-family:monospace;font-size:11px;color:var(--muted-fg);margin-bottom:16px;">Variantes</p>
+      <div class="flex flex-wrap" style="gap:16px;margin-bottom:32px;">
+        <button class="btn btn-md btn-white btn-sweep"><span>White (padrão)</span></button>
+        <button class="btn btn-md btn-blue btn-sweep"><span>Blue</span></button>
+        <button class="btn btn-md btn-ghost btn-sweep"><span>Ghost</span></button>
+      </div>
+      <p style="font-family:monospace;font-size:11px;color:var(--muted-fg);margin-bottom:16px;">Tamanhos</p>
+      <div class="flex flex-wrap items-center" style="gap:16px;margin-bottom:24px;">
+        <button class="btn btn-sm btn-white btn-sweep"><span>Small</span></button>
+        <button class="btn btn-md btn-white btn-sweep"><span>Medium</span></button>
+        <button class="btn btn-lg btn-white btn-sweep"><span>Large</span></button>
+      </div>
+      <div style="padding-top:16px;border-top:1px solid var(--border);font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;">
+        <div>Hover: btn-sweep — overlay branco scaleX(0→1), origin left, 400ms</div>
+        <div>Base: uppercase · tracking .12em · rounded 2px · font-weight 600</div>
+      </div>
+    </div>
+
+    <!-- SectionLabel -->
+    <p class="label-upper muted" style="margin-bottom:16px;"><span class="line"></span>SectionLabel</p>
+    <div class="box" style="margin-bottom:32px;">
+      <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:24px;">
+        <span class="section-label reveal-clip"><span class="divider"></span>Blue — Padrão</span>
+        <span class="section-label cream reveal-clip"><span class="divider"></span>Cream — Acento</span>
+        <span class="section-label muted reveal-clip"><span class="divider"></span>Muted — Discreto</span>
+        <span class="section-label"><span style="display:none;"></span>Sem linha</span>
+      </div>
+      <div style="padding-top:16px;border-top:1px solid var(--border);font-family:monospace;font-size:11px;color:var(--muted-fg);">
+        11px · 600 · 3px letter-spacing · uppercase · reveal-clip via IntersectionObserver
+      </div>
+    </div>
+
+    <!-- EditorialHeading -->
+    <p class="label-upper muted" style="margin-bottom:16px;"><span class="line"></span>EditorialHeading</p>
+    <div class="box" style="margin-bottom:32px;">
+      <h2 class="reveal-up" style="font-size:48px;margin-bottom:16px;">Aprender <em>design</em></h2>
+      <h3 class="reveal-up" data-delay="100" style="font-size:32px;margin-bottom:24px;">palavra por <em>palavra</em></h3>
+      <div style="padding-top:16px;border-top:1px solid var(--border);font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;">
+        <div>font-display · leading 0.95 · tracking-tight</div>
+        <div>Word-by-word reveal: stagger de 60ms por palavra via IntersectionObserver</div>
+        <div>italicLast: aplica &lt;em&gt; na última palavra → creme + itálico</div>
+      </div>
+    </div>
+
+    <!-- SweepDivider -->
+    <p class="label-upper muted" style="margin-bottom:16px;"><span class="line"></span>SweepDivider</p>
+    <div class="box" style="margin-bottom:32px;">
+      <div class="sweep-line" style="margin-bottom:20px;"></div>
+      <div style="font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;">
+        <div>height: 1px · background: rgba(255,255,255,.07)</div>
+        <div>::after sweep azul left(-100% → 200%), 1.2s ease, via IntersectionObserver</div>
+      </div>
+    </div>
+
+    <!-- EditorialInput -->
+    <p class="label-upper muted" style="margin-bottom:16px;"><span class="line"></span>EditorialInput</p>
+    <div class="box">
+      <div style="max-width:360px;margin-bottom:24px;">
+        <div class="editorial-input-wrap">
+          <label>E-mail</label>
+          <input type="email" placeholder="nome@email.com" />
+        </div>
+      </div>
+      <div style="max-width:360px;margin-bottom:24px;">
+        <div class="editorial-input-wrap">
+          <label>Nome completo</label>
+          <input type="text" placeholder="Seu nome" />
+        </div>
+      </div>
+      <div style="padding-top:16px;border-top:1px solid var(--border);font-family:monospace;font-size:11px;color:var(--muted-fg);">
+        Border bottom only · focus: border-primary · label uppercase 11px
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 07 Course Cards ────────────────────────────────────────────────────── -->
+<section class="section" id="course-cards">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>07 — Course Cards</span>
+      <h2>Variantes de <em>card</em></h2>
+      <p>Thumbnail abstrato gerado proceduralmente a partir do título quando não há imagem.</p>
+    </div>
+
+    <!-- Default variant -->
+    <p class="label-upper muted" style="margin-bottom:16px;"><span class="line"></span>Variante: default</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:16px;">
+
+      <!-- Card 1: Novo + Desconto -->
+      <a class="course-card" href="#">
+        <div class="thumb">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="g1" gradientTransform="rotate(135)"><stop offset="0%" stop-color="#2563EB"/><stop offset="50%" stop-color="#60A5FA"/><stop offset="100%" stop-color="#93C5FD"/></linearGradient></defs>
+            <rect width="100" height="100" fill="url(#g1)"/>
+            <rect x="10" y="5" width="30" height="22" rx="2" fill="white" opacity=".18"/>
+            <rect x="10" y="32" width="40" height="22" rx="2" fill="white" opacity=".14"/>
+            <rect x="10" y="59" width="25" height="22" rx="2" fill="white" opacity=".10"/>
+            <rect x="10" y="86" width="35" height="22" rx="2" fill="white" opacity=".08"/>
+          </svg>
+          <div class="overlay"></div>
+          <div class="badges">
+            <span class="badge badge-blue">Novo</span>
+            <span class="badge badge-red">-40%</span>
+            <span class="badge badge-glass">Intermediário</span>
+          </div>
+          <div class="title-overlay"><h3>Design Systems na Prática</h3></div>
+        </div>
+        <div class="body">
+          <div class="instructor"><div class="avatar">AC</div>Ana Cardoso</div>
+          <p class="description">Como construir e manter um design system que escala com o produto.</p>
+          <div class="duration"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>12h de conteúdo</div>
+          <div class="price-row">
+            <div><div class="price-old">R$ 497</div><div class="price">R$ 297</div></div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 2: Featured, sem desconto -->
+      <a class="course-card" href="#">
+        <div class="thumb">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="g2" gradientTransform="rotate(45)"><stop offset="0%" stop-color="#7C3AED"/><stop offset="50%" stop-color="#A78BFA"/><stop offset="100%" stop-color="#C4B5FD"/></linearGradient></defs>
+            <rect width="100" height="100" fill="url(#g2)"/>
+            <polygon points="10,25 50,13 90,25 50,37" fill="white" opacity=".18"/>
+            <polygon points="10,50 50,38 90,50 50,62" fill="white" opacity=".14"/>
+            <polygon points="10,75 50,63 90,75 50,87" fill="white" opacity=".10"/>
+          </svg>
+          <div class="overlay"></div>
+          <div class="badges"><span class="badge badge-glass">Avançado</span></div>
+          <div class="title-overlay"><h3>Estratégia de Produto</h3></div>
+        </div>
+        <div class="body">
+          <div class="instructor"><div class="avatar">BM</div>Bruno Meireles</div>
+          <p class="description">Do problema ao posicionamento — construindo produtos que fazem sentido.</p>
+          <div class="duration"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>8h de conteúdo</div>
+          <div class="price-row"><div><div class="price">R$ 397</div></div></div>
+        </div>
+      </a>
+
+      <!-- Card 3: Em breve -->
+      <a class="course-card" href="#">
+        <div class="thumb">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="g3" gradientTransform="rotate(210)"><stop offset="0%" stop-color="#0891B2"/><stop offset="50%" stop-color="#22D3EE"/><stop offset="100%" stop-color="#67E8F9"/></linearGradient></defs>
+            <rect width="100" height="100" fill="url(#g3)"/>
+            <rect x="46" y="0" width="8" height="50" rx="4" fill="white" opacity=".18" transform="rotate(0 50 50)"/>
+            <rect x="46" y="0" width="8" height="50" rx="4" fill="white" opacity=".15" transform="rotate(72 50 50)"/>
+            <rect x="46" y="0" width="8" height="50" rx="4" fill="white" opacity=".12" transform="rotate(144 50 50)"/>
+            <rect x="46" y="0" width="8" height="50" rx="4" fill="white" opacity=".10" transform="rotate(216 50 50)"/>
+            <rect x="46" y="0" width="8" height="50" rx="4" fill="white" opacity=".08" transform="rotate(288 50 50)"/>
+          </svg>
+          <div class="overlay"></div>
+          <div class="badges"><span class="badge badge-amber">Em Breve</span></div>
+          <div class="title-overlay"><h3>Motion Editorial</h3></div>
+        </div>
+        <div class="body">
+          <div class="instructor"><div class="avatar">CD</div>Camila Dutra</div>
+          <p class="description">Animação com propósito — do After Effects ao protótipo interativo.</p>
+          <div class="duration"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>10h de conteúdo</div>
+          <div class="price-row"><div class="price-coming">Em Breve</div></div>
+        </div>
+      </a>
+    </div>
+    <div style="padding:16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;margin-bottom:40px;">
+      <div>Wrapper: rounded-2xl border border-border bg-card hover:border-primary/20 hover:shadow-xl</div>
+      <div>Thumbnail: aspect-[3/4] overflow-hidden · hover scale-105 em 500ms</div>
+      <div>Overlay: bg-gradient-to-t from-black/80 via-black/30 to-transparent</div>
+      <div>Badges: rounded-full — azul (Novo), âmbar (Em Breve), vermelho (desconto), glass (nível)</div>
+    </div>
+
+    <!-- Compact variant -->
+    <p class="label-upper muted" style="margin-bottom:16px;"><span class="line"></span>Variante: compact</p>
+    <div style="max-width:420px;display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+      <a class="course-card-compact" href="#">
+        <div class="thumb">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="g4" gradientTransform="rotate(135)"><stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#93C5FD"/></linearGradient></defs>
+            <rect width="100" height="100" fill="url(#g4)"/>
+          </svg>
+        </div>
+        <div class="info">
+          <h4>Design Systems na Prática</h4>
+          <div class="bottom"><span class="instructor-name">Ana Cardoso</span><span class="price">R$ 297</span></div>
+        </div>
+      </a>
+      <a class="course-card-compact" href="#">
+        <div class="thumb">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="g5" gradientTransform="rotate(45)"><stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#C4B5FD"/></linearGradient></defs>
+            <rect width="100" height="100" fill="url(#g5)"/>
+          </svg>
+        </div>
+        <div class="info">
+          <h4>Estratégia de Produto</h4>
+          <div class="bottom"><span class="instructor-name">Bruno Meireles</span><span class="price">R$ 397</span></div>
+        </div>
+      </a>
+      <a class="course-card-compact" href="#">
+        <div class="thumb">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="g6" gradientTransform="rotate(210)"><stop offset="0%" stop-color="#16A34A"/><stop offset="100%" stop-color="#BBF7D0"/></linearGradient></defs>
+            <rect width="100" height="100" fill="url(#g6)"/>
+          </svg>
+        </div>
+        <div class="info">
+          <h4>Tipografia Avançada</h4>
+          <div class="bottom"><span class="instructor-name">Felipe Assis</span><span class="price">R$ 197</span></div>
+        </div>
+      </a>
+    </div>
+    <div style="padding:16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;margin-bottom:40px;">
+      <div>Layout: flex gap-4 · thumbnail 112×80px border-radius 8px</div>
+      <div>Hover: border-primary/30 bg-secondary/30</div>
+    </div>
+
+    <!-- AbstractCourseThumbnail palettes -->
+    <p class="label-upper muted" style="margin-bottom:16px;"><span class="line"></span>AbstractCourseThumbnail — 8 paletas geradas</p>
+    <div class="grid-8">
+      <div><div style="aspect-ratio:3/4;border-radius:2px;overflow:hidden;background:linear-gradient(135deg,#E85D3A,#F4845F,#F7B267);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Warm Orange · bars</p></div>
+      <div><div style="aspect-ratio:3/4;border-radius:2px;overflow:hidden;background:linear-gradient(45deg,#2563EB,#60A5FA,#93C5FD);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Blue · diagonal</p></div>
+      <div><div style="aspect-ratio:3/4;border-radius:2px;overflow:hidden;background:linear-gradient(210deg,#16A34A,#4ADE80,#BBF7D0);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Green · grid</p></div>
+      <div><div style="aspect-ratio:3/4;border-radius:2px;overflow:hidden;background:linear-gradient(315deg,#7C3AED,#A78BFA,#C4B5FD);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Purple · chevron</p></div>
+      <div><div style="aspect-ratio:3/4;border-radius:2px;overflow:hidden;background:linear-gradient(90deg,#0891B2,#22D3EE,#67E8F9);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Cyan · rays</p></div>
+      <div><div style="aspect-ratio:3/4;border-radius:2px;overflow:hidden;background:linear-gradient(180deg,#DC2626,#F87171,#FCA5A5);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Red · bars</p></div>
+      <div><div style="aspect-ratio:3/4;border-radius:2px;overflow:hidden;background:linear-gradient(270deg,#D97706,#FBBF24,#FDE68A);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Amber · diagonal</p></div>
+      <div><div style="aspect-ratio:3/4;border-radius:2px;overflow:hidden;background:linear-gradient(60deg,#0D9488,#2DD4BF,#99F6E4);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Teal · grid</p></div>
+    </div>
+    <div style="margin-top:12px;padding:12px 16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;">
+      8 paletas × 5 formas (bars, diagonal, grid, chevron, rays) · Determinístico via hashStr(title)
+    </div>
+  </div>
+</section>
+
+<!-- ── 08 Animações ───────────────────────────────────────────────────────── -->
+<section class="section" id="animacoes">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>08 — Animações</span>
+      <h2>Motion <em>editorial</em></h2>
+      <p>Easing padrão: cubic-bezier(0.16, 1, 0.3, 1) — entrada acelerada, saída suave.</p>
+    </div>
+    <div class="grid-3" style="gap:1px;margin-bottom:32px;">
+      <div class="anim-card"><div class="anim-name">fade-in</div><div class="anim-dur">0.5s · ease-out</div><div class="anim-desc">Opacity + translateY(10px) entrada</div></div>
+      <div class="anim-card"><div class="anim-name">fade-up</div><div class="anim-dur">0.6s · ease-out</div><div class="anim-desc">Opacity + translateY(20px) entrada</div></div>
+      <div class="anim-card"><div class="anim-name">scale-in</div><div class="anim-dur">0.3s · ease-out</div><div class="anim-desc">Opacity + scale(0.95→1)</div></div>
+      <div class="anim-card"><div class="anim-name">clip-reveal</div><div class="anim-dur">1s · cubic</div><div class="anim-desc">clip-path inset(0 100%→0) — reveal horizontal</div></div>
+      <div class="anim-card"><div class="anim-name">word-reveal</div><div class="anim-dur">0.9s · cubic</div><div class="anim-desc">translateY(110%→0) por palavra com stagger</div></div>
+      <div class="anim-card"><div class="anim-name">glow-pulse</div><div class="anim-dur">7s ∞ · ease-in-out alt</div><div class="anim-desc">Opacity + scale do orb de glow no hero</div></div>
+      <div class="anim-card"><div class="anim-name">marquee</div><div class="anim-dur">28s ∞ · linear</div><div class="anim-desc">translateX(-50%) loop horizontal infinito</div></div>
+      <div class="anim-card"><div class="anim-name">float</div><div class="anim-dur">6s ∞ · ease-in-out</div><div class="anim-desc">Y-axis oscillation ±10px</div></div>
+      <div class="anim-card"><div class="anim-name">shimmer</div><div class="anim-dur">3s ∞ · ease-in-out</div><div class="anim-desc">background-position sweep para loading states</div></div>
+    </div>
+
+    <!-- Live demo da animação float -->
+    <p class="label-upper muted" style="margin-bottom:24px;display:block;"><span class="line"></span>Demo ao vivo</p>
+    <div style="display:flex;flex-wrap:wrap;gap:32px;align-items:center;">
+      <div style="text-align:center;">
+        <div style="width:64px;height:64px;background:var(--primary);border-radius:2px;animation:float 3s ease-in-out infinite;margin:0 auto 8px;"></div>
+        <p style="font-size:10px;font-family:monospace;color:var(--muted-fg);">float</p>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:64px;height:64px;background:var(--primary);border-radius:2px;animation:scale-in .6s ease-out both;margin:0 auto 8px;"></div>
+        <p style="font-size:10px;font-family:monospace;color:var(--muted-fg);">scale-in</p>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:64px;height:64px;background:var(--gradient-primary);border-radius:50%;animation:glow-pulse 3s ease-in-out infinite alternate;box-shadow:var(--shadow-glow);margin:0 auto 8px;"></div>
+        <p style="font-size:10px;font-family:monospace;color:var(--muted-fg);">glow-pulse</p>
+      </div>
+      <div style="text-align:center;max-width:240px;overflow:hidden;">
+        <div style="display:flex;animation:marquee 4s linear infinite;white-space:nowrap;gap:24px;margin-bottom:8px;">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:18px;">Plots · Design · Estratégia · </span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:18px;">Plots · Design · Estratégia · </span>
+        </div>
+        <p style="font-size:10px;font-family:monospace;color:var(--muted-fg);">marquee</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 09 Utilitários ─────────────────────────────────────────────────────── -->
+<section class="section" id="utilitarios">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>09 — Utilitários CSS</span>
+      <h2>Classes <em>prontas</em></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div style="display:flex;gap:12px;padding:14px;border:1px solid var(--border);background:var(--surface);border-radius:2px;align-items:flex-start;"><span class="token-badge" style="flex-shrink:0;">.editorial-grid</span><p class="text-sm text-muted">Grid 80×80px, linhas brancas 2.5% — textura de fundo</p></div>
+      <div style="display:flex;gap:12px;padding:14px;border:1px solid var(--border);background:var(--surface);border-radius:2px;align-items:flex-start;"><span class="token-badge" style="flex-shrink:0;">.editorial-glow</span><p class="text-sm text-muted">Radial gradient azul com blur — efeito ambiental do hero</p></div>
+      <div style="display:flex;gap:12px;padding:14px;border:1px solid var(--border);background:var(--surface);border-radius:2px;align-items:flex-start;"><span class="token-badge" style="flex-shrink:0;">.sweep-line</span><p class="text-sm text-muted">Divisor 1px com sweep azul via ::after no scroll</p></div>
+      <div style="display:flex;gap:12px;padding:14px;border:1px solid var(--border);background:var(--surface);border-radius:2px;align-items:flex-start;"><span class="token-badge" style="flex-shrink:0;">.reveal-clip</span><p class="text-sm text-muted">clip-path inset(0 100%→0) via .is-visible / IntersectionObserver</p></div>
+      <div style="display:flex;gap:12px;padding:14px;border:1px solid var(--border);background:var(--surface);border-radius:2px;align-items:flex-start;"><span class="token-badge" style="flex-shrink:0;">.reveal-up</span><p class="text-sm text-muted">opacity 0 + translateY(24px) → 1/0 via .is-visible</p></div>
+      <div style="display:flex;gap:12px;padding:14px;border:1px solid var(--border);background:var(--surface);border-radius:2px;align-items:flex-start;"><span class="token-badge" style="flex-shrink:0;">.word-reveal</span><p class="text-sm text-muted">Wrapper por palavra — translateY(110%→0) em span filho</p></div>
+      <div style="display:flex;gap:12px;padding:14px;border:1px solid var(--border);background:var(--surface);border-radius:2px;align-items:flex-start;"><span class="token-badge" style="flex-shrink:0;">.btn-sweep</span><p class="text-sm text-muted">Overlay ::before scaleX(0→1) no hover — origin left</p></div>
+      <div style="display:flex;gap:12px;padding:14px;border:1px solid var(--border);background:var(--surface);border-radius:2px;align-items:flex-start;"><span class="token-badge" style="flex-shrink:0;">.label-uppercase</span><p class="text-sm text-muted">11px / 600 / 3px letter-spacing / uppercase</p></div>
+      <div style="display:flex;gap:12px;padding:14px;border:1px solid var(--border);background:var(--surface);border-radius:2px;align-items:flex-start;"><span class="token-badge" style="flex-shrink:0;">.shadow-glow</span><p class="text-sm text-muted">box-shadow 0 0 60px -10px primary/45</p></div>
+      <div style="display:flex;gap:12px;padding:14px;border:1px solid var(--border);background:var(--surface);border-radius:2px;align-items:flex-start;"><span class="token-badge" style="flex-shrink:0;">.text-gradient</span><p class="text-sm text-muted">bg-clip-text + gradient-primary — texto degradê</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 10 Backgrounds por Bloco ───────────────────────────────────────────── -->
+<section class="section" id="backgrounds">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>10 — Backgrounds por Bloco</span>
+      <h2>Texturas de <em>seção</em></h2>
+      <p>Cada bloco usa uma camada de fundo distinta para criar ritmo visual sem bordas explícitas.</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:24px;margin-bottom:40px;">
+
+      <!-- Hero -->
+      <div class="bg-preview">
+        <div class="preview-area" style="background:var(--background);">
+          <div class="editorial-grid" style="position:absolute;inset:0;opacity:.6;"></div>
+          <div class="editorial-glow" style="position:absolute;left:50%;top:50%;width:300px;height:300px;transform:translate(-50%,-50%);border-radius:50%;animation:glow-pulse 7s ease-in-out infinite alternate;"></div>
+          <p class="preview-label" style="position:relative;z-index:2;">DESIGN COMEÇA POR UMA <em>PERGUNTA.</em></p>
+        </div>
+        <div class="meta">
+          <div class="bg-name">Hero Editorial</div>
+          <div class="bg-desc">Fundo Ink sólido + glow azul radial animado + editorial-grid 60% opacidade</div>
+          <div class="layers">
+            <div class="layer"><span class="lbl">Base</span><code>bg-background (#080808)</code></div>
+            <div class="layer"><span class="lbl">Glow</span><code>editorial-glow animate-glow-pulse — 1100×1100px radial azul, blur 2px</code></div>
+            <div class="layer"><span class="lbl">Grid</span><code>editorial-grid opacity-60 — 80px grid, branco 2.5%</code></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Manifesto Blue -->
+      <div class="bg-preview">
+        <div class="preview-area" style="background:#2B2BFF;">
+          <div class="orb" style="top:-60px;left:-40px;width:200px;height:200px;background:rgba(0,0,180,.35);filter:blur(40px);"></div>
+          <div class="orb" style="bottom:-40px;right:0;width:160px;height:160px;background:rgba(0,0,80,.4);filter:blur(40px);"></div>
+          <p class="preview-label" style="color:#fff;">Aprender é um <em>verbo coletivo.</em></p>
+        </div>
+        <div class="meta">
+          <div class="bg-name">Manifesto Blue</div>
+          <div class="bg-desc">Fundo Electric Blue sólido + dois orbs escuros com blur-[80px]</div>
+          <div class="layers">
+            <div class="layer"><span class="lbl">Base</span><code>bg-primary (#2B2BFF) sólido</code></div>
+            <div class="layer"><span class="lbl">Orb 1</span><code>rgba(0,0,180,.25) blur-[80px] — canto superior esquerdo</code></div>
+            <div class="layer"><span class="lbl">Orb 2</span><code>rgba(0,0,80,.3) blur-[80px] — canto inferior direito</code></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Dark -->
+      <div class="bg-preview">
+        <div class="preview-area" style="background:linear-gradient(135deg,#0D0D0D,#171717);">
+          <div class="orb" style="top:-40%;left:-25%;width:50%;height:100%;background:rgba(43,43,255,.2);filter:blur(48px);border-radius:50%;"></div>
+          <div class="orb" style="bottom:-40%;right:-25%;width:50%;height:100%;background:rgba(43,43,255,.2);filter:blur(48px);border-radius:50%;"></div>
+          <p class="preview-label" style="position:relative;z-index:2;">E se design for, antes de tudo, <em>uma forma de pensar?</em></p>
+        </div>
+        <div class="meta">
+          <div class="bg-name">CTA Dark</div>
+          <div class="bg-desc">Card com gradient-dark + dois orbs azuis com blur-3xl nos cantos</div>
+          <div class="layers">
+            <div class="layer"><span class="lbl">Base</span><code>bg-gradient-dark — linear(135deg, #0D0D0D → #171717)</code></div>
+            <div class="layer"><span class="lbl">Orb 1</span><code>bg-purple-glow/20 blur-3xl — canto superior esquerdo</code></div>
+            <div class="layer"><span class="lbl">Orb 2</span><code>bg-primary/20 blur-3xl — canto inferior direito</code></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Season Highlight -->
+      <div class="bg-preview">
+        <div class="preview-area" style="background:linear-gradient(to bottom right,rgba(43,43,255,.05),transparent,rgba(43,43,255,.1));background-color:#080808;">
+          <div class="orb" style="top:50%;left:50%;transform:translate(-50%,-50%);width:200px;height:200px;background:rgba(43,43,255,.05);filter:blur(48px);border-radius:50%;"></div>
+          <p class="preview-label" style="position:relative;z-index:2;">O Retorno da <span class="text-gradient">Estratégia</span></p>
+        </div>
+        <div class="meta">
+          <div class="bg-name">Season Highlight</div>
+          <div class="bg-desc">Fundo transparente com radial sutil + orb central desfocado</div>
+          <div class="layers">
+            <div class="layer"><span class="lbl">Base</span><code>bg-gradient-to-br from-primary/5 via-transparent to-primary/10</code></div>
+            <div class="layer"><span class="lbl">Orb</span><code>bg-primary/5 blur-3xl — centro da seção, 800×800px</code></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonials -->
+      <div class="bg-preview">
+        <div class="preview-area" style="background:linear-gradient(180deg,#121212,#080808);">
+          <div class="orb" style="top:25%;left:25%;width:96px;height:96px;background:rgba(43,43,255,.05);filter:blur(48px);border-radius:50%;"></div>
+          <div class="orb" style="bottom:25%;right:25%;width:96px;height:96px;background:rgba(43,43,255,.05);filter:blur(48px);border-radius:50%;"></div>
+          <p class="preview-label" style="position:relative;z-index:2;">O que nossos <em>alunos dizem</em></p>
+        </div>
+        <div class="meta">
+          <div class="bg-name">Testimonials</div>
+          <div class="bg-desc">gradient-subtle como fundo + dois orbs de primary/5</div>
+          <div class="layers">
+            <div class="layer"><span class="lbl">Base</span><code>bg-gradient-subtle — linear(180deg, surface → background)</code></div>
+            <div class="layer"><span class="lbl">Orb 1</span><code>bg-primary/5 blur-3xl — quarto superior esquerdo</code></div>
+            <div class="layer"><span class="lbl">Orb 2</span><code>bg-purple-glow/5 blur-3xl — quarto inferior direito</code></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured Courses -->
+      <div class="bg-preview">
+        <div class="preview-area" style="background:rgba(28,28,28,.3);">
+          <p class="preview-label">Cursos em <em>destaque</em></p>
+        </div>
+        <div class="meta">
+          <div class="bg-name">Featured Courses</div>
+          <div class="bg-desc">Separação sutil entre seções sem textura</div>
+          <div class="layers">
+            <div class="layer"><span class="lbl">Base</span><code>bg-muted/30 — surface muted a 30% opacidade</code></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Neutra -->
+      <div class="bg-preview">
+        <div class="preview-area" style="background:#080808;border:1px solid rgba(255,255,255,.05);">
+          <p class="preview-label" style="color:var(--muted-fg);">Seção neutra — herda body</p>
+        </div>
+        <div class="meta">
+          <div class="bg-name">Seção Neutra</div>
+          <div class="bg-desc">Sem background explícito — herda bg-background. Para intercalar com seções texturizadas.</div>
+          <div class="layers">
+            <div class="layer"><span class="lbl">Base</span><code>bg-background (#080808) — herança do body</code></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alternância -->
+    <div style="padding:24px;border:1px solid rgba(43,43,255,.2);background:rgba(43,43,255,.05);border-radius:2px;">
+      <p class="label-upper" style="margin-bottom:16px;"><span class="line"></span>Regra de Alternância</p>
+      <p class="text-sm" style="margin-bottom:16px;color:rgba(255,255,255,.8);">As seções alternam entre <strong>neutro</strong> e <strong>texturizado</strong> para criar ritmo sem poluição visual:</p>
+      <div style="display:flex;flex-direction:column;gap:0;">
+        <div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07);font-family:monospace;font-size:11px;"><span style="width:20px;color:var(--muted-fg);">1.</span><span style="width:180px;color:var(--primary);flex-shrink:0;">Hero</span><span style="color:var(--muted-fg);">bg-background + editorial-grid + editorial-glow</span></div>
+        <div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07);font-family:monospace;font-size:11px;"><span style="width:20px;color:var(--muted-fg);">2.</span><span style="width:180px;color:var(--primary);flex-shrink:0;">Value Prop</span><span style="color:var(--muted-fg);">bg-background (neutro)</span></div>
+        <div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07);font-family:monospace;font-size:11px;"><span style="width:20px;color:var(--muted-fg);">3.</span><span style="width:180px;color:var(--primary);flex-shrink:0;">Featured Courses</span><span style="color:var(--muted-fg);">bg-muted/30</span></div>
+        <div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07);font-family:monospace;font-size:11px;"><span style="width:20px;color:var(--muted-fg);">4.</span><span style="width:180px;color:var(--primary);flex-shrink:0;">Manifesto Blue</span><span style="color:var(--muted-fg);">bg-primary + orbs</span></div>
+        <div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07);font-family:monospace;font-size:11px;"><span style="width:20px;color:var(--muted-fg);">5.</span><span style="width:180px;color:var(--primary);flex-shrink:0;">Season Highlight</span><span style="color:var(--muted-fg);">from-primary/5 via-transparent to-primary/10 + orb</span></div>
+        <div style="display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07);font-family:monospace;font-size:11px;"><span style="width:20px;color:var(--muted-fg);">6.</span><span style="width:180px;color:var(--primary);flex-shrink:0;">Testimonials</span><span style="color:var(--muted-fg);">bg-gradient-subtle + orbs primary/5</span></div>
+        <div style="display:flex;gap:12px;padding:8px 0;font-family:monospace;font-size:11px;"><span style="width:20px;color:var(--muted-fg);">7.</span><span style="width:180px;color:var(--primary);flex-shrink:0;">CTA Section</span><span style="color:var(--muted-fg);">card interno bg-gradient-dark + orbs blur-3xl</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 11 Temas ────────────────────────────────────────────────────────────── -->
+<section class="section" id="temas">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>11 — Temas</span>
+      <h2>Três <em>contextos</em></h2>
+    </div>
+    <div class="grid-3" style="gap:1px;">
+      <div style="padding:32px;background:#080808;border:1px solid #1F1F1F;">
+        <p style="font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#2B2BFF;margin-bottom:16px;">Dark (padrão)</p>
+        <div style="font-family:monospace;font-size:12px;color:#8C8C8C;line-height:2;"><div>background: #080808</div><div>primary: #2B2BFF</div><div>radius: 2px</div></div>
+      </div>
+      <div style="padding:32px;background:#FAFAFA;border:1px solid #E5E5E5;">
+        <p style="font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#1A1AF5;margin-bottom:16px;">Light</p>
+        <div style="font-family:monospace;font-size:12px;color:#666;line-height:2;"><div>background: #FAFAFA</div><div>primary: #1A1AF5</div><div>radius: 2px</div></div>
+      </div>
+      <div style="padding:32px;background:#121212;border:1px solid #2E2E2E;">
+        <p style="font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#F26B5B;margin-bottom:16px;">Admin</p>
+        <div style="font-family:monospace;font-size:12px;color:#999;line-height:2;"><div>background: #121212</div><div>primary: #F26B5B (coral)</div><div>radius: 8px</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 12 Stack ────────────────────────────────────────────────────────────── -->
+<section class="section" id="stack">
+  <div class="container">
+    <div class="sweep-line" style="margin-bottom:48px;"></div>
+    <div class="section-header">
+      <span class="label-upper reveal-clip"><span class="line"></span>12 — Stack Técnica</span>
+      <h2>Tecnologia <em>base</em></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;">
+      <div style="padding:24px;background:var(--surface);"><p style="font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:4px;">React 18</p><p class="text-xs text-muted">UI Framework</p></div>
+      <div style="padding:24px;background:var(--surface);"><p style="font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:4px;">TypeScript</p><p class="text-xs text-muted">Type Safety</p></div>
+      <div style="padding:24px;background:var(--surface);"><p style="font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:4px;">Tailwind CSS 3</p><p class="text-xs text-muted">Utility Styling</p></div>
+      <div style="padding:24px;background:var(--surface);"><p style="font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:4px;">Vite</p><p class="text-xs text-muted">Build Tool</p></div>
+      <div style="padding:24px;background:var(--surface);"><p style="font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:4px;">shadcn/ui</p><p class="text-xs text-muted">Radix Components</p></div>
+      <div style="padding:24px;background:var(--surface);"><p style="font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:4px;">Lucide React</p><p class="text-xs text-muted">Icon Library</p></div>
+      <div style="padding:24px;background:var(--surface);"><p style="font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:4px;">Supabase</p><p class="text-xs text-muted">Backend + Auth</p></div>
+      <div style="padding:24px;background:var(--surface);"><p style="font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:4px;">React Query</p><p class="text-xs text-muted">Server State</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────────────────────────── -->
+<div style="border-top:1px solid var(--border);margin-top:40px;">
+  <div class="container" style="padding-top:40px;padding-bottom:40px;display:flex;align-items:center;justify-content:space-between;">
+    <p style="font-family:'Cormorant Garamond',serif;font-size:20px;">Plots Design System <em>v1.0</em></p>
+    <p style="font-size:13px;color:var(--muted-fg);">2025 · Uso interno</p>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ── IntersectionObserver para reveal + sweep ──────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const delay = e.target.dataset.delay ? parseInt(e.target.dataset.delay) : 0;
+        setTimeout(() => e.target.classList.add('visible'), delay);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal-up, .reveal-clip, .sweep-line').forEach(el => obs.observe(el));
+
+  // Nav active state on scroll
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('.ds-nav a');
+  const scrollObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`.ds-nav a[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => scrollObs.observe(s));
+});
+</script>
+</body>
+</html>
