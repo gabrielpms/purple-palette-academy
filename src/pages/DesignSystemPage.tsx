@@ -3,6 +3,8 @@ import { EditorialHeading } from "@/components/landing/EditorialHeading";
 import { SectionLabel } from "@/components/landing/SectionLabel";
 import { SweepDivider } from "@/components/landing/SweepDivider";
 import { EditorialInput } from "@/components/landing/EditorialInput";
+import { CourseCard } from "@/components/ui/course-card";
+import { AbstractCourseThumbnail } from "@/components/ui/abstract-course-thumbnail";
 
 // ─── Color tokens ────────────────────────────────────────────────────────────
 
@@ -52,6 +54,194 @@ const uiScale = [
   { label: "Body Small / 14px", size: "text-sm", weight: "font-normal" },
   { label: "Label / 12px — 600", size: "text-xs", weight: "font-semibold" },
   { label: "Label Uppercase / 11px — 600", size: "text-[11px]", weight: "font-semibold", extra: "tracking-[3px] uppercase" },
+];
+
+// ─── Mock course data ─────────────────────────────────────────────────────────
+
+const mockCourseDefault = {
+  id: "1",
+  slug: "design-system",
+  title: "Design Systems na Prática",
+  short_description: "Como construir e manter um design system que escala com o produto.",
+  thumbnail_url: "",
+  price: 297,
+  original_price: 497,
+  duration_hours: 12,
+  level: "intermediario",
+  instructor_name: "Ana Cardoso",
+  instructor_avatar: "",
+  is_new: true,
+  is_featured: true,
+  tags: ["Design Systems", "Figma"],
+};
+
+const mockCourseFeatured = {
+  id: "2",
+  slug: "estrategia-produto",
+  title: "Estratégia de Produto",
+  short_description: "Do problema ao posicionamento — construindo produtos que fazem sentido.",
+  thumbnail_url: "",
+  price: 397,
+  duration_hours: 8,
+  level: "avancado",
+  instructor_name: "Bruno Meireles",
+  instructor_avatar: "",
+  is_featured: true,
+  tags: ["Produto", "Estratégia"],
+};
+
+const mockCourseComingSoon = {
+  id: "3",
+  slug: "motion-editorial",
+  title: "Motion Editorial",
+  short_description: "Animação com propósito — do After Effects ao protótipo interativo.",
+  thumbnail_url: "",
+  price: 0,
+  duration_hours: 10,
+  level: "intermediario",
+  instructor_name: "Camila Dutra",
+  instructor_avatar: "",
+  is_coming_soon: true,
+  tags: ["Motion", "After Effects"],
+};
+
+const mockCourseCompact = {
+  id: "4",
+  slug: "tipografia-avancada",
+  title: "Tipografia Avançada",
+  short_description: "Hierarquia, ritmo e escolha de tipos para projetos complexos.",
+  thumbnail_url: "",
+  price: 197,
+  duration_hours: 6,
+  level: "avancado",
+  instructor_name: "Felipe Assis",
+  instructor_avatar: "",
+  tags: ["Tipografia"],
+};
+
+// ─── Block background definitions ─────────────────────────────────────────────
+
+const blockBackgrounds = [
+  {
+    name: "Hero Editorial",
+    component: "HeroEditorial",
+    desc: "Fundo Ink + glow azul radial animado + editorial-grid 60% opacidade",
+    layers: [
+      { label: "Base", code: "bg-background" },
+      { label: "Glow", code: "editorial-glow animate-glow-pulse (1100×1100px, blur center)" },
+      { label: "Grid", code: "editorial-grid opacity-60 (80px grid, branco 2.5%)" },
+    ],
+    preview: (
+      <div className="relative h-40 overflow-hidden rounded-[2px]">
+        <div className="absolute inset-0 bg-background" />
+        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full editorial-glow" />
+        <div className="pointer-events-none absolute inset-0 editorial-grid opacity-60" />
+        <div className="relative z-10 flex h-full items-center justify-center">
+          <p className="font-display text-2xl tracking-tight">Design <em>começa</em></p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    name: "Manifesto Blue",
+    component: "ManifestoBlue",
+    desc: "Fundo Electric Blue sólido + dois orbs escuros com blur-[80px]",
+    layers: [
+      { label: "Base", code: "bg-primary (Electric Blue sólido)" },
+      { label: "Orb 1", code: "rgba(0,0,180,0.25) blur-[80px] — canto superior esquerdo" },
+      { label: "Orb 2", code: "rgba(0,0,80,0.3) blur-[80px] — canto inferior direito" },
+    ],
+    preview: (
+      <div className="relative h-40 overflow-hidden rounded-[2px] bg-primary">
+        <div className="pointer-events-none absolute -top-10 -left-10 h-[160px] w-[160px] rounded-full blur-[40px]" style={{ background: "rgba(0,0,180,0.4)" }} />
+        <div className="pointer-events-none absolute -bottom-10 right-0 h-[120px] w-[120px] rounded-full blur-[40px]" style={{ background: "rgba(0,0,80,0.5)" }} />
+        <div className="relative z-10 flex h-full items-center justify-center">
+          <p className="font-display text-2xl text-white tracking-tight">Aprender é um <em>verbo coletivo.</em></p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    name: "CTA Dark",
+    component: "CTASection",
+    desc: "Card com gradient-dark + dois orbs azuis com blur-3xl nos cantos",
+    layers: [
+      { label: "Base", code: "bg-gradient-dark (135deg, #0D0D0D → #171717)" },
+      { label: "Orb 1", code: "bg-purple-glow/20 blur-3xl — canto superior esquerdo" },
+      { label: "Orb 2", code: "bg-primary/20 blur-3xl — canto inferior direito" },
+    ],
+    preview: (
+      <div className="relative h-40 overflow-hidden rounded-[2px] bg-gradient-dark">
+        <div className="pointer-events-none absolute -left-1/4 -top-1/4 h-1/2 w-1/2 rounded-full bg-blue/20 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-1/4 -right-1/4 h-1/2 w-1/2 rounded-full bg-primary/20 blur-3xl" />
+        <div className="relative z-10 flex h-full items-center justify-center">
+          <p className="font-display text-xl tracking-tight text-center px-4">E se design for, antes de tudo, <em>uma forma de pensar?</em></p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    name: "Season Highlight",
+    component: "SeasonHighlight",
+    desc: "Fundo transparente com gradient radial sutil + orb central desfocado",
+    layers: [
+      { label: "Base", code: "bg-gradient-to-br from-primary/5 via-transparent to-primary/10" },
+      { label: "Orb", code: "bg-primary/5 blur-3xl — centro da seção, 800×800px" },
+    ],
+    preview: (
+      <div className="relative h-40 overflow-hidden rounded-[2px] bg-background" style={{ background: "linear-gradient(to bottom right, hsl(240 100% 58% / 0.05), transparent, hsl(240 100% 58% / 0.1))" }}>
+        <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] rounded-full bg-primary/5 blur-3xl" />
+        <div className="relative z-10 flex h-full items-center justify-center">
+          <p className="font-display text-2xl tracking-tight text-center">O Retorno da <span className="text-gradient">Estratégia</span></p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    name: "Testimonials",
+    component: "Testimonials",
+    desc: "gradient-subtle como fundo + dois orbs de primary/5 e purple-glow/5",
+    layers: [
+      { label: "Base", code: "bg-gradient-subtle (180deg, surface → background)" },
+      { label: "Orb 1", code: "bg-primary/5 blur-3xl — quarto superior esquerdo" },
+      { label: "Orb 2", code: "bg-purple-glow/5 blur-3xl — quarto inferior direito" },
+    ],
+    preview: (
+      <div className="relative h-40 overflow-hidden rounded-[2px] bg-gradient-subtle">
+        <div className="pointer-events-none absolute left-1/4 top-1/4 h-24 w-24 rounded-full bg-primary/5 blur-3xl" />
+        <div className="pointer-events-none absolute bottom-1/4 right-1/4 h-24 w-24 rounded-full bg-primary/5 blur-3xl" />
+        <div className="relative z-10 flex h-full items-center justify-center">
+          <p className="font-display text-xl tracking-tight">O que nossos <em>alunos dizem</em></p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    name: "Featured Courses",
+    component: "FeaturedCourses",
+    desc: "Fundo muted com opacidade reduzida — separação sutil entre seções",
+    layers: [
+      { label: "Base", code: "bg-muted/30 (surface muted a 30% opacidade)" },
+    ],
+    preview: (
+      <div className="relative h-40 overflow-hidden rounded-[2px] bg-muted/30 flex items-center justify-center">
+        <p className="font-display text-xl tracking-tight">Cursos em <em>destaque</em></p>
+      </div>
+    ),
+  },
+  {
+    name: "Seção Neutra",
+    component: "ValueProposition / default",
+    desc: "Sem background explícito — herda bg-background. Para seções intercaladas com as que têm textura.",
+    layers: [
+      { label: "Base", code: "bg-background (Ink, herança do body)" },
+    ],
+    preview: (
+      <div className="h-40 overflow-hidden rounded-[2px] bg-background flex items-center justify-center border border-border/30">
+        <p className="font-display text-xl tracking-tight text-muted-foreground">Seção neutra</p>
+      </div>
+    ),
+  },
 ];
 
 // ─── Spacing ─────────────────────────────────────────────────────────────────
@@ -593,6 +783,140 @@ export default function DesignSystemPage() {
                 <p className="text-[11px] text-muted-foreground">{t.role}</p>
               </div>
             ))}
+          </div>
+        </Section>
+
+        {/* ── Course Cards ─────────────────────────────────────────────────── */}
+        <Section>
+          <SweepDivider className="mb-16" />
+          <SectionHeader
+            label="11 — Cards de Curso"
+            title={<>Variantes de <em>card</em></>}
+            desc="O CourseCard suporta três variantes. O thumbnail abstrato é gerado proceduralmente a partir do título quando não há imagem."
+          />
+
+          {/* Default + coming soon side by side */}
+          <div className="mb-12">
+            <p className="label-uppercase text-muted-foreground mb-6">Variante: default</p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+              <CourseCard course={mockCourseDefault} variant="default" />
+              <CourseCard course={mockCourseFeatured} variant="default" />
+              <CourseCard course={mockCourseComingSoon} variant="default" />
+            </div>
+            <div className="mt-6 p-4 border border-border bg-surface rounded-[2px] text-[11px] font-mono text-muted-foreground space-y-1">
+              <p>Wrapper: rounded-2xl border border-border bg-card hover:border-primary/20 hover:shadow-xl</p>
+              <p>Thumbnail: aspect-[3/4] overflow-hidden · hover scale-105 em 500ms</p>
+              <p>Overlay: bg-gradient-to-t from-black/80 via-black/30 to-transparent</p>
+              <p>Badges: rounded-full — azul (Novo), âmbar (Em Breve), vermelho (desconto), branco/15 (nível)</p>
+            </div>
+          </div>
+
+          {/* Compact */}
+          <div className="mb-12">
+            <p className="label-uppercase text-muted-foreground mb-6">Variante: compact</p>
+            <div className="max-w-sm space-y-3">
+              <CourseCard course={mockCourseDefault} variant="compact" />
+              <CourseCard course={mockCourseFeatured} variant="compact" />
+              <CourseCard course={mockCourseCompact} variant="compact" />
+            </div>
+            <div className="mt-6 p-4 border border-border bg-surface rounded-[2px] text-[11px] font-mono text-muted-foreground space-y-1">
+              <p>Layout: flex gap-4 · thumbnail 80×112px rounded-lg</p>
+              <p>Hover: border-primary/30 bg-secondary/30</p>
+              <p>Preço: font-display font-bold text-primary</p>
+            </div>
+          </div>
+
+          {/* AbstractCourseThumbnail palettes */}
+          <div>
+            <p className="label-uppercase text-muted-foreground mb-6">AbstractCourseThumbnail — paletas geradas</p>
+            <div className="grid grid-cols-4 md:grid-cols-8 gap-3">
+              {[
+                "Design Systems",
+                "Estratégia de Produto",
+                "Motion Editorial",
+                "Tipografia Avançada",
+                "UX Research",
+                "Brand Identity",
+                "Design Ops",
+                "Dados e Design",
+              ].map((title) => (
+                <div key={title} className="space-y-2">
+                  <div className="aspect-[3/4] rounded-[2px] overflow-hidden">
+                    <AbstractCourseThumbnail title={title} className="h-full w-full" />
+                  </div>
+                  <p className="text-[9px] text-muted-foreground font-mono leading-tight">{title}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 p-4 border border-border bg-surface rounded-[2px] text-[11px] font-mono text-muted-foreground space-y-1">
+              <p>8 paletas de cor + 5 tipos de forma (bars, diagonal, grid, chevron, rays)</p>
+              <p>Determinístico: mesmo título sempre gera mesmo thumbnail via hashStr()</p>
+              <p>SVG viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" + linearGradient rotacionado</p>
+            </div>
+          </div>
+        </Section>
+
+        {/* ── Block Backgrounds ─────────────────────────────────────────────── */}
+        <Section>
+          <SweepDivider className="mb-16" />
+          <SectionHeader
+            label="12 — Backgrounds por Bloco"
+            title={<>Texturas de <em>seção</em></>}
+            desc="Cada tipo de bloco da landing usa uma camada de fundo distinta para criar ritmo visual e separar conteúdos sem bordas explícitas."
+          />
+
+          <div className="space-y-8">
+            {blockBackgrounds.map((block) => (
+              <div key={block.name} className="border border-border rounded-[2px] overflow-hidden">
+                {/* Preview */}
+                {block.preview}
+
+                {/* Info */}
+                <div className="p-6 bg-surface space-y-4">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="font-display text-lg">{block.name}</p>
+                      <p className="text-sm text-muted-foreground mt-1">{block.desc}</p>
+                    </div>
+                    <TokenBadge>{block.component}</TokenBadge>
+                  </div>
+
+                  <div className="space-y-2">
+                    {block.layers.map((layer) => (
+                      <div key={layer.label} className="flex items-start gap-3">
+                        <span className="w-16 shrink-0 text-[10px] font-mono text-primary pt-0.5">{layer.label}</span>
+                        <code className="text-[11px] font-mono text-muted-foreground leading-relaxed">{layer.code}</code>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Regra de alternância */}
+          <div className="mt-10 p-6 border border-primary/20 bg-primary/5 rounded-[2px]">
+            <p className="label-uppercase text-primary mb-4">Regra de Alternância</p>
+            <div className="space-y-2 text-sm text-foreground/80">
+              <p>As seções alternam entre <strong>neutro</strong> (bg-background) e <strong>texturizado</strong> para criar ritmo sem poluição visual:</p>
+              <div className="mt-3 flex flex-col gap-1 font-mono text-[11px]">
+                {[
+                  { bg: "bg-background + editorial-grid + editorial-glow", section: "Hero" },
+                  { bg: "bg-background (neutro)", section: "Manifesto / Value Prop" },
+                  { bg: "bg-muted/30", section: "Featured Courses" },
+                  { bg: "bg-primary (sólido)", section: "Manifesto Blue" },
+                  { bg: "from-primary/5 via-transparent to-primary/10", section: "Season Highlight" },
+                  { bg: "bg-gradient-subtle", section: "Testimonials" },
+                  { bg: "bg-gradient-dark (card interno)", section: "CTA Section" },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-3 py-1 border-b border-border/50 last:border-0">
+                    <span className="w-5 text-muted-foreground shrink-0">{i + 1}.</span>
+                    <span className="w-56 shrink-0 text-primary">{item.section}</span>
+                    <span className="text-muted-foreground">{item.bg}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </Section>
 
