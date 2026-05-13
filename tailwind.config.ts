@@ -14,8 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
-        display: ["Space Grotesk", "system-ui", "sans-serif"],
+        sans: ["Space Grotesk", "system-ui", "sans-serif"],
+        display: ["Cormorant Garamond", "Georgia", "serif"],
+        ui: ["Space Grotesk", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -68,6 +69,11 @@ export default {
         },
         gold: "hsl(var(--gold))",
         success: "hsl(var(--success))",
+        cream: "hsl(var(--cream))",
+        ink: "hsl(var(--background))",
+        blue: "hsl(var(--primary))",
+        surface: "hsl(var(--surface))",
+        "surface-2": "hsl(var(--surface-2))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -112,6 +118,28 @@ export default {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
+        "glow-pulse": {
+          "0%, 100%": { opacity: "0.7", transform: "translate(-50%, -55%) scale(1)" },
+          "50%": { opacity: "1", transform: "translate(-50%, -58%) scale(1.06)" },
+        },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        "scroll-line": {
+          "0%, 100%": { transform: "scaleY(0)", transformOrigin: "top" },
+          "50%": { transform: "scaleY(1)", transformOrigin: "top" },
+          "51%": { transformOrigin: "bottom" },
+          "100% ": { transform: "scaleY(0)", transformOrigin: "bottom" },
+        },
+        "clip-reveal": {
+          from: { clipPath: "inset(0 100% 0 0)" },
+          to: { clipPath: "inset(0 0 0 0)" },
+        },
+        "word-reveal": {
+          from: { transform: "translateY(110%)" },
+          to: { transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -121,6 +149,11 @@ export default {
         "scale-in": "scale-in 0.3s ease-out",
         shimmer: "shimmer 3s ease-in-out infinite",
         float: "float 6s ease-in-out infinite",
+        "glow-pulse": "glow-pulse 7s ease-in-out infinite alternate",
+        marquee: "marquee 28s linear infinite",
+        "scroll-line": "scroll-line 1.8s ease-in-out infinite",
+        "clip-reveal": "clip-reveal 1s cubic-bezier(0.16,1,0.3,1) both",
+        "word-reveal": "word-reveal 0.9s cubic-bezier(0.16,1,0.3,1) both",
       },
     },
   },
