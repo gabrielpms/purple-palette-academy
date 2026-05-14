@@ -369,7 +369,7 @@ img { max-width: 100%; display: block; }
 /* ── Course card ────────────────────────────────────────────────────────── */
 .course-card {
   display:flex; flex-direction:column;
-  border-radius:16px;
+  border-radius:10px;
   overflow:hidden;
   background:var(--surface);
   border:1px solid var(--border);
@@ -386,9 +386,16 @@ img { max-width: 100%; display: block; }
   overflow:hidden;
   flex-shrink:0;
 }
-.course-card .thumb svg {
+.course-card .thumb svg,
+.course-card .thumb img {
   position:absolute; inset:0;
   width:100%; height:100%;
+  object-fit:cover;
+  transition:transform 500ms var(--ease);
+}
+.course-card:hover .thumb svg,
+.course-card:hover .thumb img {
+  transform:scale(1.05);
 }
 .course-card .thumb .overlay {
   position:absolute; inset:0;
@@ -434,21 +441,28 @@ img { max-width: 100%; display: block; }
 /* Compact card */
 .course-card-compact {
   display:flex; gap:16px;
-  border-radius:12px;
+  border-radius:6px;
   border:1px solid var(--border);
   padding:12px;
   background:var(--surface);
   transition:border-color .25s, background .25s;
   text-decoration:none; color:inherit;
 }
-.course-card-compact:hover { border-color:rgba(43,43,255,.3); background:rgba(43,43,255,.04); }
+.course-card-compact:hover { border-color:rgba(43,43,255,.3); background:rgba(23,23,23,.3); }
 .course-card-compact .thumb {
   position:relative;
   width:112px; height:80px;
-  border-radius:8px;
+  border-radius:2px;
   overflow:hidden; flex-shrink:0;
 }
-.course-card-compact .thumb svg { position:absolute; inset:0; width:100%; height:100%; }
+.course-card-compact .thumb svg,
+.course-card-compact .thumb img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover;
+  transition:transform 300ms var(--ease);
+}
+.course-card-compact:hover .thumb svg,
+.course-card-compact:hover .thumb img { transform:scale(1.05); }
 .course-card-compact .info { display:flex; flex-direction:column; justify-content:space-between; flex:1; }
 .course-card-compact h4 { font-size:13px; font-family:'Cormorant Garamond',serif; font-weight:600; line-height:1.3; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; transition:color .2s; }
 .course-card-compact:hover h4 { color:var(--primary); }
@@ -1023,13 +1037,14 @@ img { max-width: 100%; display: block; }
       </a>
     </div>
     <div style="padding:16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;margin-bottom:40px;">
-      <div>Wrapper: rounded-2xl border border-border bg-card · hover:border-primary/20 hover:shadow-xl</div>
-      <div>hover:shadow-xl = 0 20px 25px -5px black/40 · sem glow azul</div>
+      <div>Wrapper: rounded-2xl = 10px (--radius 2px + 8px) · border border-border bg-card</div>
+      <div>hover: border-primary/20 · shadow-xl (dark only, sem glow azul)</div>
       <div>Thumbnail: aspect-[3/4] overflow-hidden · group-hover:scale-105 duration-500</div>
       <div>Overlay: bg-gradient-to-t from-black/80 via-black/30 to-transparent</div>
-      <div>Badges: rounded-full — azul (Novo), âmbar (Em Breve), vermelho (-X%), glass (nível)</div>
+      <div>Badges: rounded-full — azul (Novo), âmbar (Em Breve), vermelho (-X%), glass/blur (nível)</div>
       <div>Avatar: &lt;img h-6 w-6 rounded-full object-cover&gt; — apenas quando instructor_avatar existe</div>
-      <div>Price "Em Breve": font-display text-lg font-bold text-amber-500 (substitui o preço)</div>
+      <div>Price "Em Breve": font-display text-lg font-bold text-amber-500 (substitui preço)</div>
+      <div>Grid: grid gap-6 md:grid-cols-2 lg:grid-cols-3</div>
     </div>
 
     <!-- Compact variant -->
@@ -1073,9 +1088,9 @@ img { max-width: 100%; display: block; }
       </a>
     </div>
     <div style="padding:16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;margin-bottom:40px;">
-      <div>Wrapper: flex gap-4 rounded-xl border border-border p-3</div>
-      <div>Thumbnail: w-28 h-20 rounded-lg overflow-hidden flex-shrink-0</div>
-      <div>Hover: border-primary/30 · bg-secondary/30 · title → text-primary</div>
+      <div>Wrapper: rounded-xl = 6px (--radius 2px + 4px) · flex gap-4 border border-border p-3</div>
+      <div>Thumbnail: w-28 h-20 rounded-lg = 2px · group-hover:scale-105 duration-300</div>
+      <div>Hover: border-primary/30 · bg-secondary/30 = rgba(23,23,23,.3) · title → text-primary</div>
       <div>Sem avatar — apenas instructor_name como texto</div>
     </div>
 
