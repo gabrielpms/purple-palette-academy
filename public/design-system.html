@@ -373,12 +373,12 @@ img { max-width: 100%; display: block; }
   overflow:hidden;
   background:var(--surface);
   border:1px solid var(--border);
-  transition:border-color .3s, box-shadow .3s, transform .3s;
+  transition:border-color .3s, box-shadow .3s;
   text-decoration:none; color:inherit;
 }
 .course-card:hover {
   border-color:rgba(43,43,255,.2);
-  box-shadow:0 16px 48px -12px rgba(43,43,255,.2);
+  box-shadow:0 20px 25px -5px rgba(0,0,0,.4), 0 8px 10px -6px rgba(0,0,0,.3);
 }
 .course-card .thumb {
   position:relative;
@@ -421,9 +421,8 @@ img { max-width: 100%; display: block; }
 .course-card .instructor { display:flex; align-items:center; gap:8px; font-size:14px; font-weight:500; }
 .course-card .instructor .avatar {
   width:24px; height:24px; border-radius:50%;
-  background:var(--gradient-primary);
-  display:flex; align-items:center; justify-content:center;
-  font-size:10px; font-weight:700; color:#fff; flex-shrink:0;
+  overflow:hidden; flex-shrink:0;
+  object-fit:cover;
 }
 .course-card .description { font-size:13px; color:var(--muted-fg); line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
 .course-card .duration { display:flex; align-items:center; gap:6px; font-size:13px; color:var(--muted-fg); }
@@ -451,7 +450,8 @@ img { max-width: 100%; display: block; }
 }
 .course-card-compact .thumb svg { position:absolute; inset:0; width:100%; height:100%; }
 .course-card-compact .info { display:flex; flex-direction:column; justify-content:space-between; flex:1; }
-.course-card-compact h4 { font-size:13px; font-family:'Cormorant Garamond',serif; font-weight:600; line-height:1.3; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.course-card-compact h4 { font-size:13px; font-family:'Cormorant Garamond',serif; font-weight:600; line-height:1.3; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; transition:color .2s; }
+.course-card-compact:hover h4 { color:var(--primary); }
 .course-card-compact .bottom { display:flex; align-items:center; justify-content:space-between; }
 .course-card-compact .instructor-name { font-size:11px; color:var(--muted-fg); }
 .course-card-compact .price { font-family:'Cormorant Garamond',serif; font-weight:700; color:var(--primary); font-size:15px; }
@@ -967,7 +967,7 @@ img { max-width: 100%; display: block; }
           <div class="title-overlay"><h3>Design Systems na Prática</h3></div>
         </div>
         <div class="body">
-          <div class="instructor"><div class="avatar">AC</div>Ana Cardoso</div>
+          <div class="instructor"><img class="avatar" src="https://i.pravatar.cc/24?img=47" alt="Ana Cardoso" />Ana Cardoso</div>
           <p class="description">Como construir e manter um design system que escala com o produto.</p>
           <div class="duration"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>12h de conteúdo</div>
           <div class="price-row">
@@ -991,7 +991,7 @@ img { max-width: 100%; display: block; }
           <div class="title-overlay"><h3>Estratégia de Produto</h3></div>
         </div>
         <div class="body">
-          <div class="instructor"><div class="avatar">BM</div>Bruno Meireles</div>
+          <div class="instructor"><img class="avatar" src="https://i.pravatar.cc/24?img=12" alt="Bruno Meireles" />Bruno Meireles</div>
           <p class="description">Do problema ao posicionamento — construindo produtos que fazem sentido.</p>
           <div class="duration"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>8h de conteúdo</div>
           <div class="price-row"><div><div class="price">R$ 397</div></div></div>
@@ -1015,7 +1015,7 @@ img { max-width: 100%; display: block; }
           <div class="title-overlay"><h3>Motion Editorial</h3></div>
         </div>
         <div class="body">
-          <div class="instructor"><div class="avatar">CD</div>Camila Dutra</div>
+          <div class="instructor"><img class="avatar" src="https://i.pravatar.cc/24?img=32" alt="Camila Dutra" />Camila Dutra</div>
           <p class="description">Animação com propósito — do After Effects ao protótipo interativo.</p>
           <div class="duration"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>10h de conteúdo</div>
           <div class="price-row"><div class="price-coming">Em Breve</div></div>
@@ -1023,10 +1023,13 @@ img { max-width: 100%; display: block; }
       </a>
     </div>
     <div style="padding:16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;margin-bottom:40px;">
-      <div>Wrapper: rounded-2xl border border-border bg-card hover:border-primary/20 hover:shadow-xl</div>
-      <div>Thumbnail: aspect-[3/4] overflow-hidden · hover scale-105 em 500ms</div>
+      <div>Wrapper: rounded-2xl border border-border bg-card · hover:border-primary/20 hover:shadow-xl</div>
+      <div>hover:shadow-xl = 0 20px 25px -5px black/40 · sem glow azul</div>
+      <div>Thumbnail: aspect-[3/4] overflow-hidden · group-hover:scale-105 duration-500</div>
       <div>Overlay: bg-gradient-to-t from-black/80 via-black/30 to-transparent</div>
-      <div>Badges: rounded-full — azul (Novo), âmbar (Em Breve), vermelho (desconto), glass (nível)</div>
+      <div>Badges: rounded-full — azul (Novo), âmbar (Em Breve), vermelho (-X%), glass (nível)</div>
+      <div>Avatar: &lt;img h-6 w-6 rounded-full object-cover&gt; — apenas quando instructor_avatar existe</div>
+      <div>Price "Em Breve": font-display text-lg font-bold text-amber-500 (substitui o preço)</div>
     </div>
 
     <!-- Compact variant -->
@@ -1070,8 +1073,10 @@ img { max-width: 100%; display: block; }
       </a>
     </div>
     <div style="padding:16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;margin-bottom:40px;">
-      <div>Layout: flex gap-4 · thumbnail 112×80px border-radius 8px</div>
-      <div>Hover: border-primary/30 bg-secondary/30</div>
+      <div>Wrapper: flex gap-4 rounded-xl border border-border p-3</div>
+      <div>Thumbnail: w-28 h-20 rounded-lg overflow-hidden flex-shrink-0</div>
+      <div>Hover: border-primary/30 · bg-secondary/30 · title → text-primary</div>
+      <div>Sem avatar — apenas instructor_name como texto</div>
     </div>
 
     <!-- AbstractCourseThumbnail palettes -->
