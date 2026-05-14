@@ -366,77 +366,102 @@ img { max-width: 100%; display: block; }
 .anim-card .anim-dur  { font-family:monospace; font-size:10px; color:var(--muted-fg); margin-bottom:8px; }
 .anim-card .anim-desc { font-size:13px; color:rgba(255,255,255,.7); }
 
-/* ── Course card ────────────────────────────────────────────────────────── */
-.course-card {
+/* ── Masterclass Editorial Card (MasterclassesEditorial) ───────────────── */
+.mc-grid {
+  display:grid;
+  gap:1px;
+  border:1px solid rgba(255,255,255,.05);
+  background:rgba(255,255,255,.05);
+  grid-template-columns:repeat(3,1fr);
+}
+@media (max-width:900px) { .mc-grid { grid-template-columns:1fr 1fr; } }
+@media (max-width:560px) { .mc-grid { grid-template-columns:1fr; } }
+
+.mc-card {
   display:flex; flex-direction:column;
-  border-radius:10px;
-  overflow:hidden;
-  background:var(--surface);
-  border:1px solid var(--border);
-  transition:border-color .3s, box-shadow .3s;
+  background:var(--background);
+  padding:28px 32px;
   text-decoration:none; color:inherit;
+  transition:background .25s;
+  cursor:pointer;
 }
-.course-card:hover {
-  border-color:rgba(43,43,255,.2);
-  box-shadow:0 20px 25px -5px rgba(0,0,0,.4), 0 8px 10px -6px rgba(0,0,0,.3);
+.mc-card:hover { background:var(--surface); }
+
+.mc-card .mc-top {
+  display:flex; align-items:flex-start; justify-content:space-between;
 }
-.course-card .thumb {
+.mc-card .mc-num {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:11px; font-weight:600;
+  letter-spacing:3px; text-transform:uppercase;
+  color:rgba(255,255,255,.3);
+}
+.mc-card .mc-available {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:11px; font-weight:600;
+  letter-spacing:3px; text-transform:uppercase;
+  color:var(--primary);
+}
+.mc-card .mc-soon {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:11px; font-weight:600;
+  letter-spacing:3px; text-transform:uppercase;
+  color:var(--cream);
+}
+
+.mc-card .mc-thumb {
   position:relative;
-  aspect-ratio:3/4;
+  margin-top:24px;
+  aspect-ratio:4/3;
   overflow:hidden;
-  flex-shrink:0;
+  border-radius:2px;
 }
-.course-card .thumb svg,
-.course-card .thumb img {
+.mc-card .mc-thumb img,
+.mc-card .mc-thumb svg {
   position:absolute; inset:0;
   width:100%; height:100%;
   object-fit:cover;
-  transition:transform 500ms var(--ease);
+  transition:transform 700ms var(--ease);
 }
-.course-card:hover .thumb svg,
-.course-card:hover .thumb img {
-  transform:scale(1.05);
-}
-.course-card .thumb .overlay {
+.mc-card:hover .mc-thumb img,
+.mc-card:hover .mc-thumb svg { transform:scale(1.04); }
+.mc-card .mc-thumb .mc-overlay {
   position:absolute; inset:0;
-  background:linear-gradient(to top, rgba(0,0,0,.8) 0%, rgba(0,0,0,.3) 40%, transparent 100%);
+  background:linear-gradient(to top, rgba(8,8,8,.4) 0%, transparent 100%);
+  opacity:0; transition:opacity .3s;
 }
-.course-card .thumb .badges {
-  position:absolute; top:16px; left:16px;
-  display:flex; flex-wrap:wrap; gap:6px;
+.mc-card:hover .mc-thumb .mc-overlay { opacity:1; }
+
+.mc-card .mc-title {
+  margin-top:28px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px; font-weight:500;
+  line-height:1.05; letter-spacing:-.01em;
+  color:#fff;
+  transition:color .2s;
 }
-.badge {
-  display:inline-block;
-  padding:4px 12px;
-  border-radius:9999px;
-  font-size:11px; font-weight:600;
+.mc-card:hover .mc-title { color:var(--primary); }
+
+.mc-card .mc-desc {
+  margin-top:12px;
+  font-size:14px; line-height:1.6;
+  color:rgba(255,255,255,.5);
+  display:-webkit-box;
+  -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
 }
-.badge-blue   { background:var(--primary); color:#fff; }
-.badge-amber  { background:#F59E0B; color:#fff; }
-.badge-red    { background:var(--destructive); color:#fff; }
-.badge-glass  { background:rgba(255,255,255,.15); color:#fff; backdrop-filter:blur(4px); }
-.course-card .thumb .title-overlay {
-  position:absolute; bottom:0; left:0; right:0;
-  padding:20px;
+
+.mc-card .mc-bottom {
+  margin-top:28px;
+  display:flex; align-items:center; justify-content:space-between;
+  border-top:1px solid rgba(255,255,255,.05);
+  padding-top:20px;
 }
-.course-card .thumb .title-overlay h3 {
-  font-size:20px; font-weight:700; color:#fff;
-  text-shadow:0 2px 8px rgba(0,0,0,.6);
-  line-height:1.2;
+.mc-card .mc-instructor { font-size:14px; color:rgba(255,255,255,.7); }
+.mc-card .mc-price {
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px; font-weight:600;
+  color:var(--primary);
 }
-.course-card .body { padding:20px; display:flex; flex-direction:column; gap:8px; flex:1; }
-.course-card .instructor { display:flex; align-items:center; gap:8px; font-size:14px; font-weight:500; }
-.course-card .instructor .avatar {
-  width:24px; height:24px; border-radius:50%;
-  overflow:hidden; flex-shrink:0;
-  object-fit:cover;
-}
-.course-card .description { font-size:13px; color:var(--muted-fg); line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-.course-card .duration { display:flex; align-items:center; gap:6px; font-size:13px; color:var(--muted-fg); }
-.course-card .price-row { margin-top:auto; padding-top:12px; display:flex; align-items:flex-end; justify-content:space-between; }
-.course-card .price { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:700; color:var(--primary); }
-.course-card .price-old { font-size:11px; color:var(--muted-fg); text-decoration:line-through; margin-bottom:2px; }
-.course-card .price-coming { font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:700; color:#F59E0B; }
 
 /* Compact card */
 .course-card-compact {
@@ -953,102 +978,101 @@ img { max-width: 100%; display: block; }
     <div class="sweep-line" style="margin-bottom:48px;"></div>
     <div class="section-header">
       <span class="label-upper reveal-clip"><span class="line"></span>07 — Course Cards</span>
-      <h2>Variantes de <em>card</em></h2>
-      <p>Thumbnail abstrato gerado proceduralmente a partir do título quando não há imagem.</p>
+      <h2>Masterclasses <em>Editorial</em></h2>
+      <p>Componente <code style="font-family:monospace;font-size:12px;color:var(--primary);">MasterclassesEditorial</code> — grid com separadores de 1px, thumbnail landscape 4:3, título com hover→primary.</p>
     </div>
 
-    <!-- Default variant -->
-    <p class="label-upper muted" style="margin-bottom:16px;"><span class="line"></span>Variante: default</p>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:16px;">
+    <!-- Editorial grid card -->
+    <p class="label-upper muted" style="margin-bottom:16px;"><span class="line"></span>Estado: Disponível</p>
+    <div class="mc-grid" style="margin-bottom:40px;">
 
-      <!-- Card 1: Novo + Desconto -->
-      <a class="course-card" href="#">
-        <div class="thumb">
-          <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
-            <defs><linearGradient id="g1" gradientTransform="rotate(135)"><stop offset="0%" stop-color="#2563EB"/><stop offset="50%" stop-color="#60A5FA"/><stop offset="100%" stop-color="#93C5FD"/></linearGradient></defs>
-            <rect width="100" height="100" fill="url(#g1)"/>
-            <rect x="10" y="5" width="30" height="22" rx="2" fill="white" opacity=".18"/>
-            <rect x="10" y="32" width="40" height="22" rx="2" fill="white" opacity=".14"/>
-            <rect x="10" y="59" width="25" height="22" rx="2" fill="white" opacity=".10"/>
-            <rect x="10" y="86" width="35" height="22" rx="2" fill="white" opacity=".08"/>
-          </svg>
-          <div class="overlay"></div>
-          <div class="badges">
-            <span class="badge badge-blue">Novo</span>
-            <span class="badge badge-red">-40%</span>
-            <span class="badge badge-glass">Intermediário</span>
-          </div>
-          <div class="title-overlay"><h3>Design Systems na Prática</h3></div>
+      <!-- Card 1 — disponível -->
+      <a class="mc-card" href="#">
+        <div class="mc-top">
+          <span class="mc-num">01</span>
+          <span class="mc-available">Disponível</span>
         </div>
-        <div class="body">
-          <div class="instructor"><img class="avatar" src="https://i.pravatar.cc/24?img=47" alt="Ana Cardoso" />Ana Cardoso</div>
-          <p class="description">Como construir e manter um design system que escala com o produto.</p>
-          <div class="duration"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>12h de conteúdo</div>
-          <div class="price-row">
-            <div><div class="price-old">R$ 497</div><div class="price">R$ 297</div></div>
-          </div>
+        <div class="mc-thumb">
+          <svg viewBox="0 0 100 75" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="mc1" gradientTransform="rotate(135)"><stop offset="0%" stop-color="#2563EB"/><stop offset="50%" stop-color="#60A5FA"/><stop offset="100%" stop-color="#93C5FD"/></linearGradient></defs>
+            <rect width="100" height="75" fill="url(#mc1)"/>
+            <rect x="10" y="5" width="30" height="18" rx="2" fill="white" opacity=".18"/>
+            <rect x="10" y="28" width="42" height="18" rx="2" fill="white" opacity=".14"/>
+            <rect x="10" y="51" width="25" height="18" rx="2" fill="white" opacity=".10"/>
+          </svg>
+          <div class="mc-overlay"></div>
+        </div>
+        <p class="mc-title">Liderança em Design</p>
+        <p class="mc-desc">Torne-se um líder de design inspirador que move times e produto.</p>
+        <div class="mc-bottom">
+          <span class="mc-instructor">Fernanda Lima</span>
+          <span class="mc-price">R$ 697</span>
         </div>
       </a>
 
-      <!-- Card 2: Featured, sem desconto -->
-      <a class="course-card" href="#">
-        <div class="thumb">
-          <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
-            <defs><linearGradient id="g2" gradientTransform="rotate(45)"><stop offset="0%" stop-color="#7C3AED"/><stop offset="50%" stop-color="#A78BFA"/><stop offset="100%" stop-color="#C4B5FD"/></linearGradient></defs>
-            <rect width="100" height="100" fill="url(#g2)"/>
-            <polygon points="10,25 50,13 90,25 50,37" fill="white" opacity=".18"/>
-            <polygon points="10,50 50,38 90,50 50,62" fill="white" opacity=".14"/>
-            <polygon points="10,75 50,63 90,75 50,87" fill="white" opacity=".10"/>
-          </svg>
-          <div class="overlay"></div>
-          <div class="badges"><span class="badge badge-glass">Avançado</span></div>
-          <div class="title-overlay"><h3>Estratégia de Produto</h3></div>
+      <!-- Card 2 — disponível -->
+      <a class="mc-card" href="#">
+        <div class="mc-top">
+          <span class="mc-num">02</span>
+          <span class="mc-available">Disponível</span>
         </div>
-        <div class="body">
-          <div class="instructor"><img class="avatar" src="https://i.pravatar.cc/24?img=12" alt="Bruno Meireles" />Bruno Meireles</div>
-          <p class="description">Do problema ao posicionamento — construindo produtos que fazem sentido.</p>
-          <div class="duration"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>8h de conteúdo</div>
-          <div class="price-row"><div><div class="price">R$ 397</div></div></div>
+        <div class="mc-thumb">
+          <svg viewBox="0 0 100 75" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="mc2" gradientTransform="rotate(45)"><stop offset="0%" stop-color="#7C3AED"/><stop offset="50%" stop-color="#A78BFA"/><stop offset="100%" stop-color="#C4B5FD"/></linearGradient></defs>
+            <rect width="100" height="75" fill="url(#mc2)"/>
+            <polygon points="10,18 50,8 90,18 50,28" fill="white" opacity=".18"/>
+            <polygon points="10,40 50,30 90,40 50,50" fill="white" opacity=".14"/>
+            <polygon points="10,62 50,52 90,62 50,72" fill="white" opacity=".10"/>
+          </svg>
+          <div class="mc-overlay"></div>
+        </div>
+        <p class="mc-title">Estratégia de Produto</p>
+        <p class="mc-desc">Do problema ao posicionamento — construindo produtos que fazem sentido real.</p>
+        <div class="mc-bottom">
+          <span class="mc-instructor">Bruno Meireles</span>
+          <span class="mc-price">R$ 497</span>
         </div>
       </a>
 
-      <!-- Card 3: Em breve -->
-      <a class="course-card" href="#">
-        <div class="thumb">
-          <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
-            <defs><linearGradient id="g3" gradientTransform="rotate(210)"><stop offset="0%" stop-color="#0891B2"/><stop offset="50%" stop-color="#22D3EE"/><stop offset="100%" stop-color="#67E8F9"/></linearGradient></defs>
-            <rect width="100" height="100" fill="url(#g3)"/>
-            <rect x="46" y="0" width="8" height="50" rx="4" fill="white" opacity=".18" transform="rotate(0 50 50)"/>
-            <rect x="46" y="0" width="8" height="50" rx="4" fill="white" opacity=".15" transform="rotate(72 50 50)"/>
-            <rect x="46" y="0" width="8" height="50" rx="4" fill="white" opacity=".12" transform="rotate(144 50 50)"/>
-            <rect x="46" y="0" width="8" height="50" rx="4" fill="white" opacity=".10" transform="rotate(216 50 50)"/>
-            <rect x="46" y="0" width="8" height="50" rx="4" fill="white" opacity=".08" transform="rotate(288 50 50)"/>
-          </svg>
-          <div class="overlay"></div>
-          <div class="badges"><span class="badge badge-amber">Em Breve</span></div>
-          <div class="title-overlay"><h3>Motion Editorial</h3></div>
+      <!-- Card 3 — em breve -->
+      <a class="mc-card" href="#">
+        <div class="mc-top">
+          <span class="mc-num">03</span>
+          <span class="mc-soon">Em breve</span>
         </div>
-        <div class="body">
-          <div class="instructor"><img class="avatar" src="https://i.pravatar.cc/24?img=32" alt="Camila Dutra" />Camila Dutra</div>
-          <p class="description">Animação com propósito — do After Effects ao protótipo interativo.</p>
-          <div class="duration"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>10h de conteúdo</div>
-          <div class="price-row"><div class="price-coming">Em Breve</div></div>
+        <div class="mc-thumb">
+          <svg viewBox="0 0 100 75" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="mc3" gradientTransform="rotate(210)"><stop offset="0%" stop-color="#0891B2"/><stop offset="50%" stop-color="#22D3EE"/><stop offset="100%" stop-color="#67E8F9"/></linearGradient></defs>
+            <rect width="100" height="75" fill="url(#mc3)"/>
+            <rect x="46" y="0" width="8" height="38" rx="4" fill="white" opacity=".18" transform="rotate(0 50 37.5)"/>
+            <rect x="46" y="0" width="8" height="38" rx="4" fill="white" opacity=".14" transform="rotate(72 50 37.5)"/>
+            <rect x="46" y="0" width="8" height="38" rx="4" fill="white" opacity=".10" transform="rotate(144 50 37.5)"/>
+            <rect x="46" y="0" width="8" height="38" rx="4" fill="white" opacity=".08" transform="rotate(216 50 37.5)"/>
+            <rect x="46" y="0" width="8" height="38" rx="4" fill="white" opacity=".06" transform="rotate(288 50 37.5)"/>
+          </svg>
+          <div class="mc-overlay"></div>
+        </div>
+        <p class="mc-title">Motion Editorial</p>
+        <p class="mc-desc">Animação com propósito — do After Effects ao protótipo interativo.</p>
+        <div class="mc-bottom">
+          <span class="mc-instructor">Camila Dutra</span>
         </div>
       </a>
     </div>
-    <div style="padding:16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;margin-bottom:40px;">
-      <div>Wrapper: rounded-2xl = 10px (--radius 2px + 8px) · border border-border bg-card</div>
-      <div>hover: border-primary/20 · shadow-xl (dark only, sem glow azul)</div>
-      <div>Thumbnail: aspect-[3/4] overflow-hidden · group-hover:scale-105 duration-500</div>
-      <div>Overlay: bg-gradient-to-t from-black/80 via-black/30 to-transparent</div>
-      <div>Badges: rounded-full — azul (Novo), âmbar (Em Breve), vermelho (-X%), glass/blur (nível)</div>
-      <div>Avatar: &lt;img h-6 w-6 rounded-full object-cover&gt; — apenas quando instructor_avatar existe</div>
-      <div>Price "Em Breve": font-display text-lg font-bold text-amber-500 (substitui preço)</div>
-      <div>Grid: grid gap-6 md:grid-cols-2 lg:grid-cols-3</div>
+
+    <div style="padding:16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;margin-bottom:48px;">
+      <div>Grid: <span style="color:var(--primary)">gap-px bg-white/5 border border-white/5</span> · 1px visível como separador entre cards</div>
+      <div>Card: bg-background p-7 md:p-8 · sem border-radius · hover:bg-surface</div>
+      <div>Número: label-uppercase text-foreground/30 · Status: text-primary (disponível) | text-cream (em breve)</div>
+      <div>Thumbnail: aspect-[4/3] rounded-[2px] · hover:scale-[1.04] duration-700 · overlay aparece no hover</div>
+      <div>Título: font-display text-[28px] md:text-[32px] font-medium leading-[1.05] · hover:text-primary</div>
+      <div>Descrição: text-[14px] text-foreground/50 line-clamp-2</div>
+      <div>Rodapé: border-t border-white/5 pt-5 · instructor text-foreground/70 · price font-display text-xl text-primary</div>
+      <div>Price omitido quando is_coming_soon = true</div>
     </div>
 
-    <!-- Compact variant -->
-    <p class="label-upper muted" style="margin-bottom:16px;"><span class="line"></span>Variante: compact</p>
+    <!-- Compact variant (CourseCard) -->
+    <p class="label-upper muted" style="margin-bottom:16px;"><span class="line"></span>Variante: compact (CourseCard)</p>
     <div style="max-width:420px;display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
       <a class="course-card-compact" href="#">
         <div class="thumb">
@@ -1095,19 +1119,19 @@ img { max-width: 100%; display: block; }
     </div>
 
     <!-- AbstractCourseThumbnail palettes -->
-    <p class="label-upper muted" style="margin-bottom:16px;"><span class="line"></span>AbstractCourseThumbnail — 8 paletas geradas</p>
+    <p class="label-upper muted" style="margin-bottom:16px;"><span class="line"></span>AbstractCourseThumbnail — 8 paletas × 5 formas</p>
     <div class="grid-8">
-      <div><div style="aspect-ratio:3/4;border-radius:2px;overflow:hidden;background:linear-gradient(135deg,#E85D3A,#F4845F,#F7B267);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Warm Orange · bars</p></div>
-      <div><div style="aspect-ratio:3/4;border-radius:2px;overflow:hidden;background:linear-gradient(45deg,#2563EB,#60A5FA,#93C5FD);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Blue · diagonal</p></div>
-      <div><div style="aspect-ratio:3/4;border-radius:2px;overflow:hidden;background:linear-gradient(210deg,#16A34A,#4ADE80,#BBF7D0);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Green · grid</p></div>
-      <div><div style="aspect-ratio:3/4;border-radius:2px;overflow:hidden;background:linear-gradient(315deg,#7C3AED,#A78BFA,#C4B5FD);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Purple · chevron</p></div>
-      <div><div style="aspect-ratio:3/4;border-radius:2px;overflow:hidden;background:linear-gradient(90deg,#0891B2,#22D3EE,#67E8F9);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Cyan · rays</p></div>
-      <div><div style="aspect-ratio:3/4;border-radius:2px;overflow:hidden;background:linear-gradient(180deg,#DC2626,#F87171,#FCA5A5);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Red · bars</p></div>
-      <div><div style="aspect-ratio:3/4;border-radius:2px;overflow:hidden;background:linear-gradient(270deg,#D97706,#FBBF24,#FDE68A);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Amber · diagonal</p></div>
-      <div><div style="aspect-ratio:3/4;border-radius:2px;overflow:hidden;background:linear-gradient(60deg,#0D9488,#2DD4BF,#99F6E4);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Teal · grid</p></div>
+      <div><div style="aspect-ratio:4/3;border-radius:2px;overflow:hidden;background:linear-gradient(135deg,#E85D3A,#F4845F,#F7B267);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Warm Orange · bars</p></div>
+      <div><div style="aspect-ratio:4/3;border-radius:2px;overflow:hidden;background:linear-gradient(45deg,#2563EB,#60A5FA,#93C5FD);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Blue · diagonal</p></div>
+      <div><div style="aspect-ratio:4/3;border-radius:2px;overflow:hidden;background:linear-gradient(210deg,#16A34A,#4ADE80,#BBF7D0);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Green · grid</p></div>
+      <div><div style="aspect-ratio:4/3;border-radius:2px;overflow:hidden;background:linear-gradient(315deg,#7C3AED,#A78BFA,#C4B5FD);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Purple · chevron</p></div>
+      <div><div style="aspect-ratio:4/3;border-radius:2px;overflow:hidden;background:linear-gradient(90deg,#0891B2,#22D3EE,#67E8F9);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Cyan · rays</p></div>
+      <div><div style="aspect-ratio:4/3;border-radius:2px;overflow:hidden;background:linear-gradient(180deg,#DC2626,#F87171,#FCA5A5);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Red · bars</p></div>
+      <div><div style="aspect-ratio:4/3;border-radius:2px;overflow:hidden;background:linear-gradient(270deg,#D97706,#FBBF24,#FDE68A);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Amber · diagonal</p></div>
+      <div><div style="aspect-ratio:4/3;border-radius:2px;overflow:hidden;background:linear-gradient(60deg,#0D9488,#2DD4BF,#99F6E4);"></div><p style="font-size:9px;color:var(--muted-fg);font-family:monospace;margin-top:6px;line-height:1.3;">Teal · grid</p></div>
     </div>
     <div style="margin-top:12px;padding:12px 16px;border:1px solid var(--border);background:var(--surface);border-radius:2px;font-family:monospace;font-size:11px;color:var(--muted-fg);line-height:1.8;">
-      8 paletas × 5 formas (bars, diagonal, grid, chevron, rays) · Determinístico via hashStr(title)
+      8 paletas × 5 formas (bars, diagonal, grid, chevron, rays) · Determinístico via hashStr(title) · Thumbnail landscape 4:3
     </div>
   </div>
 </section>
